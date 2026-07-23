@@ -8,7 +8,7 @@ const env = {
     process.env.MONGODB_URI ||
     "mongodb+srv://ngocthangn1994_db_user:Michealnguyen18@cluster0.s2nlj9w.mongodb.net/",
   JWT_SECRET: process.env.JWT_SECRET || "ngocthang18",
-  CLIENT: process.env.CLIENT || "http://localhost:5173",
+  CLIENT: process.env.CLIENT || "https://homedevicecontrol.com",
   HA_URL: process.env.HA_URL || "http://homeassistant.local:8123",
   HA_TOKEN:
     process.env.HA_TOKEN ||

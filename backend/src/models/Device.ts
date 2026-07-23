@@ -5,9 +5,18 @@ export type DeviceType =
   | "smoke_detector"
   | "door_bell"
   | "camera"
-  | "smart_plug";
+  | "smart_plug"
+  | "smart_light"
+  | "door_lock"
+  | "water_leak_sensor"
+  | "motion_sensor"
+  | "garage_door"
+  | "window_sensor"
+  | "alarm_panel";
+export type LockState = "locked" | "unlocked" | "jammed" | "unknown";
+export type DoorState = "open" | "closed" | "opening" | "closing" | "unknown";
+export type SensorState = "open" | "closed" | "unknown";
 export type Status = "online" | "offline" | "unknown";
-
 export type PowerState = "on" | "off" | "unknown";
 export type HvacMode = "heat" | "cool" | "fan_only" | "auto";
 export interface IDeviceState {
@@ -20,6 +29,9 @@ export interface IDeviceState {
   snapshotUrl?: string;
   streamUrl?: string;
   lastUpdatedAt: Date;
+  doorLock?: LockState;
+  garageLock?: DoorState;
+  sensor?: SensorState;
 }
 
 const deviceStateSchema = new Schema<IDeviceState>({
@@ -48,6 +60,18 @@ const deviceStateSchema = new Schema<IDeviceState>({
   },
   streamUrl: {
     type: String,
+  },
+  doorLock: {
+    type: String,
+    enum: ["locked", "unlocked", "jammed", "unknown"],
+  },
+  garageLock: {
+    type: String,
+    enum: ["open", "closed", "opening", "closing", "unknown"],
+  },
+  sensor: {
+    type: String,
+    enum: ["open", "closed", "unknown"],
   },
 });
 
@@ -84,6 +108,13 @@ const deviceSchema = new Schema<IDevice>(
         "door_bell",
         "camera",
         "smart_plug",
+        "smart_light",
+        "door_lock",
+        "water_leak_sensor",
+        "motion_sensor",
+        "garage_door",
+        "window_sensor",
+        "alarm_panel",
       ],
       required: true,
     },

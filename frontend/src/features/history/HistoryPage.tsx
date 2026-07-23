@@ -1,0 +1,80 @@
+import { useEffect, useState } from "react";
+import api from "../../api/api";
+import Header from "../../components/layout/Header";
+import SummaryDevices from "../dashboard/SummaryDevices";
+import SideBarHelper from "../../components/layout/SideBarHelper";
+import { useAuth } from "../../context/AuthContext";
+import type { IAutomationRule, IAlert, IDevice } from "../../types";
+import HistoryMenu from "./components/HistoryMenu";
+import HistoryList from "./components/HistoryList";
+import HistoryOverview from "./components/HistoryOverview";
+import HistoryRecentActivity from "./components/HisrtoryRecentActivity";
+function HistoryPage() {
+  const [devices, setDevices] = useState<IDevice[]>([]);
+  const [automationRules, setAutomationRules] = useState<IAutomationRule[]>([]);
+  const [alerts, setAlerts] = useState<IAlert[]>([]);
+
+  const { user } = useAuth();
+  const [isLoading, setIsLoading] = useState(true);
+  const [errorMessage, setErrorMessage] = useState("");
+
+  useEffect(() => {
+    async function loadData() {
+      try {
+        setIsLoading(true);
+        setErrorMessage("");
+
+        const [devicesResponse, automationResponse, alertsResponse] =
+          await Promise.all([
+            api.getDevices(),
+            api.getAutomationRules(),
+            api.getAlerts(),
+          ]);
+
+        setDevices(devicesResponse.data ?? []);
+        setAlerts(alertsResponse.data ?? []);
+        // Ensure automationResponse.data is an array before setting state
+        const automationData = automationResponse.data;
+        if (Array.isArray(automationData)) {
+          setAutomationRules(automationData);
+        } else if (automationData) {
+          setAutomationRules([automationData]);
+        } else {
+          setAutomationRules([]);
+        }
+      } catch (error) {
+        console.error(error);
+        setErrorMessage("Unable to load dashboard data. Please try again.");
+      } finally {
+        setIsLoading(false);
+      }
+    }
+
+    loadData();
+  }, []);
+
+  return (
+    <>
+      <div className="w-screen min-h-screen grid grid-cols-[0.3fr_1.7fr] bg-indigo-50">
+        <div>
+          <SideBarHelper />
+        </div>
+        <div className="bg-indigo-50 px-10 py-10">
+          <Header user={user} page="history" />
+          <SummaryDevices devices={devices} />
+          <HistoryMenu />
+          <div className="grid grid-cols-[1.5fr_0.5fr] gap-5">
+            <HistoryList />
+            <div>
+              <HistoryOverview />
+
+              <HistoryRecentActivity />
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+}
+
+export default HistoryPage;

@@ -40,8 +40,17 @@ export type DeviceType =
   | "smoke_detector"
   | "door_bell"
   | "camera"
-  | "smart_plug";
-
+  | "smart_plug"
+  | "smart_light"
+  | "water_leak_sensor"
+  | "motion_sensor"
+  | "door_lock"
+  | "garage_door"
+  | "window_sensor"
+  | "alarm_panel";
+export type LockState = "locked" | "unlocked" | "jammed" | "unknown";
+export type DoorState = "open" | "closed" | "opening" | "closing" | "unknown";
+export type SensorState = "open" | "closed" | "unknown";
 export type Status = "online" | "offline" | "unknown";
 
 export type PowerState = "on" | "off" | "unknown";
@@ -56,6 +65,9 @@ export interface IDeviceState {
   snapshotUrl?: string;
   streamUrl?: string;
   lastUpdatedAt: string;
+  doorLock?: LockState;
+  garageLock?: DoorState;
+  sensor: SensorState;
 }
 export interface IDevice {
   _id: string;

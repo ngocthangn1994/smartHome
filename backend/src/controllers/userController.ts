@@ -41,6 +41,14 @@ export const createUser = asyncHandler(
         400,
       );
     }
+    const existUser = await User.findOne({ email });
+    if (existUser) {
+      throw new AppError(
+        "The email has existed, please try different email",
+        401,
+      );
+    }
+
     const user = await User.create({
       name,
       homeId,

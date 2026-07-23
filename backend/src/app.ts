@@ -1,10 +1,11 @@
-import express from "express";
+import express, { response } from "express";
 import errorMiddleware from "./middeleware/errorMiddleWare";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import { notFoundMiddleware } from "./middeleware/notFoundMiddleware";
 import router from "./routes/index";
 import env from "./config/env";
+import { Request, Response, NextFunction } from "express";
 
 const app = express();
 app.use(express.json());
@@ -14,6 +15,10 @@ app.use(
     credentials: true,
   }),
 );
+app.use((req: Request, res: Response, next: NextFunction) => {
+  console.log(req.headers);
+  next();
+});
 app.use(cookieParser());
 app.get("/", (req, res) => {
   res.status(200).json({

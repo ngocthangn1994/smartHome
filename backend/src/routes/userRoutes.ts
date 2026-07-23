@@ -6,14 +6,17 @@ import {
   createUser,
 } from "../controllers/userController";
 
-import Router from "express";
+import { protect, restrictTo } from "../middeleware/authMiddleware";
+import { Router } from "express";
 
 const router = Router();
+
+router.use(protect);
 
 router.get("/", getUsers);
 router.get("/:id", getUserById);
 router.post("/", createUser);
-router.delete("/:id", deleteUser);
+router.delete("/:id", restrictTo("admin"), deleteUser);
 router.patch("/:id", updateUser);
 
 export default router;

@@ -4,33 +4,81 @@ import { Request, Response } from "express";
 import { AppError } from "../utils/AppError";
 import Device from "../models/Device";
 import { homeAssistantService } from "../services/homeAssistantService";
-import { Readable } from "stream";
 import axios from "axios";
-// get all devices/
+import mongoose from "mongoose";
+
+/*
+|--------------------------------------------------------------------------
+| Helper: Find device by MongoDB _id OR Home Assistant entity ID
+|--------------------------------------------------------------------------
+|
+| Examples accepted:
+|
+| MongoDB ID:
+| 6a4d3caff007dda5650f8e76
+|
+| Home Assistant entity ID:
+| camera.front_door_live_view
+| climate.x2s_smart_thermostat
+| switch.bedroom_smart_plug
+|
+*/
+
+const findDeviceByIdOrHaEntityId = async (id: string) => {
+  if (mongoose.Types.ObjectId.isValid(id)) {
+    return await Device.findById(id);
+  }
+
+  return await Device.findOne({
+    haEntityId: id,
+  });
+};
+
+/*
+|--------------------------------------------------------------------------
+| Get all devices
+|--------------------------------------------------------------------------
+*/
+
 export const getDevices = asyncHandler(async (req: Request, res: Response) => {
   const devices = await Device.find();
+
   if (devices.length === 0) {
     throw new AppError("No device found", 404);
   }
+
   res
     .status(200)
-    .json(buildResponse(true, "Device fetched successfully", devices));
+    .json(buildResponse(true, "Devices fetched successfully", devices));
 });
 
-// get device by Id.
+/*
+|--------------------------------------------------------------------------
+| Get one device
+|--------------------------------------------------------------------------
+*/
+
 export const getDeviceById = asyncHandler(
   async (req: Request, res: Response) => {
-    const device = await Device.findById(req.params.id);
+    const id = req.params.id as string;
+
+    const device = await findDeviceByIdOrHaEntityId(id);
+
     if (!device) {
-      throw new AppError("Device not Found", 404);
+      throw new AppError("Device not found", 404);
     }
+
     res
       .status(200)
       .json(buildResponse(true, "Device fetched successfully", device));
   },
 );
 
-// create device.
+/*
+|--------------------------------------------------------------------------
+| Create device
+|--------------------------------------------------------------------------
+*/
 
 export const createDevice = asyncHandler(
   async (req: Request, res: Response) => {
@@ -47,10 +95,22 @@ export const createDevice = asyncHandler(
 
     if (!name || !home || !deviceType || !status || !area || !haEntityId) {
       throw new AppError(
-        "Name, home, deviceType, status, area, haEntity are required to fill out.",
+        "Name, home, deviceType, status, area, and haEntityId are required.",
         400,
       );
     }
+
+    const existingDevice = await Device.findOne({
+      haEntityId,
+    });
+
+    if (existingDevice) {
+      throw new AppError(
+        `Device with entity ID "${haEntityId}" already exists.`,
+        409,
+      );
+    }
+
     const device = await Device.create({
       name,
       home,
@@ -61,29 +121,47 @@ export const createDevice = asyncHandler(
       state,
       haEntityId,
     });
+
     res
       .status(201)
-      .json(buildResponse(true, "Successfully to create device.", device));
+      .json(buildResponse(true, "Successfully created device.", device));
   },
 );
 
-// delete Device.
+/*
+|--------------------------------------------------------------------------
+| Delete device
+|--------------------------------------------------------------------------
+*/
 
 export const deleteDevice = asyncHandler(
   async (req: Request, res: Response) => {
-    const device = await Device.findByIdAndDelete(req.params.id);
+    const id = req.params.id as string;
+
+    const device = await findDeviceByIdOrHaEntityId(id);
+
     if (!device) {
-      throw new AppError("Can't find DeviceID to delete the Device.", 404);
+      throw new AppError("Can't find device to delete.", 404);
     }
+
+    await Device.findByIdAndDelete(device._id);
+
     res
       .status(200)
-      .json(buildResponse(true, "Successfully to delete the device."));
+      .json(buildResponse(true, "Successfully deleted the device."));
   },
 );
 
-// update Device
+/*
+|--------------------------------------------------------------------------
+| Update device
+|--------------------------------------------------------------------------
+*/
+
 export const updateDevice = asyncHandler(
   async (req: Request, res: Response) => {
+    const id = req.params.id as string;
+
     const {
       name,
       home,
@@ -94,8 +172,15 @@ export const updateDevice = asyncHandler(
       haEntityId,
       state,
     } = req.body;
+
+    const existingDevice = await findDeviceByIdOrHaEntityId(id);
+
+    if (!existingDevice) {
+      throw new AppError("Can't find device to update.", 404);
+    }
+
     const device = await Device.findByIdAndUpdate(
-      req.params.id,
+      existingDevice._id,
       {
         name,
         home,
@@ -106,169 +191,297 @@ export const updateDevice = asyncHandler(
         state,
         haEntityId,
       },
-      { new: true, runValidators: true },
+      {
+        new: true,
+        runValidators: true,
+      },
     );
-    if (!device) {
-      throw new AppError("Can't find DeviceID to update the Device.", 404);
-    }
+
     res
       .status(200)
-      .json(buildResponse(true, "Successfully to update the device.", device));
+      .json(buildResponse(true, "Successfully updated the device.", device));
   },
 );
 
-// Theremostat.
-// Increase + Decrease the tempeareture.
+/*
+|--------------------------------------------------------------------------
+| Increase thermostat temperature
+|--------------------------------------------------------------------------
+*/
 
 export const increaseTemperature = asyncHandler(
   async (req: Request, res: Response) => {
-    const id = req.params.id;
-    const device = await Device.findById(id);
+    const id = req.params.id as string;
+
+    const device = await findDeviceByIdOrHaEntityId(id);
+
     if (!device) {
-      throw new AppError("Can't find the thermostat", 404);
+      throw new AppError("Can't find the thermostat.", 404);
     }
+
     if (device.deviceType !== "thermostat") {
       throw new AppError("This device is not a thermostat.", 400);
     }
-    const targetTemperature = device.state.targetTemperature
-      ? device.state.targetTemperature
-      : 72;
+
+    const targetTemperature = device.state?.targetTemperature ?? 72;
+
     const newTargetTemperature = targetTemperature + 1;
+
     await homeAssistantService.setTemperature(
       device.haEntityId,
       newTargetTemperature,
     );
 
     const thermostat = await Device.findByIdAndUpdate(
-      id,
-      { "state.targetTemperature": newTargetTemperature },
-      { new: true, runValidators: true },
+      device._id,
+      {
+        "state.targetTemperature": newTargetTemperature,
+        "state.lastUpdatedAt": new Date(),
+      },
+      {
+        new: true,
+        runValidators: true,
+      },
     );
+
     res
-      .status(201)
+      .status(200)
       .json(
-        buildResponse(true, "Increase temperature for thermostat", thermostat),
+        buildResponse(true, "Temperature increased successfully.", thermostat),
       );
   },
 );
+
+/*
+|--------------------------------------------------------------------------
+| Decrease thermostat temperature
+|--------------------------------------------------------------------------
+*/
 
 export const decreaseTemperature = asyncHandler(
   async (req: Request, res: Response) => {
-    const id = req.params.id;
-    const device = await Device.findById(id);
+    const id = req.params.id as string;
+
+    const device = await findDeviceByIdOrHaEntityId(id);
+
     if (!device) {
-      throw new AppError("Can't find the thermostat", 404);
+      throw new AppError("Can't find the thermostat.", 404);
     }
+
     if (device.deviceType !== "thermostat") {
       throw new AppError("This device is not a thermostat.", 400);
     }
-    const targetTemperature = device.state.targetTemperature
-      ? device.state.targetTemperature
-      : 72;
+
+    const targetTemperature = device.state?.targetTemperature ?? 72;
+
     const newTargetTemperature = targetTemperature - 1;
+
     await homeAssistantService.setTemperature(
       device.haEntityId,
       newTargetTemperature,
     );
 
     const thermostat = await Device.findByIdAndUpdate(
-      id,
-      { "state.targetTemperature": newTargetTemperature },
-      { new: true, runValidators: true },
+      device._id,
+      {
+        "state.targetTemperature": newTargetTemperature,
+        "state.lastUpdatedAt": new Date(),
+      },
+      {
+        new: true,
+        runValidators: true,
+      },
     );
+
     res
       .status(200)
       .json(
-        buildResponse(true, "Decrease temperature for thermostat", thermostat),
+        buildResponse(true, "Temperature decreased successfully.", thermostat),
       );
   },
 );
 
-// Turn on, off Device.
+/*
+|--------------------------------------------------------------------------
+| Turn on device
+|--------------------------------------------------------------------------
+*/
 
 export const turnOnDevice = asyncHandler(
   async (req: Request, res: Response) => {
-    const id = req.params.id;
+    const id = req.params.id as string;
 
-    const device = await Device.findById(id);
+    const device = await findDeviceByIdOrHaEntityId(id);
+
     if (!device) {
-      throw new AppError("Can't find Device", 404);
+      throw new AppError("Can't find device.", 404);
     }
+
     await homeAssistantService.turnOn(device.haEntityId);
-    const updateDevice = await Device.findByIdAndUpdate(
-      id,
-      { "state.power": "on", "state.lastUpdatedAt": new Date() },
-      { new: true, runValidators: true },
+
+    const updatedDevice = await Device.findByIdAndUpdate(
+      device._id,
+      {
+        "state.power": "on",
+        "state.lastUpdatedAt": new Date(),
+      },
+      {
+        new: true,
+        runValidators: true,
+      },
     );
+
     res
       .status(200)
-      .json(buildResponse(true, "Successfully turn on device", updateDevice));
+      .json(
+        buildResponse(true, "Successfully turned on device.", updatedDevice),
+      );
   },
 );
+
+/*
+|--------------------------------------------------------------------------
+| Turn off device
+|--------------------------------------------------------------------------
+*/
+
 export const turnOffDevice = asyncHandler(
   async (req: Request, res: Response) => {
-    const id = req.params.id;
+    const id = req.params.id as string;
 
-    const device = await Device.findById(id);
+    const device = await findDeviceByIdOrHaEntityId(id);
+
     if (!device) {
-      throw new AppError("Can't find Device", 404);
+      throw new AppError("Can't find device.", 404);
     }
+
     await homeAssistantService.turnOff(device.haEntityId);
-    const updateDevice = await Device.findByIdAndUpdate(
-      id,
-      { "state.power": "off", "state.lastUpdatedAt": new Date() },
-      { new: true, runValidators: true },
+
+    const updatedDevice = await Device.findByIdAndUpdate(
+      device._id,
+      {
+        "state.power": "off",
+        "state.lastUpdatedAt": new Date(),
+      },
+      {
+        new: true,
+        runValidators: true,
+      },
     );
+
     res
       .status(200)
-      .json(buildResponse(true, "Successfully turn off device", updateDevice));
+      .json(
+        buildResponse(true, "Successfully turned off device.", updatedDevice),
+      );
   },
 );
 
-// get snapshot and streamurl for camera and door-bell
+/*
+|--------------------------------------------------------------------------
+| Get camera snapshot
+|--------------------------------------------------------------------------
+*/
 
 export const getSnapshot = asyncHandler(async (req: Request, res: Response) => {
-  const id = req.params.id;
+  const id = req.params.id as string;
 
-  const device = await Device.findById(id);
+  const device = await findDeviceByIdOrHaEntityId(id);
+
   if (!device) {
     throw new AppError("Can't find the device.", 404);
   }
-  const haResponse = await homeAssistantService.getSnapshot(device?.haEntityId);
-  const contentType = haResponse.headers.get("content-type") || "image/jpeg";
-  const imageBuffer = Buffer.from(await haResponse.arrayBuffer());
 
-  res.setHeader("Content-Type", contentType);
-  res.status(200).send(imageBuffer);
-});
-
-export const getStream = asyncHandler(async (req: Request, res: Response) => {
-  const id = req.params.id;
-
-  const device = await Device.findById(id);
-  if (!device) {
-    throw new AppError("Can't find the device.", 404);
-  }
   if (device.deviceType !== "camera" && device.deviceType !== "door_bell") {
-    throw new AppError("This device is not a camera or doorbell", 400);
+    throw new AppError("This device is not a camera or doorbell.", 400);
   }
-  const haResponse = await homeAssistantService.getStream(device?.haEntityId);
 
-  if (!haResponse) {
-    throw new AppError("No camera stream found", 404);
+  const snapshotUrl = await homeAssistantService.getSnapshotUrl(
+    device.haEntityId,
+  );
+
+  if (!snapshotUrl) {
+    throw new AppError("No snapshot URL found.", 404);
   }
+  const snapshotResponse = await axios.get(snapshotUrl, {
+    responseType: "arraybuffer",
+    headers: {
+      Authorization: `Bearer ${process.env.HA_TOKEN}`,
+    },
+  });
+
+  const rawContentType = snapshotResponse.headers["content-type"];
 
   const contentType =
-    haResponse.headers.get("content-type") || "multipart/x-mixed-replace";
+    typeof rawContentType === "string" ? rawContentType : "image/jpeg";
+
+  const imageBuffer = Buffer.from(snapshotResponse.data);
 
   res.setHeader("Content-Type", contentType);
   res.setHeader("Cache-Control", "no-cache");
+
+  res.status(200).send(imageBuffer);
+});
+
+/*
+|--------------------------------------------------------------------------
+| Get camera stream
+|--------------------------------------------------------------------------
+*/
+
+export const getStream = asyncHandler(async (req: Request, res: Response) => {
+  const id = req.params.id as string;
+
+  if (!id || typeof id !== "string") {
+    throw new AppError("Invalid device ID.", 400);
+  }
+
+  console.log("Camera ID received:", id);
+
+  const device = await findDeviceByIdOrHaEntityId(id);
+
+  if (!device) {
+    throw new AppError("Can't find the device.", 404);
+  }
+
+  if (device.deviceType !== "camera" && device.deviceType !== "door_bell") {
+    throw new AppError("This device is not a camera or doorbell.", 400);
+  }
+
+  console.log("Camera found:", {
+    mongoId: device._id,
+    name: device.name,
+    haEntityId: device.haEntityId,
+  });
+
+  const streamUrl = await homeAssistantService.getStreamUrl(device.haEntityId);
+
+  if (!streamUrl) {
+    throw new AppError("No camera stream found.", 404);
+  }
+
+  const streamResponse = await axios.get(streamUrl, {
+    responseType: "stream",
+  });
+
+  const rawContentType = streamResponse.headers["content-type"];
+
+  const contentType =
+    typeof rawContentType === "string"
+      ? rawContentType
+      : Array.isArray(rawContentType)
+        ? rawContentType[0] || "multipart/x-mixed-replace"
+        : "multipart/x-mixed-replace";
+
+  res.setHeader("Content-Type", contentType);
+  res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
   res.setHeader("Connection", "keep-alive");
 
-  const nodeStream = Readable.fromWeb(haResponse.body as any);
+  streamResponse.data.pipe(res);
 
-  nodeStream.pipe(res);
   req.on("close", () => {
-    nodeStream.destroy();
+    if (streamResponse.data && !streamResponse.data.destroyed) {
+      streamResponse.data.destroy();
+    }
   });
 });

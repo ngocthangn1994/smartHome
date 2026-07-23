@@ -11,11 +11,11 @@ import {
   getSnapshot,
   getStream,
 } from "../controllers/deviceController";
-
 import { Router } from "express";
-
+import { protect } from "../middeleware/authMiddleware";
 const router = Router();
 
+router.use(protect);
 router.get("/", getDevices);
 router.get("/:id", getDeviceById);
 router.post("/", createDevice);

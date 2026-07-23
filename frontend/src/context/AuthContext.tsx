@@ -24,7 +24,12 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
   const login = async (email: string, passWord: string) => {
     const response = await api.login(email, passWord);
-    setUser((response.data as IUser) || null);
+
+    const loginData = response.data as {
+      user: IUser;
+      token: string;
+    };
+    setUser(loginData.user);
   };
 
   const logout = () => {

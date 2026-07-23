@@ -1,6 +1,10 @@
 import { useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
+import smarthomeLogin from "../assets/smarthome_login.png";
+import smartHomeLogo from "../assets/smarthome_logo.png";
+import { FaMobileAlt, FaDesktop, FaRobot, FaBell } from "react-icons/fa";
+import { FaEnvelope, FaLock, FaEyeLowVision, FaGoogle } from "react-icons/fa6";
 
 function Login() {
   const { login } = useAuth();
@@ -25,107 +29,74 @@ function Login() {
   };
   return (
     <>
-      <main className="relative min-h-screen bg-slate-950">
-        <div className="absolute left-[-120px] top-[-120px] h-96 w-96 rounded-full bg-blue-600/30 blur-3xl" />{" "}
-        <div className="absolute bottom-[-120px] right-[-120px] h-96 w-96 rounded-full bg-cyan-500/20 blur-3xl" />{" "}
-        <div className="absolute left-1/2 top-1/2 h-96 w-96 -translate-x-1/2 -translate-y-1/2 rounded-full bg-indigo-500/10 blur-3xl" />
+      <main className="relative min-h-screen bg-slate-50">
         <section className="mx-auto flex max-w-6xl min-h-screen items-center justify-center">
-          <div className="w-full grid border border-white lg:grid-cols-[1.1fr_0.9fr] bg-white rounded-[2rem] shadow-2xl overflow-hidden">
-            <div className="relative bg-gradient-to-br from-slate-950 via-slate-900 to-blue-950 p-10 text-white">
-              <div className="flex h-full flex-col ml-5">
-                <div className="inline-flex items-center border border-white/10 w-sm rounded-2xl px-2 mt-5 py-1 gap-3 bg-white/10 hover:bg-white/15">
-                  <span className="flex justify-center items-center w-8 h-8 rounded-full bg-white text-2xl">
-                    🏡
-                  </span>
-                  <h3 className="font-semibold text-slate-200">
-                    Smart Home Dashboard
-                  </h3>
+          <div className="w-full grid border border-white lg:grid-cols-[1.1fr_0.9fr] bg-white rounded-[2rem] shadow-xl overflow-hidden hover:shadow-2xl">
+            <div className="relative w-full h-full">
+              <img
+                className="w-full h-full object-cover"
+                src={smarthomeLogin}
+              />
+
+              <div className="absolute top-4 left-5 object-contain z-5 flex items-center">
+                <img src={smartHomeLogo} alt="Logo" className="w-20  h-20 " />
+                <div className="flex items-center text-white justify-center">
+                  <p className="font-bold text-xl">Nguyen</p>
+                  <p className="font-bold text-xl">Shield</p>
                 </div>
-                <h1 className="max-w-lg text-5xl font-bold leading-tight tracking-tight">
-                  Control your entire home from one secure place.
-                </h1>
-                <p className="mt-5 max-w-md text-base leading-7">
-                  Monitor live device status, manage automation, and receive
-                  smart alerts from one clean dashboard.
-                </p>
+              </div>
 
-                <div className="border border-white/20 bg-white/10 px-2 py-2 rounded-[2rem] mt-5 hover:bg-white/12 shadow-sm">
-                  <div className="flex justify-between px-5 py-5">
-                    <div>
-                      <h3 className="font-semibold text-[1.2rem]">
-                        🏠 Home Dasboard
-                      </h3>
-                      <p>Smart Devices Controller</p>
-                    </div>
-                    <div className="bg-white/5 px-2 py-2 rounded-xl text-center shadow-lg">
-                      <p className="font-semibold">Devices</p>
-                      <span>10</span>
-                    </div>
+              <div className="absolute text-white top-30 left-10 ">
+                <div className="font-bold text-4xl ">
+                  <p>Your home,</p>
+                  <div className="flex gap-2">
+                    <p className="text-sky-400">smarter</p>
+                    <p>and safer</p>
                   </div>
-                  <div className="grid grid-cols-5 gap-5 text-center mb-5">
-                    <div className="rounded-2xl bg-white/10 p-4">
-                      <p className="text-2xl font-bold">5</p>
-                      <p className="mt-1 text-xs text-slate-300">Online</p>
-                    </div>
-                    <div className="rounded-2xl bg-white/10 p-4">
-                      <p className="text-2xl font-bold">7</p>
-                      <p className="mt-1 text-xs text-slate-300">Offline</p>
-                    </div>
-                    <div className="rounded-2xl bg-white/10 p-4">
-                      <p className="text-2xl font-bold">3</p>
-                      <p className="mt-1 text-xs text-slate-300">Alert</p>
-                    </div>
+                </div>
+                <div>
+                  <p className="w-sm mt-5 text-white/ font-semibold">
+                    Control your devices, monitor your home, and manage
+                    everything from one simple dashboard.
+                  </p>
+                </div>
+              </div>
+              <div className="absolute text-white bottom-3 left-10 space-y-1 flex flex-col items-start">
+                <div className="flex justify-center items-center gap-3">
+                  <FaMobileAlt className="bg-white/30 w-12 h-12 px-2 py-2 rounded-full" />
+                  <p className="text-white/60">Control devices from anywhere</p>
+                </div>
+                <div className="flex justify-center items-center gap-3">
+                  <FaDesktop className="bg-white/30 w-12 h-12 px-2 py-2 rounded-full" />
+                  <p className="text-white/60">
+                    Monitor your home in real time
+                  </p>
+                </div>
+                <div className="flex justify-center items-center gap-3">
+                  <FaRobot className="bg-white/30 w-12 h-12 px-2 py-2 rounded-full" />
+                  <p className="text-white/60">Automate daily routines</p>
+                </div>
 
-                    <div className="rounded-2xl bg-white/10 p-4">
-                      <p className="text-2xl font-bold">2</p>
-                      <p className="mt-1 text-xs text-slate-300">
-                        Smoke Detected
-                      </p>
-                    </div>
-                    <div className="rounded-2xl bg-white/10 p-4">
-                      <p className="text-2xl font-bold">1</p>
-                      <p className="mt-1 text-xs text-slate-300">
-                        Motion Detected
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="grid md:grid-cols-3 gap-3 mb-5">
-                    <div className="bg-white/5 px-1 py-1 rounded-xl text-center hover:bg-white/10">
-                      <p>Thermostat</p>
-                      <div className="grid grid-cols-2 gap-1">
-                        <p className="text-[0.8rem] bg-white/15 rounded-full px-1 py-1 hover:bg-white/20">
-                          Increase ℃
-                        </p>
-                        <p className="text-[0.8rem] bg-white/15 rounded-full px-1 py-1 hover:bg-white/20">
-                          Decrease ℃
-                        </p>
-                      </div>
-                    </div>
-                    <div className="bg-white/5 px-2 py-2 rounded-xl text-center hover:bg-white/10">
-                      <p>Smoke Detector</p>
-                      <span className="text-[0.8rem] bg-white/15 rounded-full px-2 py-1 hover:bg-white/20">
-                        Toggle
-                      </span>
-                    </div>
-                    <div className="bg-white/5 px-2 py-2 rounded-xl text-center hover:bg-white/10">
-                      <p>Camera</p>
-                      <span className="text-[0.8rem] bg-white/15 rounded-full px-2 py-1 hover:bg-white/20">
-                        Toggle
-                      </span>
-                    </div>
-                  </div>
+                <div className="flex justify-center items-center gap-3">
+                  <FaBell className="bg-white/30 w-12 h-12 px-2 py-2 rounded-full" />
+                  <p className="text-white/60">
+                    Receive instant security alerts
+                  </p>
                 </div>
               </div>
             </div>
-            <div className="bg-sky-50 max-w-2xl px-5 py-5 rounded-2xl shadow-sm border border-slate-200 hover:bg-sky-100">
-              <div className="text-center text-slate-600">
-                <span className="text-2xl">🏠</span>
-                <h3 className="font-semibold text-2xl">Welcome Back</h3>
-                <p className="text-blue-600">Sign In</p>
-                <p>
-                  Enter your account information to manage your smart home
-                  devices.
+            <div className="max-w-2xl px-10 py-5 rounded-2xl shadow-sm hover:shadow-lg">
+              <div className="flex items-center">
+                <img src={smartHomeLogo} alt="Logo" className="w-20  h-20 " />
+                <div className="flex items-center text-slate-900 justify-center">
+                  <p className="font-bold text-xl">Nguyen</p>
+                  <p className="text-xl">Shield</p>
+                </div>
+              </div>
+              <div className="px-5 space-y-3">
+                <p className="text-4xl font-bold">Welcome back</p>
+                <p className="text-slate-600">
+                  Sign in to manage your smart home securely.
                 </p>
               </div>
               <form
@@ -133,29 +104,38 @@ function Login() {
                 className="space-y-5 mt-5 px-5 text-slate-600"
               >
                 <div>
-                  <label className="mb-2 block text-sm font-semibold text-slate-700">
+                  <label className="mb-2 block font-semibold text-slate-900">
                     Email address:
                   </label>
-                  <input
-                    className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3.5 text-slate-900 shadow-sm outline-none transition placeholder:text-slate-400 focus:border-blue-500 focus:ring-4 focus:ring-blue-100"
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="you@gmai.com..."
-                    required
-                  />
+                  <div className="flex items-center border border-slate-300 rounded-2xl px-4 ring-1 ring-sky-100 hover:ring-sky-300 shadow-sm hover:shadow-lg">
+                    <FaEnvelope className="text-slate-400" />
+                    <input
+                      className="w-full px-4 py-3.5 text-slate-600 text-xl outline-none placeholder:text-slate-400 "
+                      type="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      placeholder="user@gmai.com"
+                      required
+                    />
+                  </div>
                 </div>
                 <div>
-                  <label className="mb-2 block text-sm font-semibold text-slate-700">
+                  <label className="mb-2 block font-semibold text-slate-900">
                     Password:
                   </label>
-                  <input
-                    className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3.5 text-slate-900 shadow-sm outline-none transition placeholder:text-slate-400 focus:border-blue-500 focus:ring-4 focus:ring-blue-100"
-                    value={passWord}
-                    onChange={(e) => setPassWord(e.target.value)}
-                    type="password"
-                    required
-                  />
+                  <div className="flex justify-between items-center border border-slate-300 rounded-2xl px-4 ring-1 ring-sky-100 hover:ring-sky-300 shadow-sm hover:shadow-lg">
+                    <div className="flex items-center">
+                      <FaLock className="text-slate-400" />
+                      <input
+                        className="w-full px-4 py-3.5 text-slate-600 text-xl outline-none placeholder:text-slate-400"
+                        value={passWord}
+                        onChange={(e) => setPassWord(e.target.value)}
+                        type="password"
+                        required
+                      />
+                    </div>
+                    <FaEyeLowVision className="text-slate-400" />
+                  </div>
                 </div>
                 <div>
                   <div className="flex items-center justify-between text-sm mb-3">
@@ -182,17 +162,28 @@ function Login() {
                   <button
                     type="submit"
                     disabled={isLoading}
-                    className="bg-blue-600 w-full rounded-2xl px-2 py-1 border border-slate-200 text-white font-semibold text-[1.2rem] hover:bg-blue-700"
+                    className="mt-8 bg-blue-500 w-full rounded-2xl px-2 py-2 border border-slate-200 text-white font-semibold text-[1.2rem] hover:bg-blue-700"
                   >
-                    {isLoading ? "Signing In" : "Sign in to Dashboard"}
+                    {isLoading ? "Logging In" : "Log In"}
                   </button>
-                  <div className="flex gap-3 mt-5 justify-center">
+                  <div className="flex items-center justify-center mt-5 gap-3">
+                    <div className="h-1 bg-slate-100 w-20"></div>
+                    <p>or</p>
+                    <div className="h-1 bg-slate-100 w-20"></div>
+                  </div>
+                  <div className="flex justify-center items-center gap-3 w-full border border-slate-200 rounded-2xl shadow-sm px-3 py-3 mt-5">
+                    <FaGoogle className="text-red-600" />
+                    <p className="text-slate-600 font-bold">
+                      Continue with Google
+                    </p>
+                  </div>
+                  <div className="flex gap-3 mt-10 justify-center">
                     <p>Don't have account yet?</p>
                     <Link
                       to="/auth/register"
-                      className="text-blue-600 hover:text-blue-800 cursor-pointer"
+                      className="text-blue-600 font-bold hover:text-blue-800 cursor-pointer"
                     >
-                      Register
+                      Create one
                     </Link>
                   </div>
                 </div>

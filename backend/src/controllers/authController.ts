@@ -1,97 +1,129 @@
 import jwt from "jsonwebtoken";
-import bcrypt from "bcryptjs";
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import User from "../models/User";
 import env from "../config/env";
 import { asyncHandler } from "../utils/asyncHandler";
 import buildResponse from "../utils/buildResponse";
 import { AppError } from "../utils/AppError";
+import sendEmail from "../utils/email";
 
 const JWT_SECRET = env.JWT_SECRET;
 
-// Register
-export const register = asyncHandler(async (req: Request, res: Response) => {
-  const { email, name, passWord } = req.body;
+if (!JWT_SECRET) {
+  throw new AppError("Missing the JWT_SECRET, PLease try later", 401);
+}
 
-  if (!email || !name || !passWord) {
-    throw new AppError("Email, name, and password are required", 400);
-  }
+const generateToken = (userId: string, email: string) => {
+  return jwt.sign({ userId, email }, JWT_SECRET, { expiresIn: "7d" });
+};
 
-  const existEmail = await User.findOne({ email });
+export const register = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const { name, email, passWord } = req.body;
+    if (!name || !email || !passWord) {
+      throw new AppError(
+        "Name, email, password are required to fill out.",
+        400,
+      );
+    }
 
-  if (existEmail) {
-    throw new AppError("Email already exists. Try a new one", 409);
-  }
+    const existUser = await User.findOne({ email });
+    if (existUser) {
+      throw new AppError(
+        "The email have already used, please try different one",
+        400,
+      );
+    }
 
-  const hashedPassword = await bcrypt.hash(passWord, 10);
+    const user = await User.create({
+      name,
+      email,
+      passWord,
+    });
+    const token = generateToken(user._id.toString(), user.email);
 
-  const newUser = await User.create({
-    email,
-    name,
-    passWord: hashedPassword,
-  });
+    res.status(201).json(
+      buildResponse(true, "Successfully create the new user", {
+        user,
+        token,
+      }),
+    );
+  },
+);
 
-  res.status(201).json(
-    buildResponse(true, "Successfully created account", {
-      id: newUser._id,
-      email: newUser.email,
-      name: newUser.name,
-    }),
-  );
-});
+export const login = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const { email, passWord } = req.body;
 
-// Login
-export const login = asyncHandler(async (req: Request, res: Response) => {
-  const { email, passWord } = req.body;
+    if (!email || !passWord) {
+      throw new AppError("Email, password are required to fill out.", 400);
+    }
+    const verifyUser = await User.findOne({ email }).select("+passWord");
+    if (!verifyUser) {
+      throw new AppError("Email or password is wrong, please try again", 401);
+    }
+    const verifyPassword = await verifyUser.correctPassword(
+      passWord,
+      verifyUser.passWord,
+    );
+    if (!verifyPassword) {
+      throw new AppError("The password's incorrect, please try again", 401);
+    }
+    const token = generateToken(verifyUser._id.toString(), verifyUser.email);
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: false,
+      sameSite: "lax",
+      maxAge: 7 * 24 * 60 * 60 * 1000,
+    });
 
-  if (!email || !passWord) {
-    throw new AppError("Email and password are required", 400);
-  }
+    res.status(200).json(
+      buildResponse(true, "Successfully login to the account", {
+        user: verifyUser,
+        token,
+      }),
+    );
+  },
+);
 
-  const user = await User.findOne({ email });
+export const logout = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    let token = "";
+    res.status(200).json(buildResponse(true, "successfully logout", token));
+  },
+);
 
-  if (!user) {
-    throw new AppError("Invalid email or password", 401);
-  }
-
-  const isPasswordCorrect = await bcrypt.compare(passWord, user.passWord);
-
-  if (!isPasswordCorrect) {
-    throw new AppError("Invalid email or password", 401);
-  }
-
-  const token = jwt.sign(
-    {
-      userId: user._id,
-      email: user.email,
-    },
-    JWT_SECRET as string,
-    { expiresIn: "7d" },
-  );
-
-  res.cookie("token", token, {
-    httpOnly: true,
-    sameSite: "lax",
-    secure: false,
-    maxAge: 7 * 24 * 60 * 60 * 1000,
-  });
-
-  res.status(200).json(
-    buildResponse(true, "Successfully logged in", {
-      id: user._id,
-      email: user.email,
-      name: user.name,
-    }),
-  );
-});
-
-// Logout
-export const logout = asyncHandler(async (req: Request, res: Response) => {
-  res.clearCookie("token", {
-    httpOnly: true,
-    sameSite: "lax",
-    secure: false,
-  });
-
-  res.status(200).json(buildResponse(true, "Successfully logged out"));
-});
+export const forgotPassword = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    // 1. Get user based on the email
+    const user = await User.findOne({ email: req.body.email });
+    if (!user) {
+      throw new AppError("There is no user with email address", 404);
+    }
+    // 2. Generate the random reset token
+    const resetToken = user.createPasswordResetToken();
+    await user.save({ validateBeforeSave: false });
+    // 3. Send it to user's email.
+    const resetUrl = `${req.protocol}://${req.get("host")}/api/auth/resetPassword/${resetToken}`;
+    const message = `Forgot your password? submit a patch request with your new password and passwordConfirm to: ${resetUrl} \n If you didn't do ignore it.`;
+    try {
+      await sendEmail({
+        email: user.email,
+        subject: "Your password reset token (valid for 10 min)",
+        message,
+      });
+    } catch (error) {
+      user.set("passwordResetToken", undefined);
+      user.set("passwordResetExpires", undefined);
+      await user.save({ validateBeforeSave: false });
+      throw new AppError("There are sth wrong when send to the email", 500);
+    }
+    res.status(200).json({
+      status: "success",
+      message: "Token sent to email",
+    });
+  },
+);
+export const resetPassword = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {},
+);
