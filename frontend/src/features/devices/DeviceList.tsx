@@ -32,14 +32,14 @@ function DeviceList({ devices }: DeviceListProp) {
             {startIndex + 1} - {endIndex} : {devices.length}
           </p>
           <button
-            onClick={(e: any) => handlePrevious()}
+            onClick={() => handlePrevious()}
             disabled={currentPage === 1}
             className="text-blue-600"
           >
             Previous
           </button>
           <button
-            onClick={(e: any) => handleNext()}
+            onClick={() => handleNext()}
             className="text-blue-600"
             disabled={currentPage === totalPages}
           >
