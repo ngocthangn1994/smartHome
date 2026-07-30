@@ -1,11 +1,7 @@
 import smartHomeHomePage from "../../../assets/smarthome_homepage.png";
 import { IoShieldHalfSharp } from "react-icons/io5";
-import { RiAccountCircleLine } from "react-icons/ri";
-import { RiAccountPinBoxLine } from "react-icons/ri";
 import { IoShieldCheckmarkOutline } from "react-icons/io5";
 import { SlEnergy } from "react-icons/sl";
-import { MdOutlineCellWifi } from "react-icons/md";
-import { NavLink } from "react-router-dom";
 import { FaUserSecret } from "react-icons/fa";
 
 function HeroSection() {
