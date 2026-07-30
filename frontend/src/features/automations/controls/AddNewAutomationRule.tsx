@@ -16,7 +16,6 @@ import type {
   IDevice,
 } from "../../../types";
 import { useEffect, useState } from "react";
-import { useAuth } from "../../../context/AuthContext";
 interface AddNewAutomationRule {
   name: string;
   triggerType: TriggerType | "";
@@ -30,12 +29,7 @@ interface AddNewAutomationRuleProp {
 
 function AddNewAutomationRule({ onClose }: AddNewAutomationRuleProp) {
   const [devices, setDevices] = useState<IDevice[]>();
-  const [selectedTrigger, setSelectedTrigger] = useState<string | null>(null);
-  const [selectedAction, setSelectedAction] = useState<string | null>(null);
-  const [onSubmit, setOnSubmit] = useState(null);
   const [error, setError] = useState("");
-  const { user } = useAuth();
-
   const [formData, setFormData] = useState<AddNewAutomationRule>({
     name: "",
     triggerType: "",
