@@ -1,49 +1,60 @@
-import express, { response } from "express";
-import errorMiddleware from "./middeleware/errorMiddleWare";
+import express, {
+  type Request,
+  type Response,
+  type NextFunction,
+} from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
+
+import errorMiddleware from "./middeleware/errorMiddleWare";
 import { notFoundMiddleware } from "./middeleware/notFoundMiddleware";
 import router from "./routes/index";
-import env from "./config/env";
-import { Request, Response, NextFunction } from "express";
 
 const app = express();
 
 const allowedOrigins = [
+  "http://localhost:5173",
   "https://homedevicecontrol.com",
   "https://www.homedevicecontrol.com",
 ];
-app.use(express.json());
+
 app.use(
   cors({
     origin: (origin, callback) => {
-      if (!origin) {
+      console.log("Request origin:", origin);
+
+      if (!origin || allowedOrigins.includes(origin)) {
         return callback(null, true);
       }
 
-      if (allowedOrigins.includes(origin)) {
-        return callback(null, true);
-      }
       return callback(new Error(`CORS blocked origin: ${origin}`));
     },
     credentials: true,
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
   }),
 );
-app.use((req: Request, res: Response, next: NextFunction) => {
-  console.log(req.headers);
+
+app.use(express.json());
+app.use(cookieParser());
+
+app.use((req: Request, _res: Response, next: NextFunction) => {
+  console.log(`${req.method} ${req.path}`);
+  console.log("Origin:", req.headers.origin);
   next();
 });
-app.use(cookieParser());
-app.get("/", (req, res) => {
+
+app.get("/", (_req, res) => {
   res.status(200).json({
     success: true,
-    message: "Server's healthy.",
+    message: "Server is healthy.",
   });
 });
-app.get("/health", (req, res) => {
+
+app.get("/health", (_req, res) => {
   res.status(200).json({
     success: true,
-    message: "Server's healthy.",
+    message: "Server is healthy.",
   });
 });
 
