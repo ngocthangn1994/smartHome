@@ -4,8 +4,7 @@ import Header from "../../components/layout/Header";
 import SummaryDevices from "../dashboard/SummaryDevices";
 import SideBarHelper from "../../components/layout/SideBarHelper";
 import { useAuth } from "../../context/AuthContext";
-import type { IAutomationRule, IAlert, IDevice, IHome } from "../../types";
-import RecentActivity from "../devices/components/RecentActivity";
+import type { IDevice, IHome } from "../../types";
 import SettingsMenu from "./components/SettingsMenu";
 import SettingsOverview from "./components/SettingsOverview";
 import ProfileInformation from "./components/ProfileInformation";
@@ -18,47 +17,20 @@ import BackupSystem from "./components/BackupSystem.tsx";
 import SettingsQuickActions from "./components/SettingsQuickActions.tsx";
 function SettingPage() {
   const [devices, setDevices] = useState<IDevice[]>([]);
-  const [automationRules, setAutomationRules] = useState<IAutomationRule[]>([]);
-  const [alerts, setAlerts] = useState<IAlert[]>([]);
   const [home, setHome] = useState<IHome>();
   const [name, setName] = useState("User");
   const [email, setEmail] = useState("user@gmail.com");
   const [phone, setPhone] = useState("+1 (832)-591-6062");
   const { user } = useAuth();
-  const [isLoading, setIsLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
   const [homeName, setHomeName] = useState("Ngoc's Smart Home");
   const [address, setAddress] = useState("15106 gaines meadow court");
 
   useEffect(() => {
     async function loadData() {
-      try {
-        setIsLoading(true);
-        setErrorMessage("");
-
-        const [devicesResponse, automationResponse, alertsResponse] =
-          await Promise.all([
-            api.getDevices(),
-            api.getAutomationRules(),
-            api.getAlerts(),
-          ]);
-        setDevices(devicesResponse.data ?? []);
-        setAlerts(alertsResponse.data ?? []);
-        // Ensure automationResponse.data is an array before setting state
-        const automationData = automationResponse.data;
-        if (Array.isArray(automationData)) {
-          setAutomationRules(automationData);
-        } else if (automationData) {
-          setAutomationRules([automationData]);
-        } else {
-          setAutomationRules([]);
-        }
-      } catch (error) {
-        console.error(error);
-        setErrorMessage("Unable to load dashboard data. Please try again.");
-      } finally {
-        setIsLoading(false);
-      }
+      setErrorMessage("");
+      const [devicesResponse] = await Promise.all([api.getDevices()]);
+      setDevices(devicesResponse.data ?? []);
     }
 
     loadData();

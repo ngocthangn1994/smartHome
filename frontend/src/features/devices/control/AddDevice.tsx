@@ -11,7 +11,6 @@ import smartGarageImage from "../../../assets/smarthome_garage.png";
 import smartCameraImage from "../../../assets/smarthome_camera.png";
 import smartDoorBellImage from "../../../assets/smartHome_doorBell.png";
 import smartThermostatImage from "../../../assets/smartHome_thermostat.png";
-import smartDot from "../../../assets/threedot.png";
 import AddDeviceDetail from "./AddDeviceDetail";
 import type { DeviceType } from "../../../types";
 interface AddDeviceProps {

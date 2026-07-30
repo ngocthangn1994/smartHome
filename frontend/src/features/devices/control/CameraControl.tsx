@@ -14,8 +14,12 @@ function CameraControl({ device, onClose }: Props) {
 
   const cameraEntityId = device.haEntityId;
 
-  const snapshotUrl = `${api.getCameraSnapshotUrl(cameraEntityId)}?t=${snapshotVersion}`;
-  const streamUrl = api.getCameraStreamUrl(cameraEntityId);
+  const snapshotUrl = cameraEntityId
+    ? `${api.getCameraSnapshotUrl(cameraEntityId)}?t=${snapshotVersion}`
+    : "";
+  const streamUrl = cameraEntityId
+    ? api.getCameraStreamUrl(cameraEntityId)
+    : "";
 
   const imageSrc = viewMode === "snapshot" ? snapshotUrl : streamUrl;
 

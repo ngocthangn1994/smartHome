@@ -1,5 +1,4 @@
 import smartHomeWaterLeakSensor from "../../../assets/smarthome_waterleaksensor.png";
-import { FaCircle } from "react-icons/fa6";
 import type { IDevice } from "../../../types";
 import CameraControl from "../control/CameraControl";
 import { useState } from "react";
