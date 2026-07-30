@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import smarthomeRegister from "../assets/smarthome_register.png";
 import smartHomeLogo from "../assets/smarthome_logo.png";
 import { FaMobileAlt, FaDesktop, FaRobot, FaBell } from "react-icons/fa";
+import { NavLink } from "react-router-dom";
 import {
   FaEnvelope,
   FaLock,
@@ -23,7 +24,7 @@ function Register() {
     try {
       e.preventDefault();
       await register(name, email, passWord);
-      navigate("/");
+      navigate("/dashboard");
     } catch (error) {
       throw new Error("Can't register");
     }
@@ -39,14 +40,15 @@ function Register() {
                 className="w-full h-full object-cover"
                 src={smarthomeRegister}
               />
-
-              <div className="absolute top-4 left-5 object-contain z-5 flex items-center">
-                <img src={smartHomeLogo} alt="Logo" className="w-20  h-20 " />
-                <div className="flex items-center text-white justify-center">
-                  <p className="font-bold text-xl">Nguyen</p>
-                  <p className="font-bold text-xl">Shield</p>
+              <NavLink to="/">
+                <div className="absolute top-4 left-5 object-contain z-5 flex items-center">
+                  <img src={smartHomeLogo} alt="Logo" className="w-20  h-20 " />
+                  <div className="flex items-center text-white justify-center">
+                    <p className="font-bold text-xl">Nguyen</p>
+                    <p className="font-bold text-xl">Shield</p>
+                  </div>
                 </div>
-              </div>
+              </NavLink>
 
               <div className="absolute text-white top-30 left-10 ">
                 <div className="font-bold text-4xl ">
@@ -88,13 +90,16 @@ function Register() {
               </div>
             </div>
             <div className="bg-white px-5 py-5 rounded-2xl shadow-sm text-slate-900">
-              <div className="flex items-center">
-                <img src={smartHomeLogo} alt="Logo" className="w-20  h-20 " />
-                <div className="flex items-center text-slate-900 justify-center">
-                  <p className="font-bold text-xl">Nguyen</p>
-                  <p className="text-xl">Shield</p>
+              <NavLink to="/">
+                <div className="flex items-center">
+                  <img src={smartHomeLogo} alt="Logo" className="w-20  h-20 " />
+                  <div className="flex items-center text-slate-900 justify-center">
+                    <p className="font-bold text-xl">Nguyen</p>
+                    <p className="text-xl">Shield</p>
+                  </div>
                 </div>
-              </div>
+              </NavLink>
+
               <div className="px-5 space-y-3">
                 <p className="text-4xl font-bold">Create your account</p>
                 <p className="text-slate-600">

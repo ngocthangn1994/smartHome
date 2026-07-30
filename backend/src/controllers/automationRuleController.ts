@@ -109,7 +109,7 @@ export const createAutomationRule = asyncHandler(
       triggerType,
       condition,
       actionDevice,
-      actionValue,
+      actionType,
       enable,
     } = req.body;
     const automationRule = await AutomationRule.create({
@@ -119,18 +119,10 @@ export const createAutomationRule = asyncHandler(
       triggerType,
       condition,
       actionDevice,
-      actionValue,
+      actionType,
       enable,
     });
-    if (
-      !name ||
-      !home ||
-      !triggerDevice ||
-      !triggerType ||
-      !condition ||
-      !actionDevice ||
-      !enable
-    ) {
+    if (!name || !triggerDevice || !triggerType || !actionDevice) {
       throw new AppError(
         "Name, home, triggerDevice... are required to fill out",
         400,

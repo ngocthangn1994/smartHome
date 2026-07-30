@@ -28,12 +28,30 @@ export async function fetchApi<TData>(
     body: body !== undefined ? JSON.stringify(body) : undefined,
   };
 
+  console.log("API request:", {
+    url: `${VITE_API_URL}${url}`,
+    method,
+    body,
+  });
+
   const response = await fetch(`${VITE_API_URL}${url}`, config);
+
+  const responseData = await response.json().catch(() => null);
+
+  console.log("API response:", responseData);
+
   if (!response.ok) {
-    throw new Error(`API Error: ${response.status}`);
+    const errorMessage =
+      responseData?.message ||
+      responseData?.error ||
+      responseData?.errors?.[0]?.message ||
+      JSON.stringify(responseData) ||
+      `API Error: ${response.status}`;
+
+    throw new Error(errorMessage);
   }
-  const data: ApiResponse<TData> = await response.json();
-  return data;
+
+  return responseData as ApiResponse<TData>;
 }
 
 export const api = {
@@ -122,6 +140,7 @@ export const api = {
   login: (email: string, passWord: string) =>
     fetchApi(`/auth/login`, "POST", { email, passWord }),
   logout: () => fetchApi(`/auth/register`, "POST"),
+  getMe: () => fetchApi("/users/me", "GET"),
 };
 
 export default api;

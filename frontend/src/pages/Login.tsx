@@ -5,7 +5,7 @@ import smarthomeLogin from "../assets/smarthome_login.png";
 import smartHomeLogo from "../assets/smarthome_logo.png";
 import { FaMobileAlt, FaDesktop, FaRobot, FaBell } from "react-icons/fa";
 import { FaEnvelope, FaLock, FaEyeLowVision, FaGoogle } from "react-icons/fa6";
-
+import { NavLink } from "react-router-dom";
 function Login() {
   const { login } = useAuth();
   const [errorMessage, setErrorMessage] = useState("");
@@ -20,7 +20,7 @@ function Login() {
     setErrorMessage("");
     try {
       await login(email, passWord);
-      navigate("/");
+      navigate("/dashboard");
     } catch (error) {
       setErrorMessage("Invalid email or password. Please try again.");
     } finally {
@@ -37,14 +37,15 @@ function Login() {
                 className="w-full h-full object-cover"
                 src={smarthomeLogin}
               />
-
-              <div className="absolute top-4 left-5 object-contain z-5 flex items-center">
-                <img src={smartHomeLogo} alt="Logo" className="w-20  h-20 " />
-                <div className="flex items-center text-white justify-center">
-                  <p className="font-bold text-xl">Nguyen</p>
-                  <p className="font-bold text-xl">Shield</p>
+              <NavLink to="/">
+                <div className="absolute top-4 left-5 object-contain z-5 flex items-center">
+                  <img src={smartHomeLogo} alt="Logo" className="w-20  h-20 " />
+                  <div className="flex items-center text-white justify-center">
+                    <p className="font-bold text-xl">Nguyen</p>
+                    <p className="font-bold text-xl">Shield</p>
+                  </div>
                 </div>
-              </div>
+              </NavLink>
 
               <div className="absolute text-white top-30 left-10 ">
                 <div className="font-bold text-4xl ">
@@ -86,13 +87,16 @@ function Login() {
               </div>
             </div>
             <div className="max-w-2xl px-10 py-5 rounded-2xl shadow-sm hover:shadow-lg">
-              <div className="flex items-center">
-                <img src={smartHomeLogo} alt="Logo" className="w-20  h-20 " />
-                <div className="flex items-center text-slate-900 justify-center">
-                  <p className="font-bold text-xl">Nguyen</p>
-                  <p className="text-xl">Shield</p>
+              <NavLink to="/">
+                <div className="flex items-center">
+                  <img src={smartHomeLogo} alt="Logo" className="w-20  h-20 " />
+                  <div className="flex items-center text-slate-900 justify-center">
+                    <p className="font-bold text-xl">Nguyen</p>
+                    <p className="text-xl">Shield</p>
+                  </div>
                 </div>
-              </div>
+              </NavLink>
+
               <div className="px-5 space-y-3">
                 <p className="text-4xl font-bold">Welcome back</p>
                 <p className="text-slate-600">

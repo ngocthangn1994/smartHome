@@ -81,7 +81,7 @@ function DeviceToolbar({ selectedType, onFilterDevice }: DeviceToolBarProps) {
             >
               + Add Device
             </button>
-            {control == true && <AddDevice />}
+            {control == true && <AddDevice onClose={() => setControl(false)} />}
           </div>
         </div>
       </div>

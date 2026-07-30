@@ -1,9 +1,10 @@
 import {
-  getUsers,
+  getMe,
   getUserById,
   deleteUser,
   updateUser,
   createUser,
+  getAllUsers,
 } from "../controllers/userController";
 
 import { protect, restrictTo } from "../middeleware/authMiddleware";
@@ -13,7 +14,8 @@ const router = Router();
 
 router.use(protect);
 
-router.get("/", getUsers);
+router.get("/", getAllUsers);
+router.get("/me", getMe);
 router.get("/:id", getUserById);
 router.post("/", createUser);
 router.delete("/:id", restrictTo("admin"), deleteUser);

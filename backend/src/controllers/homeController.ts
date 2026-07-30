@@ -72,12 +72,10 @@ export const deleteHome = asyncHandler(
 
 export const updateHome = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
-    const { name, address, ownerId } = req.body;
-    const home = await Home.findByIdAndUpdate(
-      req.params.id,
-      { name, address, ownerId },
-      { new: true, isValidate: true },
-    );
+    const home = await Home.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+      runValidators: true,
+    });
     if (!home) {
       throw new AppError("Can't update home by Id.", 404);
     }

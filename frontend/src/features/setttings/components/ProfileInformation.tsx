@@ -1,9 +1,29 @@
 import { RxAvatar } from "react-icons/rx";
+import { useAuth } from "../../../context/AuthContext";
+import { useState } from "react";
+import { useEffect } from "react";
 
-function ProfileInformation() {
+interface ProfileInformationProp {
+  name: string;
+  email: string;
+  phone: string;
+  onSave: () => void;
+  setName: (value: string) => void;
+  setEmail: (value: string) => void;
+  setPhone: (value: string) => void;
+}
+function ProfileInformation({
+  name,
+  email,
+  phone,
+  onSave,
+  setName,
+  setEmail,
+  setPhone,
+}: ProfileInformationProp) {
   return (
     <>
-      <div className="space-y-3 bg-white px-5 py-5 rounded-2xl text-slate-600">
+      <div className="bg-white px-5 py-5 rounded-2xl text-slate-600 flex flex-col justify-between">
         <p className="font-bold text-xl">Profile Information</p>
         <div className="flex items-center gap-5 ">
           <div>
@@ -11,11 +31,26 @@ function ProfileInformation() {
           </div>
           <div>
             <p>Full Name</p>
-            <p className="font-medium">Ngoc Nguyen</p>
+            <input
+              value={name}
+              onChange={(event) => setName(event.target.value)}
+              className="font-medium outline-none"
+              placeholder={name}
+            />
             <p>Email Address</p>
-            <p className="font-medium">ngoc.nguyen.engineer@gmail.com</p>
+            <input
+              value={email}
+              onChange={(event) => setEmail(event.target.value)}
+              className="font-medium outline-none"
+              placeholder={email}
+            />
             <p>Phone Number</p>
-            <p className="font-medium">+1 (832)-597-6062</p>
+            <input
+              value={phone}
+              onChange={(event) => setPhone(event.target.value)}
+              className="font-medium outline-none"
+              placeholder={phone}
+            />
           </div>
         </div>
         <div>
@@ -32,9 +67,15 @@ function ProfileInformation() {
             <option className="font-medium">English (US)</option>
           </select>
         </div>
-        <button className="w-full bg-blue-600 text-white px-2 py-2 rounded-2xl">
-          Save Changes
-        </button>
+        <div>
+          <button
+            type="button"
+            onClick={onSave}
+            className="w-full bg-blue-600 text-white px-2 py-2 rounded-2xl hover:bg-blue-700"
+          >
+            Save Changes
+          </button>
+        </div>
       </div>
     </>
   );
