@@ -4,7 +4,7 @@ import Header from "../../components/layout/Header";
 import SummaryDevices from "../dashboard/SummaryDevices";
 import SideBarHelper from "../../components/layout/SideBarHelper";
 import { useAuth } from "../../context/AuthContext";
-import type { IAutomationRule, IAlert, IDevice } from "../../types";
+import type { IAlert, IDevice } from "../../types";
 import DeviceToolbar from "./components/DeviceToolbar";
 import DeviceList from "./DeviceList";
 import DeviceHealthOverview from "./components/DeviceHealthOverview";
@@ -15,12 +15,10 @@ type DeviceFilter = DeviceType | "all" | "security";
 
 function DevicesPage() {
   const [devices, setDevices] = useState<IDevice[]>([]);
-  const [automationRules, setAutomationRules] = useState<IAutomationRule[]>([]);
   const [alerts, setAlerts] = useState<IAlert[]>([]);
   const [selectedType, setSelectedType] = useState<DeviceFilter>("all");
   const { user } = useAuth();
-  const [isLoading, setIsLoading] = useState(true);
-  const [errorMessage, setErrorMessage] = useState("");
+
   const securityDevices = [
     "door_lock",
     "window_sensor",
@@ -29,44 +27,27 @@ function DevicesPage() {
   ];
   const filterDevice = (type: DeviceFilter) => {
     return devices.filter((device) => {
-      if (selectedType === "all") {
+      if (type === "all") {
         return true;
       }
-      if (selectedType === "security") {
+      if (type === "security") {
         return securityDevices.includes(device.deviceType);
       }
-      return device.deviceType.includes(selectedType);
+      return device.deviceType.includes(type);
     });
   };
   useEffect(() => {
     async function loadData() {
       try {
-        setIsLoading(true);
-        setErrorMessage("");
-
-        const [devicesResponse, automationResponse, alertsResponse] =
-          await Promise.all([
-            api.getDevices(),
-            api.getAutomationRules(),
-            api.getAlerts(),
-          ]);
+        const [devicesResponse, alertsResponse] = await Promise.all([
+          api.getDevices(),
+          api.getAlerts(),
+        ]);
 
         setDevices(devicesResponse.data ?? []);
         setAlerts(alertsResponse.data ?? []);
-        // Ensure automationResponse.data is an array before setting state
-        const automationData = automationResponse.data;
-        if (Array.isArray(automationData)) {
-          setAutomationRules(automationData);
-        } else if (automationData) {
-          setAutomationRules([automationData]);
-        } else {
-          setAutomationRules([]);
-        }
       } catch (error) {
-        console.error(error);
-        setErrorMessage("Unable to load dashboard data. Please try again.");
-      } finally {
-        setIsLoading(false);
+        console.log(error);
       }
     }
 
