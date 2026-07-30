@@ -74,7 +74,7 @@ const deviceStateSchema = new Schema<IDeviceState>({
     enum: ["open", "closed", "unknown"],
   },
 });
-
+export type ConnectionMethod = "wifi" | "bluetooth" | "zigbee" | "zwave";
 export interface IDevice extends Document {
   name: string;
   home: mongoose.Types.ObjectId;
@@ -86,19 +86,24 @@ export interface IDevice extends Document {
   haEntityId: string;
   createdAt: Date;
   updatedAt: Date;
+  brand?: string;
+  modelDevice?: string;
+  connectionMethod?: ConnectionMethod;
+  ipAddress?: string;
+  macAddress?: string;
+  deviceImage?: string;
+  description?: string;
 }
 
 const deviceSchema = new Schema<IDevice>(
   {
     name: {
       type: String,
-      required: true,
       trim: true,
     },
     home: {
       type: Schema.Types.ObjectId,
       ref: "Home",
-      required: true,
     },
     deviceType: {
       type: String,
@@ -116,12 +121,10 @@ const deviceSchema = new Schema<IDevice>(
         "window_sensor",
         "alarm_panel",
       ],
-      required: true,
     },
     status: {
       type: String,
       enum: ["online", "offline", "unknown"],
-      required: true,
       default: "unknown",
     },
     batteryLevel: {
@@ -139,9 +142,15 @@ const deviceSchema = new Schema<IDevice>(
       trim: true,
     },
     haEntityId: {
-      required: true,
       type: String,
     },
+    brand: String,
+    modelDevice: String,
+    connectionMethod: ["wifi", "bluetooth", "zigbee", "zwave"],
+    ipAddress: String,
+    macAddress: String,
+    deviceImage: String,
+    description: String,
   },
   { timestamps: true },
 );

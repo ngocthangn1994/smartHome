@@ -1,4 +1,18 @@
-function HomePreferences() {
+interface HomePreferencesProps {
+  setHomeName: (value: string) => void;
+  setAddress: (value: string) => void;
+  homeName: string;
+  address: string;
+  homeSave: () => Promise<void>;
+}
+
+function HomePreferences({
+  setHomeName,
+  setAddress,
+  homeName,
+  address,
+  homeSave,
+}: HomePreferencesProps) {
   return (
     <>
       <div className="bg-white px-5 py-5 rounded-2xl flex flex-col justify-between">
@@ -9,8 +23,10 @@ function HomePreferences() {
           <label>Home Name</label>
           <div>
             <input
-              className="border px-5 py-2 rounded-2xl w-full"
-              placeholder="Ngoc's Smart Home"
+              value={homeName}
+              onChange={(event) => setHomeName(event.target.value)}
+              className="border px-5 py-2 rounded-2xl w-full outline-none"
+              placeholder={homeName}
             />
           </div>
         </div>
@@ -19,8 +35,10 @@ function HomePreferences() {
             <label>Home Address</label>
           </div>
           <input
-            className="border px-5 py-2 rounded-2xl w-full"
-            placeholder="15106 gaines meadow court, Houston, TX 77083"
+            value={address}
+            onChange={(event) => setAddress(event.target.value)}
+            className="border px-5 py-2 rounded-2xl w-full outline-none"
+            placeholder={address}
           />
         </div>
 
@@ -68,8 +86,11 @@ function HomePreferences() {
           </div>
         </div>
         <div>
-          {" "}
-          <button className="bg-blue-600 text-white w-full rounded-2xl px-2 py-3">
+          <button
+            type="button"
+            onClick={homeSave}
+            className="bg-blue-600 text-white w-full rounded-2xl px-2 py-3 hover:bg-blue-700"
+          >
             Save Changes
           </button>
         </div>

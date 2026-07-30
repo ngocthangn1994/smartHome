@@ -15,7 +15,7 @@ import { HiBellAlert } from "react-icons/hi2";
 import { NavLink } from "react-router-dom";
 function SideBarHelper() {
   const menu = [
-    { name: "Dashboard", icon: <FaWindows />, path: "/" },
+    { name: "Dashboard", icon: <FaWindows />, path: "/dashboard" },
     { name: "Devices", icon: <FaModx />, path: "/devices" },
     { name: "Cameras", icon: <FaCameraRetro />, path: "/cameras" },
     { name: "Automations", icon: <FaRocket />, path: "/automations" },
@@ -27,15 +27,17 @@ function SideBarHelper() {
   return (
     <>
       <div className="bg-white h-full px-5 py-5">
-        <div className="flex items-center">
-          <NavLink to="/">
+        {" "}
+        <NavLink to="/dashboard">
+          <div className="flex items-center">
             <img className="w-20 h-20" src={smartHomeLogo} />
-          </NavLink>
-          <div className="flex text-3xl font-bold">
-            <p>Nguyen</p>
-            <p className="text-blue-800">Shield</p>
+
+            <div className="flex text-3xl font-bold">
+              <p>Nguyen</p>
+              <p className="text-blue-800">Shield</p>
+            </div>
           </div>
-        </div>
+        </NavLink>
         <div className="space-y-4 px-5 py-20 text-2xl text-slate-900 space-y-15">
           {menu.map((item) => (
             <NavLink

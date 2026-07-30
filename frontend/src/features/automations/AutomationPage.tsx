@@ -55,6 +55,13 @@ function AutomationPage() {
     loadData();
   }, []);
 
+  const handleDelete = async (id: string) => {
+    await api.deleteAutomationById(id);
+    setAutomationRules((previous) =>
+      previous.filter((rule) => rule._id !== id),
+    );
+    console.log("Successfully delete automationRule by ID");
+  };
   return (
     <>
       <div className="w-screen min-h-screen grid grid-cols-[0.3fr_1.7fr] bg-indigo-50">
@@ -67,7 +74,10 @@ function AutomationPage() {
           <AutomationMenu />
           <div className="grid grid-cols-[1.5fr_0.5fr] mt-5 gap-5">
             <div>
-              <AutomationList />
+              <AutomationList
+                automationRules={automationRules}
+                handleDelete={handleDelete}
+              />
             </div>
             <div className="space-y-3">
               <AutomationHealthOverview automationRules={automationRules} />

@@ -1,35 +1,38 @@
 import { Request, Response, NextFunction } from "express";
 import { AppError } from "../utils/AppError";
 import buildResponse from "../utils/buildResponse";
-import User from "../models/User";
+import User, { IUser } from "../models/User";
 import { asyncHandler } from "../utils/asyncHandler";
 
-export const getUsers = asyncHandler(
-  async (req: Request, res: Response, next: NextFunction) => {
-    const users = await User.find();
-    if (!users) {
-      throw new AppError("No user found", 404);
-    }
-    res
-      .status(200)
-      .json(buildResponse(true, "Successfully fetch all the users", users));
-  },
-);
+interface AuthenticatedRequest extends Request {
+  user?: IUser;
+}
 
-// get user by Id:
+export const getMe = asyncHandler(
+  async (req: AuthenticatedRequest, res: Response) => {
+    const user = req.user;
 
-export const getUserById = asyncHandler(
-  async (req: Request, res: Response, next: NextFunction) => {
-    const user = await User.findById(req.params.id);
     if (!user) {
-      throw new AppError("Not found user by Id", 404);
+      throw new AppError("You are not logged in.", 401);
     }
+
     res
       .status(200)
-      .json(buildResponse(true, "Successfully fetch user by id", user));
+      .json(buildResponse(true, "Successfully fetched current user", user));
   },
 );
 
+export const getUserById = asyncHandler(async (req: Request, res: Response) => {
+  const user = await User.findById(req.params.id);
+
+  if (!user) {
+    throw new AppError("User not found by ID.", 404);
+  }
+
+  res
+    .status(200)
+    .json(buildResponse(true, "Successfully fetched user by ID", user));
+});
 // create user by id.
 
 export const createUser = asyncHandler(
@@ -91,5 +94,17 @@ export const updateUser = asyncHandler(
     res
       .status(200)
       .json(buildResponse(true, "Successfuly update the user", user));
+  },
+);
+
+// get all user.
+
+export const getAllUsers = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const users = await User.find();
+
+    res
+      .status(200)
+      .json(buildResponse(true, "Successfuly update the user", users));
   },
 );

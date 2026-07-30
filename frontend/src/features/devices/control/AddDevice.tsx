@@ -1,6 +1,4 @@
 import { useState } from "react";
-import type { IDevice } from "../../../types";
-import api from "../../../api/api";
 import { CiCirclePlus } from "react-icons/ci";
 import smartLightImage from "../../../assets/smarthome_smartlight.png";
 import smartPlugImage from "../../../assets/smarthome_smartplug.png";
@@ -14,26 +12,87 @@ import smartCameraImage from "../../../assets/smarthome_camera.png";
 import smartDoorBellImage from "../../../assets/smartHome_doorBell.png";
 import smartThermostatImage from "../../../assets/smartHome_thermostat.png";
 import smartDot from "../../../assets/threedot.png";
+import AddDeviceDetail from "./AddDeviceDetail";
+import type { DeviceType } from "../../../types";
 interface AddDeviceProps {
-  device: IDevice;
   onClose: () => void;
 }
 
-function AddDevice() {
-  const [selectedDevice, setSelectedDevice] = useState<string | null>(null);
-  const listDevice = [
-    { image: smartLightImage, name: "Smart Light" },
-    { image: smartCameraImage, name: "Camera" },
-    { image: smartThermostatImage, name: "Thermostat" },
-    { image: smartPlugImage, name: "Smart Plug" },
-    { image: smartDoorLockImage, name: "Door Lock" },
-    { image: smartGarageImage, name: "Garage Door" },
-    { image: smartSmokeDetectorImage, name: "Smoke Detector" },
-    { image: smartWaterLeakSensorImage, name: "Water Leak Sensor" },
-    { image: smartMotionSensorImage, name: "Motion Sensor" },
-    { image: smartWindowSensorImage, name: "Window Sensor" },
-    { image: smartDoorBellImage, name: "Door Bell" },
-    { image: smartDot, name: "Other" },
+interface DeviceOption {
+  image: string;
+  name: string;
+  deviceType: DeviceType;
+}
+function AddDevice({ onClose }: AddDeviceProps) {
+  const [selectedDevice, setSelectedDevice] = useState<DeviceOption | null>(
+    null,
+  );
+  const [showDetail, setShowDetail] = useState(false);
+  if (showDetail && selectedDevice) {
+    return (
+      <AddDeviceDetail
+        deviceType={selectedDevice?.deviceType}
+        selectedDevice={selectedDevice?.name}
+        onClose={() => setShowDetail(false)}
+      />
+    );
+  }
+  const listDevice: DeviceOption[] = [
+    {
+      image: smartLightImage,
+      name: "Smart Light",
+      deviceType: "smart_light",
+    },
+    {
+      image: smartCameraImage,
+      name: "Camera",
+      deviceType: "camera",
+    },
+    {
+      image: smartThermostatImage,
+      name: "Thermostat",
+      deviceType: "thermostat",
+    },
+    {
+      image: smartPlugImage,
+      name: "Smart Plug",
+      deviceType: "smart_plug",
+    },
+    {
+      image: smartDoorLockImage,
+      name: "Door Lock",
+      deviceType: "door_lock",
+    },
+    {
+      image: smartGarageImage,
+      name: "Garage Door",
+      deviceType: "garage_door",
+    },
+    {
+      image: smartSmokeDetectorImage,
+      name: "Smoke Detector",
+      deviceType: "smoke_detector",
+    },
+    {
+      image: smartWaterLeakSensorImage,
+      name: "Water Leak Sensor",
+      deviceType: "water_leak_sensor",
+    },
+    {
+      image: smartMotionSensorImage,
+      name: "Motion Sensor",
+      deviceType: "motion_sensor",
+    },
+    {
+      image: smartWindowSensorImage,
+      name: "Window Sensor",
+      deviceType: "window_sensor",
+    },
+    {
+      image: smartDoorBellImage,
+      name: "Door Bell",
+      deviceType: "door_bell",
+    },
   ];
   return (
     <>
@@ -48,7 +107,10 @@ function AddDevice() {
                   Connect a new smart device to your home
                 </p>
               </div>
-              <button className="bg-sky-100 p-3 rounded-full font-bold text-xl">
+              <button
+                onClick={() => onClose()}
+                className="bg-sky-100 p-3 rounded-full font-bold text-xl"
+              >
                 X
               </button>
             </div>
@@ -70,13 +132,13 @@ function AddDevice() {
           </div>
           <div className="border border-slate-200 p-5 rounded-xl shadow-sm grid grid-cols-3 gap-3 mt-3">
             {listDevice.map((item) => {
-              const isSelected = selectedDevice === item.name;
+              const isSelected = selectedDevice?.deviceType === item.deviceType;
 
               return (
                 <button
-                  key={item.name}
+                  key={item.deviceType}
                   type="button"
-                  onClick={() => setSelectedDevice(item.name)}
+                  onClick={() => setSelectedDevice(item)}
                   className={`flex flex-col items-center p-2 border rounded-xl transition-all
           ${
             isSelected
@@ -103,10 +165,16 @@ function AddDevice() {
             })}
           </div>
           <div className="flex mt-5 gap-3 justify-end">
-            <button className="px-10 py-2 rounded-2xl border border-slate-200 rouned-2xl">
+            <button
+              onClick={() => onClose()}
+              className="px-10 py-2 rounded-2xl border border-slate-200 rouned-2xl"
+            >
               Cancel
             </button>
-            <button className="px-10 py-2 bg-blue-600 text-white border border-slate-200 rounded-2xl">
+            <button
+              onClick={() => setShowDetail(true)}
+              className="px-10 py-2 bg-blue-600 text-white border border-slate-200 rounded-2xl"
+            >
               Next
             </button>
           </div>

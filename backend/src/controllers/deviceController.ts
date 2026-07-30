@@ -1,57 +1,73 @@
-import buildResponse from "../utils/buildResponse";
-import { asyncHandler } from "../utils/asyncHandler";
-import { Request, Response } from "express";
-import { AppError } from "../utils/AppError";
-import Device from "../models/Device";
-import { homeAssistantService } from "../services/homeAssistantService";
+import type { Request, Response } from "express";
 import axios from "axios";
 import mongoose from "mongoose";
 
+import buildResponse from "../utils/buildResponse";
+import { asyncHandler } from "../utils/asyncHandler";
+import { AppError } from "../utils/AppError";
+
+import Device from "../models/Device";
+import User from "../models/User";
+
+import { homeAssistantService } from "../services/homeAssistantService";
+
+export interface AuthenticatedRequest extends Request {
+  user?: {
+    userId: string;
+    email?: string;
+    homeId?: string;
+  };
+}
+
 /*
 |--------------------------------------------------------------------------
-| Helper: Find device by MongoDB _id OR Home Assistant entity ID
+| Helper: Find device by MongoDB ID or Home Assistant entity ID
 |--------------------------------------------------------------------------
-|
-| Examples accepted:
-|
-| MongoDB ID:
-| 6a4d3caff007dda5650f8e76
-|
-| Home Assistant entity ID:
-| camera.front_door_live_view
-| climate.x2s_smart_thermostat
-| switch.bedroom_smart_plug
-|
 */
 
 const findDeviceByIdOrHaEntityId = async (id: string) => {
   if (mongoose.Types.ObjectId.isValid(id)) {
-    return await Device.findById(id);
+    return Device.findById(id);
   }
 
-  return await Device.findOne({
+  return Device.findOne({
     haEntityId: id,
   });
 };
 
 /*
 |--------------------------------------------------------------------------
-| Get all devices
+| Get devices belonging to logged-in user's home
 |--------------------------------------------------------------------------
 */
 
-export const getDevices = asyncHandler(async (req: Request, res: Response) => {
-  const devices = await Device.find();
+export const getDevices = asyncHandler(
+  async (req: AuthenticatedRequest, res: Response) => {
+    const user = req.user;
 
-  if (devices.length === 0) {
-    throw new AppError("No device found", 404);
-  }
+    if (!user) {
+      throw new AppError("You are not logged in.", 401);
+    }
 
-  res
-    .status(200)
-    .json(buildResponse(true, "Devices fetched successfully", devices));
-});
+    if (!user.homeId) {
+      throw new AppError("User does not have a home assigned.", 400);
+    }
 
+    const devices = await Device.find({
+      home: user.homeId,
+    });
+
+    res
+      .status(200)
+      .json(
+        buildResponse(
+          true,
+          "Successfully fetched devices for this home",
+          devices,
+        ),
+      );
+  },
+);
 /*
 |--------------------------------------------------------------------------
 | Get one device
@@ -60,17 +76,21 @@ export const getDevices = asyncHandler(async (req: Request, res: Response) => {
 
 export const getDeviceById = asyncHandler(
   async (req: Request, res: Response) => {
-    const id = req.params.id as string;
+    const id = req.params.id;
+
+    if (!id || Array.isArray(id)) {
+      throw new AppError("Invalid device ID.", 400);
+    }
 
     const device = await findDeviceByIdOrHaEntityId(id);
 
     if (!device) {
-      throw new AppError("Device not found", 404);
+      throw new AppError("Device not found.", 404);
     }
 
     res
       .status(200)
-      .json(buildResponse(true, "Device fetched successfully", device));
+      .json(buildResponse(true, "Device fetched successfully.", device));
   },
 );
 
@@ -93,9 +113,9 @@ export const createDevice = asyncHandler(
       state,
     } = req.body;
 
-    if (!name || !home || !deviceType || !status || !area || !haEntityId) {
+    if (!name || !home || !deviceType || !area || !haEntityId) {
       throw new AppError(
-        "Name, home, deviceType, status, area, and haEntityId are required.",
+        "Name, home, device type, area, and Home Assistant entity ID are required.",
         400,
       );
     }
@@ -115,11 +135,11 @@ export const createDevice = asyncHandler(
       name,
       home,
       deviceType,
-      batteryLevel,
       status,
+      batteryLevel,
       area,
-      state,
       haEntityId,
+      state,
     });
 
     res
@@ -136,7 +156,11 @@ export const createDevice = asyncHandler(
 
 export const deleteDevice = asyncHandler(
   async (req: Request, res: Response) => {
-    const id = req.params.id as string;
+    const id = req.params.id;
+
+    if (!id || Array.isArray(id)) {
+      throw new AppError("Invalid device ID.", 400);
+    }
 
     const device = await findDeviceByIdOrHaEntityId(id);
 
@@ -160,18 +184,11 @@ export const deleteDevice = asyncHandler(
 
 export const updateDevice = asyncHandler(
   async (req: Request, res: Response) => {
-    const id = req.params.id as string;
+    const id = req.params.id;
 
-    const {
-      name,
-      home,
-      deviceType,
-      status,
-      batteryLevel,
-      area,
-      haEntityId,
-      state,
-    } = req.body;
+    if (!id || Array.isArray(id)) {
+      throw new AppError("Invalid device ID.", 400);
+    }
 
     const existingDevice = await findDeviceByIdOrHaEntityId(id);
 
@@ -179,18 +196,20 @@ export const updateDevice = asyncHandler(
       throw new AppError("Can't find device to update.", 404);
     }
 
+    const allowedUpdates = {
+      name: req.body.name,
+      home: req.body.home,
+      deviceType: req.body.deviceType,
+      status: req.body.status,
+      batteryLevel: req.body.batteryLevel,
+      area: req.body.area,
+      state: req.body.state,
+      haEntityId: req.body.haEntityId,
+    };
+
     const device = await Device.findByIdAndUpdate(
       existingDevice._id,
-      {
-        name,
-        home,
-        deviceType,
-        status,
-        batteryLevel,
-        area,
-        state,
-        haEntityId,
-      },
+      allowedUpdates,
       {
         new: true,
         runValidators: true,
@@ -211,7 +230,11 @@ export const updateDevice = asyncHandler(
 
 export const increaseTemperature = asyncHandler(
   async (req: Request, res: Response) => {
-    const id = req.params.id as string;
+    const id = req.params.id;
+
+    if (!id || Array.isArray(id)) {
+      throw new AppError("Invalid device ID.", 400);
+    }
 
     const device = await findDeviceByIdOrHaEntityId(id);
 
@@ -224,7 +247,6 @@ export const increaseTemperature = asyncHandler(
     }
 
     const targetTemperature = device.state?.targetTemperature ?? 72;
-
     const newTargetTemperature = targetTemperature + 1;
 
     await homeAssistantService.setTemperature(
@@ -260,7 +282,11 @@ export const increaseTemperature = asyncHandler(
 
 export const decreaseTemperature = asyncHandler(
   async (req: Request, res: Response) => {
-    const id = req.params.id as string;
+    const id = req.params.id;
+
+    if (!id || Array.isArray(id)) {
+      throw new AppError("Invalid device ID.", 400);
+    }
 
     const device = await findDeviceByIdOrHaEntityId(id);
 
@@ -273,7 +299,6 @@ export const decreaseTemperature = asyncHandler(
     }
 
     const targetTemperature = device.state?.targetTemperature ?? 72;
-
     const newTargetTemperature = targetTemperature - 1;
 
     await homeAssistantService.setTemperature(
@@ -309,7 +334,11 @@ export const decreaseTemperature = asyncHandler(
 
 export const turnOnDevice = asyncHandler(
   async (req: Request, res: Response) => {
-    const id = req.params.id as string;
+    const id = req.params.id;
+
+    if (!id || Array.isArray(id)) {
+      throw new AppError("Invalid device ID.", 400);
+    }
 
     const device = await findDeviceByIdOrHaEntityId(id);
 
@@ -347,7 +376,11 @@ export const turnOnDevice = asyncHandler(
 
 export const turnOffDevice = asyncHandler(
   async (req: Request, res: Response) => {
-    const id = req.params.id as string;
+    const id = req.params.id;
+
+    if (!id || Array.isArray(id)) {
+      throw new AppError("Invalid device ID.", 400);
+    }
 
     const device = await findDeviceByIdOrHaEntityId(id);
 
@@ -384,7 +417,11 @@ export const turnOffDevice = asyncHandler(
 */
 
 export const getSnapshot = asyncHandler(async (req: Request, res: Response) => {
-  const id = req.params.id as string;
+  const id = req.params.id;
+
+  if (!id || Array.isArray(id)) {
+    throw new AppError("Invalid device ID.", 400);
+  }
 
   const device = await findDeviceByIdOrHaEntityId(id);
 
@@ -403,6 +440,7 @@ export const getSnapshot = asyncHandler(async (req: Request, res: Response) => {
   if (!snapshotUrl) {
     throw new AppError("No snapshot URL found.", 404);
   }
+
   const snapshotResponse = await axios.get(snapshotUrl, {
     responseType: "arraybuffer",
     headers: {
@@ -412,8 +450,12 @@ export const getSnapshot = asyncHandler(async (req: Request, res: Response) => {
 
   const rawContentType = snapshotResponse.headers["content-type"];
 
-  const contentType =
-    typeof rawContentType === "string" ? rawContentType : "image/jpeg";
+  const contentType: string =
+    typeof rawContentType === "string"
+      ? rawContentType
+      : Array.isArray(rawContentType)
+        ? rawContentType[0] || "image/jpeg"
+        : "image/jpeg";
 
   const imageBuffer = Buffer.from(snapshotResponse.data);
 
@@ -430,13 +472,11 @@ export const getSnapshot = asyncHandler(async (req: Request, res: Response) => {
 */
 
 export const getStream = asyncHandler(async (req: Request, res: Response) => {
-  const id = req.params.id as string;
+  const id = Array.isArray(req.params.id) ? req.params.id[0] : req.params.id;
 
-  if (!id || typeof id !== "string") {
+  if (!id) {
     throw new AppError("Invalid device ID.", 400);
   }
-
-  console.log("Camera ID received:", id);
 
   const device = await findDeviceByIdOrHaEntityId(id);
 
@@ -447,12 +487,6 @@ export const getStream = asyncHandler(async (req: Request, res: Response) => {
   if (device.deviceType !== "camera" && device.deviceType !== "door_bell") {
     throw new AppError("This device is not a camera or doorbell.", 400);
   }
-
-  console.log("Camera found:", {
-    mongoId: device._id,
-    name: device.name,
-    haEntityId: device.haEntityId,
-  });
 
   const streamUrl = await homeAssistantService.getStreamUrl(device.haEntityId);
 
@@ -466,7 +500,7 @@ export const getStream = asyncHandler(async (req: Request, res: Response) => {
 
   const rawContentType = streamResponse.headers["content-type"];
 
-  const contentType =
+  const contentType: string =
     typeof rawContentType === "string"
       ? rawContentType
       : Array.isArray(rawContentType)

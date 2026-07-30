@@ -4,8 +4,10 @@ import { MdOutlineSecurity } from "react-icons/md";
 import { MdDeviceThermostat } from "react-icons/md";
 import { AiFillThunderbolt } from "react-icons/ai";
 import { CiStar } from "react-icons/ci";
-
+import { useState } from "react";
+import AddNewAutomationRule from "../controls/AddNewAutomationRule";
 function AutomationMenu() {
+  const [popUp, setPopUp] = useState(false);
   const menu = [
     { icon: null, name: "All" },
     { icon: <FiSun />, name: "Morning" },
@@ -38,11 +40,15 @@ function AutomationMenu() {
           </button>
         </div>
         <div className="bg-white">
-          <button className="bg-blue-600 text-white px-5 py-2 rounded-2xl">
+          <button
+            onClick={() => setPopUp(true)}
+            className="bg-blue-600 text-white px-5 py-2 rounded-2xl"
+          >
             + New Automation
           </button>
         </div>
       </div>
+      {popUp && <AddNewAutomationRule onClose={() => setPopUp(false)} />}
     </>
   );
 }

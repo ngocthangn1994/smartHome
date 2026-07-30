@@ -35,6 +35,8 @@ export interface IDeviceLog {
 
 // Device
 
+export type ConnectionMethod = "wifi" | "bluetooth" | "zigbee" | "zwave";
+
 export type DeviceType =
   | "thermostat"
   | "smoke_detector"
@@ -78,9 +80,16 @@ export interface IDevice {
   batteryLevel?: number;
   area: string;
   state: IDeviceState;
-  haEntityId: string;
+  haEntityId?: string;
   createdAt: string;
   updatedAt: string;
+  brand?: string;
+  modelDevice?: string;
+  connectionMethod?: ConnectionMethod;
+  ipAddress?: string;
+  macAddress?: string;
+  deviceImage?: string;
+  description?: string;
 }
 
 // automationRule.
@@ -100,6 +109,7 @@ export type ActionType =
 export interface IAutomationRule {
   _id: string;
   name: string;
+  message: string;
   home: string;
   triggerDevice: string;
   triggerType: TriggerType;

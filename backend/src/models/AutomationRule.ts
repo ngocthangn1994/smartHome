@@ -14,11 +14,12 @@ export type ActionType =
 
 export interface IAutomationRule extends Document {
   name: string;
+  message: string;
   home: mongoose.Types.ObjectId;
-  triggerDevice: mongoose.Types.ObjectId;
+  triggerDevice: string;
   triggerType: TriggerType;
   condition: Record<string, unknown>;
-  actionDevice: mongoose.Types.ObjectId;
+  actionDevice: string;
   actionType: ActionType;
   actionValue?: Record<string, unknown>;
   enable: boolean;
@@ -30,12 +31,14 @@ const automationRuleSchema = new Schema<IAutomationRule>(
       type: String,
       required: true,
     },
+    message: {
+      type: String,
+    },
     home: {
       type: Schema.Types.ObjectId,
-      required: true,
     },
     triggerDevice: {
-      type: Schema.Types.ObjectId,
+      type: String,
       required: true,
     },
     triggerType: {
@@ -54,7 +57,7 @@ const automationRuleSchema = new Schema<IAutomationRule>(
       default: {},
     },
     actionDevice: {
-      type: Schema.Types.ObjectId,
+      type: String,
       required: true,
     },
     actionType: {
