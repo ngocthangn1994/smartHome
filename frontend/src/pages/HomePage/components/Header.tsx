@@ -2,7 +2,6 @@ import smartHomeLogo from "../../../assets/smarthome_logo.png";
 import { NavLink } from "react-router-dom";
 import { RiAccountCircleLine } from "react-icons/ri";
 import { RiAccountPinBoxLine } from "react-icons/ri";
-import { useState } from "react";
 
 function Header() {
   const currentPage = "text-blue-600 font-bold";
