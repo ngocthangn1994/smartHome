@@ -1,7 +1,4 @@
 import { RxAvatar } from "react-icons/rx";
-import { useAuth } from "../../../context/AuthContext";
-import { useState } from "react";
-import { useEffect } from "react";
 
 interface ProfileInformationProp {
   name: string;

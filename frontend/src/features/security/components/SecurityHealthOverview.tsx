@@ -1,7 +1,6 @@
 import HealthRow from "../../../components/layout/HealthRow";
 import DonutChart from "../../../components/layout/DonutChart";
 import type { IDevice } from "../../../types";
-import MotionSensor from "../../devices/cards/MotionSensor";
 interface SecurityHealthOverviewProps {
   devices: IDevice[];
 }

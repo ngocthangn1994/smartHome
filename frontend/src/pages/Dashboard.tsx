@@ -16,15 +16,10 @@ function Dashboard() {
   const [alerts, setAlerts] = useState<IAlert[]>([]);
 
   const { user } = useAuth();
-  const [isLoading, setIsLoading] = useState(true);
-  const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
     async function loadData() {
       try {
-        setIsLoading(true);
-        setErrorMessage("");
-
         const [devicesResponse, automationResponse, alertsResponse] =
           await Promise.all([
             api.getDevices(),
@@ -45,9 +40,6 @@ function Dashboard() {
         }
       } catch (error) {
         console.error(error);
-        setErrorMessage("Unable to load dashboard data. Please try again.");
-      } finally {
-        setIsLoading(false);
       }
     }
 

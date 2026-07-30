@@ -43,7 +43,11 @@ function SecurityMenu({ selectedType, onFilterDevice }: securityMenuProps) {
             <button
               key={item.type}
               onClick={() => onFilterDevice(item.type)}
-              className="flex items-center gap-2 px-10 py-3 hover:bg-blue-600 hover:text-white rounded-2xl"
+              className={`flex items-center gap-2 px-10 py-3 rounded-2xl ${
+                selectedType === item.type
+                  ? "bg-blue-600 text-white"
+                  : "hover:bg-blue-600 hover:text-white"
+              }`}
             >
               <span>{item.icon}</span>
               <p>{item.name}</p>
