@@ -1,6 +1,3 @@
-import frontCamera from "../../../assets/smarthome_camera_front.png";
-import sideCamera from "../../../assets/smarthome_camera_sidehouse.png";
-import backyardCamera from "../../../assets/smarthome_camera_backyard.png";
 import smartHomeCamera from "../../../assets/smarthome_camera.png";
 import { FaCircle } from "react-icons/fa6";
 import type { IDevice } from "../../../types";

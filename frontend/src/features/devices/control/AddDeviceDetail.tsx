@@ -31,7 +31,6 @@ function AddDeviceDetail({
   selectedDevice,
   deviceType,
 }: AddDeviceDetailProps) {
-  const [selectedItem, setSelectedItem] = useState<string | null>(null);
   const [formData, setFormData] = useState<AddDeviceFormData>({
     name: selectedDevice ?? "",
     area: "Living Room",

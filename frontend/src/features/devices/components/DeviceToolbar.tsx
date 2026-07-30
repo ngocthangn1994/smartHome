@@ -21,7 +21,10 @@ interface ToolBarItem {
   name: string;
   icon: ReactNode;
 }
-function DeviceToolbar({ selectedType, onFilterDevice }: DeviceToolBarProps) {
+function DeviceToolbar({
+  selectedType: _selectedType,
+  onFilterDevice,
+}: DeviceToolBarProps) {
   const deviceToolBar: ToolBarItem[] = [
     { type: "all", name: "All", icon: null },
     { type: "thermostat", name: "Climate", icon: <FaTemperatureHigh /> },

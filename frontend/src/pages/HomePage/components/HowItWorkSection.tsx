@@ -1,7 +1,6 @@
 import { FaHouseDamage } from "react-icons/fa";
 import { FaShieldAlt } from "react-icons/fa";
 import { SlEnergy } from "react-icons/sl";
-import { IoIosPhonePortrait } from "react-icons/io";
 
 function HowItWorkSection() {
   const featuresMenu = [

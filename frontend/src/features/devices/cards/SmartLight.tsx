@@ -1,5 +1,4 @@
 import smartHomeSmartLight from "../../../assets/smarthome_smartlight.png";
-import { FaCircle } from "react-icons/fa6";
 import type { IDevice } from "../../../types";
 import { FiSun } from "react-icons/fi";
 
