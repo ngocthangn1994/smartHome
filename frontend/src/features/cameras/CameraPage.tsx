@@ -4,7 +4,7 @@ import Header from "../../components/layout/Header";
 import SummaryDevices from "../dashboard/SummaryDevices";
 import SideBarHelper from "../../components/layout/SideBarHelper";
 import { useAuth } from "../../context/AuthContext";
-import type { IAutomationRule, IAlert, IDevice } from "../../types";
+import type { IDevice } from "../../types";
 import DeviceToolbar from "../devices/components/DeviceToolbar";
 import DeviceList from "../devices/DeviceList";
 import DeviceHealthOverview from "../devices/components/DeviceHealthOverview";
@@ -12,47 +12,21 @@ import RecentMotion from "./components/RecentMotion";
 import Recording from "./components/Recording";
 import QuickAction from "./components/QuickAction";
 
-interface DeviceHealthOverviewProps {
-  devices: IDevice[];
-}
 function CameraPage() {
   const [devices, setDevices] = useState<IDevice[]>([]);
-  const [automationRules, setAutomationRules] = useState<IAutomationRule[]>([]);
-  const [alerts, setAlerts] = useState<IAlert[]>([]);
 
   const { user } = useAuth();
-  const [isLoading, setIsLoading] = useState(true);
-  const [errorMessage, setErrorMessage] = useState("");
+  const [selectedType, setSelectedType] = useState<any>("all");
 
   useEffect(() => {
     async function loadData() {
       try {
-        setIsLoading(true);
-        setErrorMessage("");
-
-        const [devicesResponse, automationResponse, alertsResponse] =
-          await Promise.all([
-            api.getDevices(),
-            api.getAutomationRules(),
-            api.getAlerts(),
-          ]);
+        const [devicesResponse] = await Promise.all([api.getDevices()]);
 
         setDevices(devicesResponse.data ?? []);
-        setAlerts(alertsResponse.data ?? []);
         // Ensure automationResponse.data is an array before setting state
-        const automationData = automationResponse.data;
-        if (Array.isArray(automationData)) {
-          setAutomationRules(automationData);
-        } else if (automationData) {
-          setAutomationRules([automationData]);
-        } else {
-          setAutomationRules([]);
-        }
       } catch (error) {
         console.error(error);
-        setErrorMessage("Unable to load dashboard data. Please try again.");
-      } finally {
-        setIsLoading(false);
       }
     }
 
@@ -72,7 +46,10 @@ function CameraPage() {
         <div className="bg-indigo-50 px-10 py-10">
           <Header user={user} page="cameras" />
           <SummaryDevices devices={devices} />
-          <DeviceToolbar />
+          <DeviceToolbar
+            selectedType={selectedType}
+            onFilterDevice={(type) => setSelectedType(type)}
+          />
           <div className="grid grid-cols-[1.4fr_0.7fr] mt-5 gap-3">
             <div className="space-y-5">
               <DeviceList devices={camera} />
