@@ -327,6 +327,7 @@ function AddDeviceDetail({
             </div>
           </div>
         </div>
+        {error}
       </form>
     </>
   );

@@ -1,4 +1,4 @@
-import { FaPersonWalking, FaHouseSignal, FaH } from "react-icons/fa6";
+import { FaPersonWalking, FaHouseSignal } from "react-icons/fa6";
 import smarthomeCamera from "../../../assets/smarthome_camera.png";
 function RecentMotion() {
   const recentMotionEvent = [
