@@ -94,8 +94,15 @@ export const login = asyncHandler(
 
 export const logout = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
-    let token = "";
-    res.status(200).json(buildResponse(true, "successfully logout", token));
+    // clearCookie must use the same attributes the cookie was set with,
+    // otherwise the browser won't match and remove it.
+    const isDev = process.env.NODE_ENV === "development";
+    res.clearCookie("token", {
+      httpOnly: true,
+      secure: !isDev,
+      sameSite: isDev ? "lax" : "none",
+    });
+    res.status(200).json(buildResponse(true, "successfully logout", ""));
   },
 );
 

@@ -8,7 +8,7 @@ import type {
 } from "../types";
 
 const VITE_API_URL =
-  import.meta.env.VITE_API_URL || "http://localhost:3500/api";
+  import.meta.env.VITE_API_URL || "https://smarthome-avce.onrender.com/api";
 
 export async function fetchApi<TData>(
   url: string,
@@ -139,7 +139,7 @@ export const api = {
     fetchApi(`/auth/register`, "POST", { name, email, passWord }),
   login: (email: string, passWord: string) =>
     fetchApi(`/auth/login`, "POST", { email, passWord }),
-  logout: () => fetchApi(`/auth/register`, "POST"),
+  logout: () => fetchApi(`/auth/logout`, "POST"),
   getMe: () => fetchApi("/users/me", "GET"),
 };
 
