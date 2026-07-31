@@ -70,10 +70,16 @@ export const login = asyncHandler(
       throw new AppError("The password's incorrect, please try again", 401);
     }
     const token = generateToken(verifyUser._id.toString(), verifyUser.email);
+
+    // Frontend and backend are on different sites (homedevicecontrol.com vs
+    // *.onrender.com), so the auth cookie must be SameSite=None + Secure to be
+    // sent on cross-site requests. Default to prod-safe values; relax only for
+    // explicit local development.
+    const isDev = process.env.NODE_ENV === "development";
     res.cookie("token", token, {
       httpOnly: true,
-      secure: false,
-      sameSite: "lax",
+      secure: !isDev,
+      sameSite: isDev ? "lax" : "none",
       maxAge: 7 * 24 * 60 * 60 * 1000,
     });
 
