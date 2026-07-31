@@ -19,6 +19,20 @@ const allowedOrigins = [
 ];
 
 const corsOptions: CorsOptions = {
+  origin(origin, callback) {
+    console.log("CORS request origin:", origin);
+
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+      return;
+    }
+
+    // Deny cleanly (no CORS headers) instead of throwing -> avoids a 500
+    // that masks the real "origin not allowed" cause in the browser.
+    console.warn(`CORS blocked origin: ${origin}`);
+    callback(null, false);
+  },
+
   credentials: true,
 
   methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
