@@ -53,7 +53,7 @@ function Footer() {
 
         <p className="sm:flex gap-3 text-xs">
           <p>Smarter Living. Safer Home</p>
-          <p>@ 2025 NguyenShield. All rights reserved</p>
+          <p>@ 2026 NguyenShield. All rights reserved</p>
         </p>
       </section>
     </>
