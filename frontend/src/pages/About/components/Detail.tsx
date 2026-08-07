@@ -36,9 +36,9 @@ function Detail() {
   ];
   return (
     <>
-      <div className="text-slate-600 mt-10 border border-slate-200 p-20 grid grid-cols-4">
+      <div className="text-slate-600 mt-10 border border-slate-200 p-10 gap-2 grid grid-cols-2 xl:grid-cols-4 space-y-3">
         {detail.map((item) => (
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-3 text-center">
             {item.icon}
             <div>
               <p className="font-bold text-xl">{item.name}</p>

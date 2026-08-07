@@ -2,6 +2,7 @@ import Header from "../HomePage/components/Header";
 import HeroSection from "./components/HeroSection";
 import Detail from "./components/Detail";
 import Information from "./components/Information";
+import Footer from "../HomePage/components/Footer";
 function About() {
   return (
     <>
@@ -10,6 +11,7 @@ function About() {
         <HeroSection />
         <Detail />
         <Information />
+        <Footer />
       </div>
     </>
   );
