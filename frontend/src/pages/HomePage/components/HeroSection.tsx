@@ -30,13 +30,13 @@ function HeroSection() {
   ];
   return (
     <>
-      <section className="grid grid-cols-1 md:grid-cols-[0.7fr_1.3fr] text-slate-600 w-full">
+      <section className="grid grid-cols-1 md:grid-cols-[0.9fr_1.1fr] text-slate-600 w-full">
         <div className="p-10 space-y-3">
           <div className="flex items-center md:justify-center border border-slate-200 shadow-sm w-sm md:w-lg rounded-xl">
             <IoShieldHalfSharp className="w-10 h-10 p-2 text-green-600" />
             <p className="font-medium">Smart Home. Safer Home. Smarter You.</p>
           </div>
-          <div className="text-5xl md:text-7xl w-full">
+          <div className="text-5xl md:text-7xl xl:text-9xl w-full">
             <div className="flex gap-2 font-bold">
               <p>Smarter</p>
               <p className="text-blue-600">Living,</p>
