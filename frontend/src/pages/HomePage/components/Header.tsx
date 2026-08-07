@@ -29,7 +29,7 @@ function Header() {
               <p className="text-blue-800">Shield</p>
             </div>
           </div>
-          <div className="hidden lg:flex items-center gap-10 font-medium">
+          <div className="hidden xl:flex items-center gap-10 font-medium">
             {menu.map((item) => (
               <NavLink
                 className={({ isActive }) =>
@@ -42,7 +42,7 @@ function Header() {
               </NavLink>
             ))}
           </div>
-          <div className="hidden md:flex lg:gap-10">
+          <div className="hidden xl:flex lg:gap-10">
             <div>
               <NavLink to="/auth/login">
                 <div className="flex items-center justify-center gap-1 border border-blue-300 px-3 py-1 rounded-xl hover:shadow-sm hover:border-blue-500">
@@ -71,7 +71,7 @@ function Header() {
           <button
             onClick={() => setIsMenu(!isMenu)}
             type="button"
-            className="shrink-0 lg:hidden"
+            className="shrink-0 xl:hidden"
           >
             <TiThMenuOutline className="w-10 h-10" />
           </button>

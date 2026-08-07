@@ -12,7 +12,6 @@ import { FaNodeJs } from "react-icons/fa";
 import { SiExpressdotcom } from "react-icons/si";
 import { TbBrandMongodb } from "react-icons/tb";
 import { BiLogoTailwindCss } from "react-icons/bi";
-
 import smartHomeAvatar from "../../../assets/branding/smarthome_avatar.png";
 function Information() {
   const coreValues = [
@@ -71,8 +70,8 @@ function Information() {
   ];
   return (
     <>
-      <section className="mt-10 p-20 text-slate-600">
-        <div className="grid grid-cols-4 gap-10 items-center">
+      <section className="mt-10 p-10 text-slate-600">
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-10 items-center">
           <div className="space-y-10">
             <div className="space-y-3">
               <div className="flex items-center gap-1">
@@ -102,7 +101,7 @@ function Information() {
               <IoDiamond className="text-green-600 w-8 h-8" />
               <p className="font-bold text-2xl">Our Core Values</p>
             </div>
-            <div className="space-y-2 mt-2">
+            <div className="space-y-5 mt-5">
               {coreValues.map((item) => (
                 <div>
                   <div className="flex items-center gap-5">
@@ -116,7 +115,7 @@ function Information() {
               ))}
             </div>
           </div>
-          <div className="flex flex-col items-center">
+          <div className="flex flex-col lg:items-center">
             <div className="flex items-center gap-3">
               <FaPeopleGroup className="w-8 h-8" />
               <p className="font-bold text-2xl">Meet the Team</p>
