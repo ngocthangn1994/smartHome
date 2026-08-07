@@ -31,14 +31,14 @@ function HowItWorkSection() {
   ];
   return (
     <>
-      <section className="mt-3 space-y-5 px-50 text-slate-600 mt-10 bg-sky-50 p-5 py-10">
+      <section className="mt-3 space-y-5 text-slate-600 mt-10 bg-sky-50 p-5 py-10">
         <div className="text-center">
           <span className="text-blue-600 font-bold">HOW IT WORKS</span>
           <p className="text-2xl font-bold">Simple Steps to a Smarter Home</p>
         </div>
-        <div className="grid grid-cols-3 gap-4 mt-10">
+        <div className="grid gap-10 md:grid-cols-3 gap-4 mt-10">
           {featuresMenu.map((item) => (
-            <div className="flex gap-3 items-center">
+            <div className="flex gap-5 items-center">
               <div>
                 <span className="text-white bg-blue-600 rounded-full px-3 py-1">
                   {item.number}
@@ -46,9 +46,9 @@ function HowItWorkSection() {
                 <p>{item.icon}</p>
               </div>
 
-              <div className="w-xs">
-                <p className="font-bold">{item.name}</p>
-                <p>{item.description}</p>
+              <div className="w-full">
+                <p className="font-bold text-2xl sm:text-xl">{item.name}</p>
+                <p className="text-xl sm:text-sm">{item.description}</p>
               </div>
             </div>
           ))}
