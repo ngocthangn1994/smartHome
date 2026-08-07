@@ -36,7 +36,7 @@ function HowItWorkSection() {
           <span className="text-blue-600 font-bold">HOW IT WORKS</span>
           <p className="text-2xl font-bold">Simple Steps to a Smarter Home</p>
         </div>
-        <div className="grid gap-10 md:grid-cols-3 gap-4 mt-10">
+        <div className="grid gap-10 md:grid-cols-3 gap-4 mt-10 text-center">
           {featuresMenu.map((item) => (
             <div className="flex gap-5 items-center">
               <div>
