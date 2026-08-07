@@ -14,8 +14,8 @@ function FeaturesPhone() {
   const operationSystem = [
     {
       icon: <FaApple className="text-white h-12 w-12" />,
-      name: "Download on the",
-      brand: "App Store",
+      name: "Download",
+      brand: "AppStore",
     },
     {
       icon: <FcAndroidOs className="h-12 w-12" />,
@@ -25,22 +25,22 @@ function FeaturesPhone() {
   ];
   return (
     <>
-      <section className="text-slate-600 grid grid-cols-2 mt-5 p-10 gap-10">
-        <div className="flex items-center ring-1 ring-slate-100 p-5 rounded-xl shadow-sm gap-3">
+      <section className="text-slate-600 grid grid-cols-1 md:grid-cols-2 mt-5 p-3 gap-5">
+        <div className="flex items-center ring-1 ring-slate-100 rounded-xl p-1 shadow-sm gap-2">
           <p className="font-bold text-4xl w-sm text-center">
             Build for Your Comfort and Security
           </p>
-          <div className="space-y-10">
+          <div className="space-y-5">
             {securityList.map((item) => (
               <div className="flex items-center">
-                <TbCircleCheckFilled className="w-8 h-8 p-1 text-blue-600" />
+                <TbCircleCheckFilled className="w-15 h-15 md:w-12 md:h-12 p-1 text-blue-600" />
                 <p>{item.name}</p>
               </div>
             ))}
           </div>
         </div>
         <div className="ring-1 ring-slate-100 p-5 rounded-xl shadow-sm">
-          <div className="grid grid-cols-[0.9fr_1.1fr] gap-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
             <div className="space-y-5">
               <p className="font-bold text-4xl text-center">
                 Control Everything From Your Phone
@@ -50,11 +50,11 @@ function FeaturesPhone() {
               </p>
               <div className="grid grid-cols-2 gap-5">
                 {operationSystem.map((item) => (
-                  <div className="bg-black rounded-2xl text-white flex items-center justify-center px-3 py-3">
+                  <div className="bg-black rounded-2xl text-white flex items-center justify-center px-5 py-1 gap-2">
                     {item.icon}
                     <div>
                       <p>{item.name}</p>
-                      <p className="font-bold text-2xl">{item.brand}</p>
+                      <p className="font-bold text-xl">{item.brand}</p>
                     </div>
                   </div>
                 ))}
