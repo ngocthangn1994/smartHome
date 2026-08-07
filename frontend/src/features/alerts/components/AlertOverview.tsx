@@ -1,5 +1,5 @@
-import HealthRow from "../../../components/layout/HealthRow";
-import DonutChart from "../../../components/layout/DonutChart";
+import HealthRow from "../../../components/ui/HealthRow";
+import DonutChart from "../../../components/ui/DonutChart";
 import type { IAlert } from "../../../types";
 
 interface AlertOverviewProps {

@@ -6,6 +6,7 @@ import {
   FaGrav,
 } from "react-icons/fa6";
 import type { IUser } from "../../types";
+import { useNavigate } from "react-router-dom";
 type PageName =
   | "dashboard"
   | "devices"
@@ -20,7 +21,9 @@ interface HeaderProps {
   user: IUser | null;
 }
 
+import api from "../../api/api";
 function Header({ user, page }: HeaderProps) {
+  const navigate = useNavigate();
   const headerGreeting = {
     dashboard: {
       greet: `Welcome back, ${user?.name ?? "User"}! 👋`,
@@ -70,6 +73,23 @@ function Header({ user, page }: HeaderProps) {
         "Customize your profile, manage your home, configure devices, and personalize your experience.",
     },
   };
+
+  const handleMenu = async (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const value = event.target.value;
+
+    if (value === "profile") {
+      navigate("/settings");
+      return;
+    }
+    if (value === "dashboard") {
+      navigate("/dashboard");
+      return;
+    }
+    if (value === "logout") {
+      await api.logout();
+      navigate("/");
+    }
+  };
   return (
     <>
       <div className="flex justify-between items-center mb-10 text-slate-600">
@@ -100,11 +120,11 @@ function Header({ user, page }: HeaderProps) {
           <FaBell className="w-12 h-12 bg-white px-2 py-2 rounded-full shadow-sm ring-1 ring-indigo-200" />
           <div className="flex gap-3 items-center text-slate-600 border border-slate-200 px-5 py-2 rounded-2xl bg-white">
             <FaGrav className="w-10 h-10" />
-            <div className="text-center">
-              <span className="text-xl font-bold ">{user?.name}</span>
-              <p>{user?.role}</p>
-            </div>
-            <FaAngleDown />
+            <select onChange={handleMenu}>
+              <option value="dashboard">Dashboard</option>
+              <option value="profile">Profile</option>
+              <option value="logout">Log out</option>
+            </select>
           </div>
         </div>
       </div>

@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
-import api from "../../api/api";
-import Header from "../../components/layout/Header";
-import SummaryDevices from "../dashboard/SummaryDevices";
-import SideBarHelper from "../../components/layout/SideBarHelper";
-import { useAuth } from "../../context/AuthContext";
-import type { IAlert, IDevice } from "../../types";
-import AlertMenu from "./components/AlertMenu";
-import AlertList from "./components/AlertList";
-import AlertOverview from "./components/AlertOverview";
-import AlertRecentActivity from "./components/AlertRecentActivity";
-import AlertQuickAction from "./components/AlertQuickActions";
+import api from "../../../api/api";
+import Header from "../../../components/layout/Header";
+import SummaryDevices from "../../dashboard/components/SummaryDevices";
+import SideBarHelper from "../../../components/layout/SideBarHelper";
+import { useAuth } from "../../../context/AuthContext";
+import type { IAlert, IDevice } from "../../../types";
+import AlertMenu from "../components/AlertMenu";
+import AlertList from "../components/AlertList";
+import AlertOverview from "../components/AlertOverview";
+import AlertRecentActivity from "../components/AlertRecentActivity";
+import AlertQuickAction from "../components/AlertQuickActions";
 function AlertPage() {
   const [devices, setDevices] = useState<IDevice[]>([]);
   const [alerts, setAlerts] = useState<IAlert[]>([]);

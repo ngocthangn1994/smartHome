@@ -1,4 +1,4 @@
-import smartHomeMotionSensor from "../../../assets/smarthome_motionsensor.png";
+import smartHomeMotionSensor from "../../../assets/devices/smarthome_motionsensor.png";
 import type { IDevice } from "../../../types";
 import CameraControl from "../control/CameraControl";
 import { useState } from "react";

@@ -8,7 +8,9 @@ import type {
 } from "../types";
 
 const VITE_API_URL =
-  import.meta.env.VITE_API_URL || "https://smarthome-avce.onrender.com/api";
+  import.meta.env.VITE_API_URL || "http://localhost:3500/api";
+// const VITE_API_URL =
+//   import.meta.env.VITE_API_URL || "https://smarthome-avce.onrender.com/api";
 
 export async function fetchApi<TData>(
   url: string,

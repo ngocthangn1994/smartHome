@@ -1,15 +1,15 @@
-import type { IDevice } from "../../types";
-import Thermostat from "../devices/cards/Thermostat";
-import SmokeDetector from "../devices/cards/SmokeDetector";
-import Camera from "../devices/cards/Camera";
-import SmartPlug from "../devices/cards/SmartPlug";
+import type { IDevice } from "../../../types";
+import Thermostat from "../cards/Thermostat";
+import SmokeDetector from "../cards/SmokeDetector";
+import Camera from "../cards/Camera";
+import SmartPlug from "../cards/SmartPlug";
 import { FaCircle } from "react-icons/fa6";
-import SmartLight from "./cards/SmartLight";
-import DoorLock from "./cards/DoorLock";
-import WaterLeakSensor from "./cards/WaterLeakSensor";
-import MotionSensor from "./cards/MotionSensor";
-import GarageDoor from "./cards/GarageDoor";
-import WindowSensor from "./cards/WindowSensor";
+import SmartLight from "../cards/SmartLight";
+import DoorLock from "../cards/DoorLock";
+import WaterLeakSensor from "../cards/WaterLeakSensor";
+import MotionSensor from "../cards/MotionSensor";
+import GarageDoor from "../cards/GarageDoor";
+import WindowSensor from "../cards/WindowSensor";
 
 interface DeviceProp {
   device: IDevice;

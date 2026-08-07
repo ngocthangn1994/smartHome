@@ -1,16 +1,16 @@
 import { useState } from "react";
 import { CiCirclePlus } from "react-icons/ci";
-import smartLightImage from "../../../assets/smarthome_smartlight.png";
-import smartPlugImage from "../../../assets/smarthome_smartplug.png";
-import smartDoorLockImage from "../../../assets/smarthome_doorlock.png";
-import smartSmokeDetectorImage from "../../../assets/smarthome_smoke_detector.png";
-import smartWaterLeakSensorImage from "../../../assets/smarthome_waterleaksensor.png";
-import smartMotionSensorImage from "../../../assets/smarthome_motionsensor.png";
-import smartWindowSensorImage from "../../../assets/smarthome_windowsensor.png";
-import smartGarageImage from "../../../assets/smarthome_garage.png";
-import smartCameraImage from "../../../assets/smarthome_camera.png";
-import smartDoorBellImage from "../../../assets/smartHome_doorBell.png";
-import smartThermostatImage from "../../../assets/smartHome_thermostat.png";
+import smartLightImage from "../../../assets/devices/smarthome_smartlight.png";
+import smartPlugImage from "../../../assets/devices/smarthome_smartplug.png";
+import smartDoorLockImage from "../../../assets/devices/smarthome_doorlock.png";
+import smartSmokeDetectorImage from "../../../assets/devices/smarthome_smoke_detector.png";
+import smartWaterLeakSensorImage from "../../../assets/devices/smarthome_waterleaksensor.png";
+import smartMotionSensorImage from "../../../assets/devices/smarthome_motionsensor.png";
+import smartWindowSensorImage from "../../../assets/devices/smarthome_windowsensor.png";
+import smartGarageImage from "../../../assets/devices/smarthome_garage.png";
+import smartCameraImage from "../../../assets/devices/smarthome_camera.png";
+import smartDoorBellImage from "../../../assets/devices/smartHome_doorBell.png";
+import smartThermostatImage from "../../../assets/devices/smartHome_thermostat.png";
 import AddDeviceDetail from "./AddDeviceDetail";
 import type { DeviceType } from "../../../types";
 interface AddDeviceProps {

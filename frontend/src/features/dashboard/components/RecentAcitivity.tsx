@@ -9,7 +9,7 @@ import {
   FaInternetExplorer,
 } from "react-icons/fa6";
 
-import type { IAlert } from "../../types";
+import type { IAlert } from "../../../types";
 
 interface AlertProp {
   alerts: IAlert[];

@@ -1,5 +1,5 @@
 import { TbCircleCheckFilled } from "react-icons/tb";
-import smartHomePhone from "../../../assets/smarthome_cellphone.png";
+import smartHomePhone from "../../../assets/landing/smarthome_cellphone.png";
 import { FcAndroidOs } from "react-icons/fc";
 import { FaApple } from "react-icons/fa";
 

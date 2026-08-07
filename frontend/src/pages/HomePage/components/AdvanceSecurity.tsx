@@ -1,4 +1,4 @@
-import smartHomeAdvanceSecurity from "../../../assets/smarthome_advancesecurity.png";
+import smartHomeAdvanceSecurity from "../../../assets/landing/smarthome_advancesecurity.png";
 import { FaHouseLock } from "react-icons/fa6";
 import { BiShieldQuarter } from "react-icons/bi";
 import { TbBellCog } from "react-icons/tb";

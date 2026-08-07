@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react";
-import api from "../../api/api";
-import Header from "../../components/layout/Header";
-import SummaryDevices from "../dashboard/SummaryDevices";
-import SideBarHelper from "../../components/layout/SideBarHelper";
-import { useAuth } from "../../context/AuthContext";
-import type { IDevice } from "../../types";
-import SecurityMenu from "./components/SecurityMenu";
-import DeviceList from "../devices/DeviceList";
-import SecurityHealthOverview from "./components/SecurityHealthOverview";
-import SecurityRecentActivity from "./components/SecurityRecentActivity";
-import SecurityQuickAction from "./components/SecurityQuickAction";
-import type { securityType } from "./components/SecurityMenu";
+import api from "../../../api/api";
+import Header from "../../../components/layout/Header";
+import SummaryDevices from "../../dashboard/components/SummaryDevices";
+import SideBarHelper from "../../../components/layout/SideBarHelper";
+import { useAuth } from "../../../context/AuthContext";
+import type { IDevice } from "../../../types";
+import SecurityMenu from "../components/SecurityMenu";
+import DeviceList from "../../devices/components/DeviceList";
+import SecurityHealthOverview from "../../security/components/SecurityHealthOverview";
+import SecurityRecentActivity from "../../security/components/SecurityRecentActivity";
+import SecurityQuickAction from "../../security/components/SecurityQuickAction";
+import type { securityType } from "../components/SecurityMenu";
 
 function SecurityPage() {
   const [devices, setDevices] = useState<IDevice[]>([]);

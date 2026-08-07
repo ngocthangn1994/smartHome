@@ -1,5 +1,5 @@
 import Device from "./Device";
-import type { IDevice } from "../../types";
+import type { IDevice } from "../../../types";
 import { useState } from "react";
 interface DeviceListProp {
   devices: IDevice[];

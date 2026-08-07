@@ -1,4 +1,4 @@
-import smartHomeLogo from "../../assets/smarthome_logo.png";
+import smartHomeLogo from "../../assets/branding/smarthome_logo.png";
 import {
   FaWindows,
   FaCameraRetro,
@@ -9,9 +9,7 @@ import {
   FaSketch,
 } from "react-icons/fa6";
 import { MdManageHistory } from "react-icons/md";
-
 import { HiBellAlert } from "react-icons/hi2";
-
 import { NavLink } from "react-router-dom";
 function SideBarHelper() {
   const menu = [
@@ -27,7 +25,6 @@ function SideBarHelper() {
   return (
     <>
       <div className="bg-white h-full px-5 py-5">
-        {" "}
         <NavLink to="/dashboard">
           <div className="flex items-center">
             <img className="w-20 h-20" src={smartHomeLogo} />

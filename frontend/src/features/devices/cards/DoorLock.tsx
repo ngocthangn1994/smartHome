@@ -1,4 +1,4 @@
-import smartHomeDoorLock from "../../../assets/smarthome_doorlock.png";
+import smartHomeDoorLock from "../../../assets/devices/smarthome_doorlock.png";
 import type { IDevice } from "../../../types";
 import DoorLockControl from "../control/DoorLockControl";
 import { useState } from "react";

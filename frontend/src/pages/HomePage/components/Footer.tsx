@@ -1,4 +1,4 @@
-import smartHomeLogo from "../../../assets/smarthome_logo.png";
+import smartHomeLogo from "../../../assets/branding/smarthome_logo.png";
 import { NavLink } from "react-router-dom";
 import { MdEmail } from "react-icons/md";
 import { FaEarthAfrica } from "react-icons/fa6";

@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { useAuth } from "../context/AuthContext";
+import { useAuth } from "../../../context/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
-import smarthomeLogin from "../assets/smarthome_login.png";
-import smartHomeLogo from "../assets/smarthome_logo.png";
+import smarthomeLogin from "../../../assets/landing/smarthome_login.png";
+import smartHomeLogo from "../../../assets/branding/smarthome_logo.png";
 import { FaMobileAlt, FaDesktop, FaRobot, FaBell } from "react-icons/fa";
 import { FaEnvelope, FaLock, FaEyeLowVision, FaGoogle } from "react-icons/fa6";
 import { NavLink } from "react-router-dom";
