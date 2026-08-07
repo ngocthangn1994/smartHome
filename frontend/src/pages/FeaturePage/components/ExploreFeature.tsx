@@ -70,7 +70,7 @@ function ExploreFeature() {
             solution
           </p>
         </div>
-        <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-10 text-center px-4">
+        <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-10 text-center px-2 md:px-10">
           {featuresList.map((item) => (
             <div className="flex flex-col items-center border border-slate-200 shadow-sm p-5 rounded-xl">
               {item.icon}
