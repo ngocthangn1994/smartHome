@@ -51,7 +51,7 @@ function AdvanceSecurity() {
           </p>
         </div>
 
-        <div className="flex items-center gap-5 mt-10">
+        <div className="sm:flex items-center gap-5 mt-10">
           <div>
             <img
               src={smartHomeAdvanceSecurity}
@@ -59,12 +59,12 @@ function AdvanceSecurity() {
             />
           </div>
           <div>
-            <HiArrowCircleRight className="w-50 h-50 text-slate-700" />
+            <HiArrowCircleRight className="hidden sm:block w-20 h-20 sm:w-40 sm:h-40 text-slate-700" />
           </div>
           <div className="flex items-center">
-            <div className="grid grid-cols-2 text-center gap-10 px-30">
+            <div className="grid grid-cols-1 sm:grid-cols-2 text-center gap-5">
               {securityList.map((item) => (
-                <div className="flex flex-col items-center border border-slate-200 p-5 rounded-xl shadow-sm">
+                <div className="flex flex-col items-center border border-slate-200 p-1 rounded-xl shadow-sm">
                   <p>{item.icon}</p>
                   <p className="font-bold">{item.name}</p>
                   <p>{item.description}</p>
