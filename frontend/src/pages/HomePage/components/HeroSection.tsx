@@ -11,32 +11,32 @@ function HeroSection() {
   const featureMenu = [
     {
       icon: (
-        <IoShieldCheckmarkOutline className="text-green-600 w-10 h-10 p-2 bg-green-50 rounded-full" />
+        <IoShieldCheckmarkOutline className="text-green-600 w-15 h-15 md:w-12 md:h-12 p-2 bg-green-50 rounded-full" />
       ),
       name: "Secure by Design",
     },
     {
       icon: (
-        <SlEnergy className="text-green-600 w-10 h-10 p-2 bg-green-50 rounded-full" />
+        <SlEnergy className="text-green-600 w-15 h-15 md:w-12 md:h-12 p-2 bg-green-50 rounded-full" />
       ),
       name: "Energy Smart",
     },
     {
       icon: (
-        <MdOutlineCellWifi className="text-green-600 w-10 h-10 p-2 bg-green-50 rounded-full" />
+        <MdOutlineCellWifi className="text-green-600 w-15 h-15 md:w-12 md:h-12 p-2 bg-green-50 rounded-full" />
       ),
       name: "Always Connected",
     },
   ];
   return (
     <>
-      <section className="grid grid-cols-[0.7fr_1.3fr] text-slate-600">
-        <div className="p-10 space-y-10">
-          <div className="flex items-center justify-center border border-slate-200 shadow-sm w-lg rounded-xl">
+      <section className="grid grid-cols-1 md:grid-cols-[0.7fr_1.3fr] text-slate-600 w-full">
+        <div className="p-10 space-y-3">
+          <div className="flex items-center md:justify-center border border-slate-200 shadow-sm w-sm md:w-lg rounded-xl">
             <IoShieldHalfSharp className="w-10 h-10 p-2 text-green-600" />
             <p className="font-medium">Smart Home. Safer Home. Smarter You.</p>
           </div>
-          <div className="text-9xl w-full">
+          <div className="text-5xl md:text-7xl w-full">
             <div className="flex gap-2 font-bold">
               <p>Smarter</p>
               <p className="text-blue-600">Living,</p>
@@ -46,48 +46,40 @@ function HeroSection() {
               <p>Home.</p>
             </div>
           </div>
-          <div className="text-sm mt-5 w-full">
+          <div className="text-sm sm:mt-5 w-full">
             <p>
               NguyenShield connects your devices, protects your home, and gives
               you total control - anytime, anywhere
             </p>
           </div>
-          <div className="flex items-center gap-5 w-xs">
+          <div className="hidden md:grid grid-cols-2 gap-3">
             <NavLink to="/auth/login">
-              <div className="flex items-center justify-center gap-1 border border-blue-300 bg-blue-600 px-2 py-1 rounded-xl w-xs">
-                <div>
-                  <RiAccountCircleLine className="w-10 h-10 p-2 text-white" />
-                </div>
-                <div>
-                  <p className="text-white">Log In</p>
-                </div>
-              </div>
+              <button className="w-full flex flex-nowrap items-center justify-center gap-1 border border-blue-300 bg-blue-600 px-3 py-1 rounded-xl">
+                <RiAccountCircleLine className="w-10 h-10 p-2 text-white" />
+                <p className="text-white">Log In</p>
+              </button>
             </NavLink>
-            <NavLink to="auth/register">
-              <div className="flex items-center justify-center gap-1 border border-blue-300 font-medium px-2 py-1 rounded-xl w-xs">
-                <div>
-                  <RiAccountPinBoxLine className="w-10 h-10 p-2 text-blue-600" />
-                </div>
-                <div>
-                  <p className="text-blue-600">Create Account</p>
-                </div>
-              </div>
+            <NavLink to="/auth/register">
+              <button className="w-full flex items-center justify-center gap-1 border border-blue-300 font-medium px-3 py-1 rounded-xl">
+                <RiAccountPinBoxLine className="w-10 h-10 p-2 text-blue-600" />
+                <p className="text-blue-600">Create Account</p>
+              </button>
             </NavLink>
           </div>
-          <div className="flex justify-between w-3/4">
+          <div className="flex justify-between text-center w-3/4">
             {featureMenu.map((item) => (
               <div className="flex items-center gap-1">
                 {item.icon}
-                <p className="font-bold">{item.name}</p>
+                <p className="font-bold text-sm md:text-xl">{item.name}</p>
               </div>
             ))}
           </div>
         </div>
-        <div className="relative overflow-hidden h-full w-full">
+        <div className="relative w-full h-64 sm:h-80 md:h-full overflow-hidden">
           <img
             src={smartHomeHomePage}
             alt="Modern smart home"
-            className="absolute w-full h-full object-cover object-center"
+            className="absolute inset-0 w-full h-full object-cover object-center"
           />
 
           <div className="pointer-events-none absolute left-0 top-0 h-full w-1/3 bg-gradient-to-r from-white via-white/60 to-transparent" />
