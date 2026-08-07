@@ -206,19 +206,26 @@ function Register() {
                     <p>One special characters</p>
                   </div>
                 </div>
-                <div className="flex items-center gap-2">
-                  <input type="checkbox" />
-                  <div className="w-full flex gap-1">
-                    <p>I agree to the</p>
-                    <p className="text-blue-600 font-semibold">
-                      Tearms of Service
-                    </p>
-                    <p>and</p>
-                    <p className="text-blue-600 font-semibold">
+                <label className="flex items-start gap-2 text-sm text-slate-600">
+                  <input type="checkbox" className="mt-1 h-4 w-4 shrink-0" />
+
+                  <span className="leading-6">
+                    I agree to the{" "}
+                    <NavLink
+                      to="/terms"
+                      className="text-blue-600 font-semibold hover:underline"
+                    >
+                      Terms of Service
+                    </NavLink>{" "}
+                    and{" "}
+                    <NavLink
+                      to="/privacy"
+                      className="text-blue-600 font-semibold hover:underline"
+                    >
                       Privacy Policy
-                    </p>
-                  </div>
-                </div>
+                    </NavLink>
+                  </span>
+                </label>
                 <div>
                   <button
                     type="submit"
