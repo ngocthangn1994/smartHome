@@ -16,13 +16,15 @@ function Header() {
       <header className="w-full max-w-full border border-slate-200 px-2 py-1">
         <div className="flex w-full items-center justify-between">
           <div className="flex items-center min-w-0">
-            <NavLink to="/">
-              <img
-                className="w-12 h-12 sm:w-16 sm:h-16 lg:w-20 lg:h-20"
-                src={smartHomeLogo}
-              />
-            </NavLink>
-            <div className="flex min-w-0 text-xl sm:text-2xl lg:text-3xl font-bold">
+            <div>
+              <NavLink to="/">
+                <img
+                  className="w-12 h-12 sm:w-16 sm:h-16 lg:w-20 lg:h-20"
+                  src={smartHomeLogo}
+                />
+              </NavLink>
+            </div>
+            <div className="flex min-w-0 text-3xl font-bold">
               <p>Nguyen</p>
               <p className="text-blue-800">Shield</p>
             </div>
