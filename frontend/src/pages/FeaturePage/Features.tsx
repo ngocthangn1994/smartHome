@@ -1,7 +1,7 @@
 import Header from "../HomePage//components/Header";
 import Footer from "../HomePage/components/Footer";
-import ExploreFeature from "../HomePage/components/ExploreFeature";
-import FeaturesPhone from "../HomePage/components/FeaturesPhone";
+import ExploreFeature from "./components/ExploreFeature";
+import FeaturesPhone from "./components/FeaturesPhone";
 import FeaturesHeroSection from "./components/FeaturesHeroSection";
 function Features() {
   return (

@@ -18,7 +18,7 @@ function ExploreFeature() {
     },
     {
       icon: (
-        <MdOutlineSecurity className="bg-sky-100 text-blue-600 w-10 h-10 p-2 rounded-full" />
+        <MdOutlineSecurity className="bg-orange-100 text-orange-600 w-10 h-10 p-2 rounded-full" />
       ),
       name: "Advanced Security",
       description:
@@ -26,7 +26,7 @@ function ExploreFeature() {
     },
     {
       icon: (
-        <MdOutlineSmartToy className="bg-sky-100 text-blue-600 w-10 h-10 p-2 rounded-full" />
+        <MdOutlineSmartToy className="bg-purple-100 text-purple-600 w-10 h-10 p-2 rounded-full" />
       ),
       name: "Smart Automations",
       description:
@@ -34,7 +34,7 @@ function ExploreFeature() {
     },
     {
       icon: (
-        <MdEco className="bg-sky-100 text-blue-600 w-10 h-10 p-2 rounded-full" />
+        <MdEco className="bg-yellow-100 text-yellow-600 w-10 h-10 p-2 rounded-full" />
       ),
       name: "Energy Monitoring",
       description:
@@ -42,7 +42,7 @@ function ExploreFeature() {
     },
     {
       icon: (
-        <LuBellRing className="bg-sky-100 text-blue-600 w-10 h-10 p-2 rounded-full" />
+        <LuBellRing className="bg-red-100 text-red-600 w-10 h-10 p-2 rounded-full" />
       ),
       name: "Instant Notifications",
       description:
@@ -50,7 +50,7 @@ function ExploreFeature() {
     },
     {
       icon: (
-        <MdOutlineSettingsRemote className="bg-sky-100 text-blue-600 w-10 h-10 p-2 rounded-full" />
+        <MdOutlineSettingsRemote className="bg-slate-100 text-slate-600 w-10 h-10 p-2 rounded-full" />
       ),
       name: "Remote Access",
       description:
@@ -60,7 +60,7 @@ function ExploreFeature() {
   return (
     <>
       <section className="mt-10 text-slate-600 space-y-5">
-        <div className="flex flex-col items-center justify-center">
+        <div className="flex flex-col items-center justify-center text-center">
           <div className="flex items-center gap-2">
             <GiNeedleDrill />
             <p className="text-2xl font-bold">Everything You Need</p>
@@ -70,12 +70,14 @@ function ExploreFeature() {
             solution
           </p>
         </div>
-        <div className="grid grid-cols-6 gap-10 px-50">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-10 text-center px-4">
           {featuresList.map((item) => (
             <div className="flex flex-col items-center border border-slate-200 shadow-sm p-5 rounded-xl">
               {item.icon}
               <p className="font-bold">{item.name}</p>
-              <p className="text-center text-xs">{item.description}</p>
+              <p className="text-center text-[0.8rem] sm:text-xs">
+                {item.description}
+              </p>
             </div>
           ))}
         </div>
