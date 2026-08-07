@@ -4,24 +4,24 @@ import { GiPolarStar } from "react-icons/gi";
 function FeaturesHeroSection() {
   return (
     <>
-      <section className="grid grid-cols-[1fr_1fr] text-slate-600">
-        <div className="p-10 space-y-10">
-          <div className="flex items-center justify-center w-lg rounded-xl">
+      <section className="md:grid grid-cols-[1.2fr_0.8fr] text-slate-600">
+        <div className="p-5 space-y-5">
+          <div className="flex items-center">
             <GiPolarStar className="w-10 h-10 p-2 text-green-600" />
             <p className="font-medium">Features</p>
           </div>
-          <div className="text-9xl w-full font-bold">
+          <div className="text-6xl w-full md:text-7xl font-bold">
             <p>Powerful Features for</p>
-            <p className="text-blue-600 text-8xl">a Smarter Home</p>
+            <p className="text-blue-600">a Smarter Home</p>
           </div>
-          <div className="text-sm mt-5 w-1/2">
+          <div className="text-sm mt-3">
             <p>
               NguyenShield brings all your smart devices together in one place.
               More control, more security, more convenience.
             </p>
           </div>
         </div>
-        <div className="relative overflow-hidden h-full w-full">
+        <div className="relative overflow-hidden w-full h-64 sm:h-full">
           <img
             src={smartHomeHomePage}
             alt="Modern smart home"
