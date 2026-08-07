@@ -1,4 +1,4 @@
-import smartHomeWindowSensor from "../../../assets/smarthome_windowsensor.png";
+import smartHomeWindowSensor from "../../../assets/devices/smarthome_windowsensor.png";
 import type { IDevice } from "../../../types";
 import { useState } from "react";
 import WindowSensorControl from "../control/WindowSensorControl";

@@ -1,6 +1,6 @@
-import DonutChart from "../../../components/layout/DonutChart";
+import DonutChart from "../../../components/ui/DonutChart";
 import type { IAutomationRule } from "../../../types";
-import HealthRow from "../../../components/layout/HealthRow";
+import HealthRow from "../../../components/ui/HealthRow";
 
 interface AutomationHealthOverViewProps {
   automationRules: IAutomationRule[];

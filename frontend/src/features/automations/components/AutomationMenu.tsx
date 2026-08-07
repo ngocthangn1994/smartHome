@@ -5,7 +5,7 @@ import { MdDeviceThermostat } from "react-icons/md";
 import { AiFillThunderbolt } from "react-icons/ai";
 import { CiStar } from "react-icons/ci";
 import { useState } from "react";
-import AddNewAutomationRule from "../controls/AddNewAutomationRule";
+import AddNewAutomationRule from "../modals/AddNewAutomationRule";
 function AutomationMenu() {
   const [popUp, setPopUp] = useState(false);
   const menu = [

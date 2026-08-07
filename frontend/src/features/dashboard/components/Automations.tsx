@@ -1,4 +1,4 @@
-import type { IAutomationRule } from "../../types";
+import type { IAutomationRule } from "../../../types";
 
 interface AutomationProps {
   automationRules: IAutomationRule[];

@@ -13,7 +13,7 @@ import { SiExpressdotcom } from "react-icons/si";
 import { TbBrandMongodb } from "react-icons/tb";
 import { BiLogoTailwindCss } from "react-icons/bi";
 
-import smartHomeAvatar from "../../../assets/smarthome_avatar.png";
+import smartHomeAvatar from "../../../assets/branding/smarthome_avatar.png";
 function Information() {
   const coreValues = [
     {

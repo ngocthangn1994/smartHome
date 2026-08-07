@@ -1,18 +1,18 @@
-import Dashboard from "./pages/Dashboard";
-import Login from "./pages/Login";
-import Register from "./pages/Register";
+import Dashboard from "../src/features/dashboard/pages/Dashboard";
+import Login from "../src/features/auth/pages/Login";
+import Register from "../src/features/auth/pages/Register";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
-import DevicesPage from "./features/devices/DevicesPage";
-import CameraPage from "./features/cameras/CameraPage";
-import AutomationPage from "./features/automations/AutomationPage";
+import DevicesPage from "../src/features/devices/pages/DevicesPage";
+import CameraPage from "../src/features/devices/pages/DevicesPage";
+import AutomationPage from "../src/features/automations/pages/AutomationPage";
 import EnergyPage from "./features/energy/EnergyPage";
-import SettingPage from "./features/setttings/SettingPage";
-import SecurityPage from "./features/security/SecurityPage";
-import AlertPage from "./features/alerts/AlertPage";
-import HistoryPage from "./features/history/HistoryPage";
-import ProtectedRoute from "./components/ProtectedRoute";
+import SettingPage from "../src/features/setttings/pages/SettingPage";
+import SecurityPage from "../src/features/security/pages/SecurityPage";
+import AlertPage from "../src/features/alerts/pages/AlertPage";
+import HistoryPage from "../src/features/history/pages/HistoryPage";
+import ProtectedRoute from "../src/components/routing/ProtectedRoute";
 import Homepage from "./pages/HomePage/HomePage";
-import Features from "./pages/HomePage/Features";
+import Features from "../src/pages/FeaturePage/Features";
 import About from "./pages/About/About";
 function App() {
   return (

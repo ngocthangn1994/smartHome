@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react";
-import api from "../../api/api";
-import Header from "../../components/layout/Header";
-import SummaryDevices from "../dashboard/SummaryDevices";
-import SideBarHelper from "../../components/layout/SideBarHelper";
-import { useAuth } from "../../context/AuthContext";
-import type { IAlert, IDevice } from "../../types";
-import DeviceToolbar from "./components/DeviceToolbar";
-import DeviceList from "./DeviceList";
-import DeviceHealthOverview from "./components/DeviceHealthOverview";
-import RecentAdded from "./components/RecentAdded";
-import RecentActivity from "../devices/components/RecentActivity";
-import type { DeviceType } from "../../types";
+import api from "../../../api/api";
+import Header from "../../../components/layout/Header";
+import SummaryDevices from "../../../features/dashboard/components/SummaryDevices";
+import SideBarHelper from "../../../components/layout/SideBarHelper";
+import { useAuth } from "../../../context/AuthContext";
+import type { IAlert, IDevice } from "../../../types";
+import DeviceToolbar from "../components/DeviceToolbar";
+import DeviceList from "../components/DeviceList";
+import DeviceHealthOverview from "../components/DeviceHealthOverview";
+import RecentAdded from "../components/RecentAdded";
+import RecentActivity from "../components/RecentActivity";
+import type { DeviceType } from "../../../types";
 type DeviceFilter = DeviceType | "all" | "security";
 
 function DevicesPage() {

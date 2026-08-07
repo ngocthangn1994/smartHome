@@ -1,7 +1,7 @@
 import { FaDoorClosed, FaLock, FaShieldVirus } from "react-icons/fa6";
 import { GiHomeGarage } from "react-icons/gi";
-import smarthomeRecentCamera from "../../assets/smarthome_recentcamera.png";
-import type { IDevice } from "../../types";
+import smarthomeRecentCamera from "../../../assets/smarthome_recentcamera.png";
+import type { IDevice } from "../../../types";
 
 interface SecurityOverProps {
   devices: IDevice[];

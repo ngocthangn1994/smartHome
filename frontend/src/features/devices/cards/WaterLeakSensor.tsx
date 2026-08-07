@@ -1,4 +1,4 @@
-import smartHomeWaterLeakSensor from "../../../assets/smarthome_waterleaksensor.png";
+import smartHomeWaterLeakSensor from "../../../assets/devices/smarthome_waterleaksensor.png";
 import type { IDevice } from "../../../types";
 import CameraControl from "../control/CameraControl";
 import { useState } from "react";

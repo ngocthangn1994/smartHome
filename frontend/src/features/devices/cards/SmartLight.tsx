@@ -1,4 +1,4 @@
-import smartHomeSmartLight from "../../../assets/smarthome_smartlight.png";
+import smartHomeSmartLight from "../../../assets/devices/smarthome_smartlight.png";
 import type { IDevice } from "../../../types";
 import { FiSun } from "react-icons/fi";
 

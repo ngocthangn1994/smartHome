@@ -1,5 +1,5 @@
 import { FaPowerOff } from "react-icons/fa6";
-import smartHomeSamrtPlug from "../../../assets/smarthome_smartplug.png";
+import smartHomeSamrtPlug from "../../../assets/devices/smarthome_smartplug.png";
 import type { IDevice } from "../../../types";
 import { useState } from "react";
 import SmartPlugControl from "../control/SmartPlugControl";

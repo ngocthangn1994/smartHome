@@ -5,7 +5,7 @@ import {
   FaWifi,
   FaTemperatureHigh,
 } from "react-icons/fa6";
-import type { IDevice } from "../../types";
+import type { IDevice } from "../../../types";
 import type { ReactNode } from "react";
 
 interface SummaryDevicesProp {

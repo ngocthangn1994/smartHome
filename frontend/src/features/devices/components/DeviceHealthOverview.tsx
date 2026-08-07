@@ -1,6 +1,6 @@
 import type { IDevice } from "../../../types";
-import DonutChart from "../../../components/layout/DonutChart";
-import HealthRow from "../../../components/layout/HealthRow";
+import DonutChart from "../../../components/ui/DonutChart";
+import HealthRow from "../../../components/ui/HealthRow";
 interface DeviceHealthOverviewProps {
   devices: IDevice[];
 }

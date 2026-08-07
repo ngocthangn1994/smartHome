@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import api from "../../api/api";
 import Header from "../../components/layout/Header";
-import SummaryDevices from "../dashboard/SummaryDevices";
+import SummaryDevices from "../dashboard/components/SummaryDevices";
 import SideBarHelper from "../../components/layout/SideBarHelper";
 import { useAuth } from "../../context/AuthContext";
 import type { IAlert, IDevice } from "../../types";

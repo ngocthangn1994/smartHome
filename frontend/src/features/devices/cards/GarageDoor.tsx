@@ -1,4 +1,4 @@
-import smartHomeGarage from "../../../assets/smarthome_garage.png";
+import smartHomeGarage from "../../../assets/devices/smarthome_garage.png";
 import type { IDevice } from "../../../types";
 import { useState } from "react";
 import GarageControl from "../control/GarageControl";

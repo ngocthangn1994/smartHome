@@ -1,4 +1,4 @@
-import smartHomeSmokeDetector from "../../../assets/smarthome_smoke_detector.png";
+import smartHomeSmokeDetector from "../../../assets/devices/smarthome_smoke_detector.png";
 import { IoIosNotificationsOff } from "react-icons/io";
 import type { IDevice } from "../../../types";
 import SmokeControl from "../control/SmokeControl";

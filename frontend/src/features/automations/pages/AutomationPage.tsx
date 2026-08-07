@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react";
-import api from "../../api/api";
-import Header from "../../components/layout/Header";
-import SummaryDevices from "../dashboard/SummaryDevices";
-import SideBarHelper from "../../components/layout/SideBarHelper";
-import { useAuth } from "../../context/AuthContext";
-import type { IAutomationRule, IDevice } from "../../types";
-import AutomationMenu from "./components/AutomationMenu";
-import AutomationList from "./components/AutomationList";
-import AutomationHealthOverview from "./components/AutomationHealthOverView";
-import RecentActivity from "./components/RecentActivity";
-import SuggestedAutomation from "./components/SuggestedAutomation";
-import QuickActions from "./components/QuickActions";
+import api from "../../../api/api";
+import Header from "../../../components/layout/Header";
+import SummaryDevices from "../../dashboard/components/SummaryDevices";
+import SideBarHelper from "../../../components/layout/SideBarHelper";
+import { useAuth } from "../../../context/AuthContext";
+import type { IAutomationRule, IDevice } from "../../../types";
+import AutomationMenu from "../../../features/automations/components/AutomationMenu";
+import AutomationList from "../../../features/automations/components/AutomationList";
+import AutomationHealthOverview from "../../automations/components/AutomationHealthOverView";
+import RecentActivity from "../components/RecentActivity";
+import SuggestedAutomation from "../components/SuggestedAutomation";
+import QuickActions from "../components/QuickActions";
 function AutomationPage() {
   const [devices, setDevices] = useState<IDevice[]>([]);
   const [automationRules, setAutomationRules] = useState<IAutomationRule[]>([]);
