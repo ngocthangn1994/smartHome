@@ -24,27 +24,29 @@ function SecuritySection() {
   ];
   return (
     <>
-      <section className="flex items-center justify-between px-50 mt-20 bg-sky-50 py-5 text-slate-600">
-        <div>
-          <FaBuildingShield className="text-green-600 h-40 w-40 p-5 rounded-full border" />
-        </div>
-        <div className="w-4xl">
-          <p className="text-blue-600 font-bold">
-            BUILT FOR YOUR PEACE OF MIND
-          </p>
-          <p className="text-2xl font-bold">Security You Can Trust</p>
-          <p>
-            NguyenShield uses enterprise encryption and smart detection to keep
-            your home and data safe - so you can focus on what matters
-          </p>
-        </div>
-        <div className="space-y-2">
-          {securityList.map((item) => (
-            <div className="flex items-center gap-3">
-              {item.icon}
-              <p className="font-bold">{item.name}</p>
-            </div>
-          ))}
+      <section className="mt-20 bg-sky-50 py-5 text-slate-600">
+        <p className="text-blue-600 font-bold text-center my-5">
+          BUILT FOR YOUR PEACE OF MIND
+        </p>
+        <div className="grid grid-cols-3 items-center sm:px-10 gap-1 px-1">
+          <div>
+            <FaBuildingShield className="text-green-600 h-25 w-25 md:h-40 md:w-40 p-5 rounded-full border" />
+          </div>
+          <div>
+            <p className="text-2xl font-bold">Security You Can Trust</p>
+            <p className="text-sm">
+              NguyenShield uses enterprise encryption and smart detection to
+              keep your home and data safe - so you can focus on what matters
+            </p>
+          </div>
+          <div className="space-y-1">
+            {securityList.map((item) => (
+              <div className="flex items-center gap-1 sm:gap-3">
+                {item.icon}
+                <p className="font-bold">{item.name}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
     </>

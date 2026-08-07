@@ -8,7 +8,7 @@ import AdvanceSecurity from "./components/AdvanceSecurity";
 function Homepage() {
   return (
     <>
-      <div className="w-full min-h-full overflow-x-hidden">
+      <div className="w-full h-full">
         <Header />
         <HeroSection />
         <FeaturesSection />
