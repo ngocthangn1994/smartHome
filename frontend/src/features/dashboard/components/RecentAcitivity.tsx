@@ -42,7 +42,7 @@ function RecentActivity({ alerts }: AlertProp) {
         <p className="text-xl font-bold mb-5">
           Recent Activity & Quick Actions
         </p>
-        <div className="grid grid-cols-2 gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
           <div className="space-y-7 border border-slate-200 shadow-sm px-2 py-2 rounded-2xl">
             {alerts.map((alert) => (
               <div className="flex items-center gap-5 px-1 py-1">
