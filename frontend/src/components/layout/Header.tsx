@@ -4,7 +4,7 @@ import {
   FaSearchengin,
 } from "react-icons/fa6";
 import type { IUser } from "../../types";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 type PageName =
   | "dashboard"
   | "devices"
@@ -19,9 +19,9 @@ interface HeaderProps {
   user: IUser | null;
 }
 
-import api from "../../api/api";
+// import api from "../../api/api";
 function Header({ user, page }: HeaderProps) {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const headerGreeting = {
     dashboard: {
       greet: `Welcome back, ${user?.name ?? "User"}! 👋`,
