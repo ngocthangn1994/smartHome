@@ -11,6 +11,7 @@ import RecentAdded from "../components/RecentAdded";
 import RecentActivity from "../components/RecentActivity";
 import type { DeviceType } from "../../../types";
 import UserHeader from "../../../components/layout/UserHeader";
+import SideBarHelper from "../../../components/layout/SideBarHelper";
 type DeviceFilter = DeviceType | "all" | "security";
 
 function DevicesPage() {
@@ -56,24 +57,29 @@ function DevicesPage() {
 
   return (
     <>
-      <div className="w-screen min-h-screen md:grid-cols-[0.3fr_1.7fr] bg-indigo-50">
+      <div className="w-screen min-h-screen bg-indigo-50">
         <UserHeader />
-        <div className="bg-indigo-50 px-10 py-10 space-y-3">
-          <Header user={user} page="devices" />
-          <SummaryDevices devices={devices} />
-          <DeviceToolbar
-            selectedType={selectedType}
-            onFilterDevice={setSelectedType}
-          />
-          <div className="grid gtrid-cols-1 md:grid-cols-[1.4fr_0.7fr] mt-5 gap-3">
-            <div className="space-y-5">
-              <DeviceList devices={filterDevice(selectedType)} />
-            </div>
-            <div className="bg-white px-5 py-5 border border-slate-200 shadow-sm rounded-2xl text-slate-600 space-y-3">
-              <DeviceHealthOverview devices={filterDevice(selectedType)} />
-              <RecentAdded />
-              <div className="mt-5">
-                <RecentActivity alerts={alerts} />
+        <div className="grid lg:grid-cols-[0.3fr_1.7fr]">
+          <div className="hidden lg:block">
+            <SideBarHelper />
+          </div>
+          <div className="bg-indigo-50 px-10 py-10 space-y-3">
+            <Header user={user} page="devices" />
+            <SummaryDevices devices={devices} />
+            <DeviceToolbar
+              selectedType={selectedType}
+              onFilterDevice={setSelectedType}
+            />
+            <div className="grid gtrid-cols-1 md:grid-cols-[1.4fr_0.7fr] mt-5 gap-3">
+              <div className="space-y-5">
+                <DeviceList devices={filterDevice(selectedType)} />
+              </div>
+              <div className="bg-white px-5 py-5 border border-slate-200 shadow-sm rounded-2xl text-slate-600 space-y-3">
+                <DeviceHealthOverview devices={filterDevice(selectedType)} />
+                <RecentAdded />
+                <div className="mt-5">
+                  <RecentActivity alerts={alerts} />
+                </div>
               </div>
             </div>
           </div>

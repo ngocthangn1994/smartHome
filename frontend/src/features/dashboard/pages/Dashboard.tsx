@@ -10,6 +10,7 @@ import Automation from "../../dashboard/components/Automations";
 import { useAuth } from "../../../context/AuthContext";
 import type { IAutomationRule, IAlert, IDevice } from "../../../types";
 import DashboardHeader from "../components/DashboardHeader";
+import SideBarHelper from "../../../components/layout/SideBarHelper";
 function Dashboard() {
   const [devices, setDevices] = useState<IDevice[]>([]);
   const [automationRules, setAutomationRules] = useState<IAutomationRule[]>([]);
@@ -47,20 +48,25 @@ function Dashboard() {
     <>
       <div className="w-screen min-h-screen bg-indigo-50">
         <DashboardHeader />
-        <div className="bg-indigo-50 px-10 py-10 space-y-5">
-          <Header user={user} page="dashboard" />
-          <SummaryDevices devices={devices} />
-          <div className="grid grid-cols-1 xl:grid-cols-[1.3fr_0.7fr] mt-5 gap-5">
-            <div className="border border-slate-200 bg-white rounded-2xl px-5 py-5">
-              <p className="font-bold text-xl mb-5">My Deivces</p>
-              <DeviceList devices={devices} />
-            </div>
-            <SecurityOverview devices={devices} />
+        <div className="grid lg:grid-cols-[0.3fr_1.7fr]">
+          <div>
+            <SideBarHelper />
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-[1fr_1fr_2fr] mt-5 gap-5">
-            <EnergyOverview />
-            <Automation automationRules={automationRules} />
-            <RecentActivity alerts={alerts} />
+          <div className="bg-indigo-50 px-10 py-10 space-y-5">
+            <Header user={user} page="dashboard" />
+            <SummaryDevices devices={devices} />
+            <div className="grid grid-cols-1 xl:grid-cols-[1.3fr_0.7fr] mt-5 gap-5">
+              <div className="border border-slate-200 bg-white rounded-2xl px-5 py-5">
+                <p className="font-bold text-xl mb-5">My Deivces</p>
+                <DeviceList devices={devices} />
+              </div>
+              <SecurityOverview devices={devices} />
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-[1fr_1fr_2fr] mt-5 gap-5">
+              <EnergyOverview />
+              <Automation automationRules={automationRules} />
+              <RecentActivity alerts={alerts} />
+            </div>
           </div>
         </div>
       </div>
