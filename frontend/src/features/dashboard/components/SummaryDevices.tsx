@@ -7,6 +7,7 @@ import {
 } from "react-icons/fa6";
 import type { IDevice } from "../../../types";
 import type { ReactNode } from "react";
+import { FaDoorClosed } from "react-icons/fa";
 
 interface SummaryDevicesProp {
   devices: IDevice[];
@@ -43,7 +44,7 @@ function SummaryDevices({ devices }: SummaryDevicesProp) {
   const summary: SummaryItem[] = [
     {
       icon: (
-        <FaHardDrive className="text-green-600 bg-green-50 px-3 py-3 w-15 h-15 rounded-full" />
+        <FaHardDrive className="text-green-600 bg-green-50 px-1 py-1 md:px-3 md:py-3 w-12 h-12 md:w-15 md:h-15 rounded-full" />
       ),
       name: "Total Devices",
       data: devices.length,
@@ -51,7 +52,7 @@ function SummaryDevices({ devices }: SummaryDevicesProp) {
     },
     {
       icon: (
-        <FaWifi className="text-green-600 bg-green-50 px-3 py-3 w-15 h-15 rounded-full" />
+        <FaWifi className="text-green-600 bg-green-50 px-1 py-1 md:px-3 md:py-3 w-12 h-12 md:w-15 md:h-15 rounded-full" />
       ),
       name: "Active Devices",
       data: activeDeviced.length,
@@ -59,7 +60,7 @@ function SummaryDevices({ devices }: SummaryDevicesProp) {
     },
     {
       icon: (
-        <FaTemperatureHigh className="text-green-600 bg-green-50 px-3 py-3 w-15 h-15 rounded-full" />
+        <FaTemperatureHigh className="text-green-600 bg-green-50 px-1 py-1 md:px-3 md:py-3 w-12 h-12 md:w-15 md:h-15 rounded-full" />
       ),
       name: "Indoor Tempt",
       data: indoorTemp?.state.currentTemperature || "",
@@ -67,7 +68,7 @@ function SummaryDevices({ devices }: SummaryDevicesProp) {
     },
     {
       icon: (
-        <FaShieldHalved className="text-green-600 bg-green-50 px-3 py-3 w-15 h-15 rounded-full" />
+        <FaShieldHalved className="text-green-600 bg-green-50 px-1 py-1 md:px-3 md:py-3 w-12 h-12 md:w-15 md:h-15 rounded-full" />
       ),
       name: "Security Status",
       data: securityStatus,
@@ -75,7 +76,15 @@ function SummaryDevices({ devices }: SummaryDevicesProp) {
     },
     {
       icon: (
-        <FaBoltLightning className="text-green-600 bg-green-50 px-3 py-3 w-15 h-15 rounded-full" />
+        <FaDoorClosed className="text-green-600 bg-green-50 px-1 py-1 md:px-3 md:py-3 w-12 h-12 md:w-15 md:h-15 rounded-full" />
+      ),
+      name: "Doors & Windows",
+      data: "All Closed",
+      status: "secured",
+    },
+    {
+      icon: (
+        <FaBoltLightning className="text-green-600 bg-green-50 px-1 py-1 md:px-3 md:py-3 w-12 h-12 md:w-15 md:h-15 rounded-full" />
       ),
       name: "Energy Today",
       data: "12.4kWh",
@@ -84,13 +93,13 @@ function SummaryDevices({ devices }: SummaryDevicesProp) {
   ];
   return (
     <>
-      <div className="grid grid-cols-5 gap-5 bg-white border border-slate-200 shadow-sm px-5 py-5 rounded-2xl">
+      <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 text-sm gap-5 bg-white border border-slate-200 shadow-sm px-5 py-5 rounded-2xl">
         {summary.map((item) => (
           <div className="bg-white border border-slate-200 rounded-2xl px-5 py-5 shadow-sm hover:shadow-lg">
             <div className="flex justify-between items-center">
               <div className="space-y-1">
-                <p className="text-xl font-semibold">{item.name}</p>
-                <p className={`text-green-600 text-4xl font-bold`}>
+                <p className="font-semibold">{item.name}</p>
+                <p className={`text-green-600 text-xl font-bold`}>
                   {item.data}
                 </p>
                 <p className="text-green-600 font-semibold">{item.status}</p>
