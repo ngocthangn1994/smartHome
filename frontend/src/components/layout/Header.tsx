@@ -72,22 +72,22 @@ function Header({ user, page }: HeaderProps) {
     },
   };
 
-  const handleMenu = async (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const value = event.target.value;
+  // const handleMenu = async (event: React.ChangeEvent<HTMLSelectElement>) => {
+  //   const value = event.target.value;
 
-    if (value === "profile") {
-      navigate("/settings");
-      return;
-    }
-    if (value === "dashboard") {
-      navigate("/dashboard");
-      return;
-    }
-    if (value === "logout") {
-      await api.logout();
-      navigate("/");
-    }
-  };
+  //   if (value === "profile") {
+  //     navigate("/settings");
+  //     return;
+  //   }
+  //   if (value === "dashboard") {
+  //     navigate("/dashboard");
+  //     return;
+  //   }
+  //   if (value === "logout") {
+  //     await api.logout();
+  //     navigate("/");
+  //   }
+  // };
   return (
     <>
       <div className="space-y-5 text-slate-600">
