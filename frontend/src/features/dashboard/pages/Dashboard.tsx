@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import api from "../../../api/api";
 import Header from "../../../components/layout/Header";
 import DeviceList from "../../../features/devices/components/DeviceList";
-import SideBarHelper from "../../../components/layout/SideBarHelper";
 import SummaryDevices from "../../dashboard/components/SummaryDevices";
 import SecurityOverview from "../../dashboard/components/SecurityOverview";
 import EnergyOverview from "../../dashboard/components/EnergyOverview";
@@ -10,9 +9,7 @@ import RecentActivity from "../../dashboard/components/RecentAcitivity";
 import Automation from "../../dashboard/components/Automations";
 import { useAuth } from "../../../context/AuthContext";
 import type { IAutomationRule, IAlert, IDevice } from "../../../types";
-import MenuList from "../../../components/layout/MenuList";
 import DashboardHeader from "../components/DashboardHeader";
-import UserHeader from "../../../components/layout/UserHeader";
 function Dashboard() {
   const [devices, setDevices] = useState<IDevice[]>([]);
   const [automationRules, setAutomationRules] = useState<IAutomationRule[]>([]);
