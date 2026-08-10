@@ -92,7 +92,7 @@ function Header({ user, page }: HeaderProps) {
   };
   return (
     <>
-      <div className="flex justify-between items-center mb-10 text-slate-600">
+      <div className="space-y-5 text-slate-600">
         <div className="space-y-1">
           <h1 className="text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl">
             {headerGreeting[page].greet}
@@ -104,27 +104,18 @@ function Header({ user, page }: HeaderProps) {
             </p>
           )}
         </div>
-        <div className="flex gap-5 items-center">
+        <div className="grid grid-cols-2 gap-3">
           <div className="flex gap-3 items-center text-slate-600 border border-slate-200 px-2 py-2 rounded-2xl bg-white">
             <FaHouseChimneyUser className="w-10 h-10" />
-            <span className="text-xl font-bold ">My Home</span>
+            <span className="text-sm font-bold ">My Home</span>
             <FaAngleDown />
           </div>
-          <div className="flex justify-between border border-slate-200 bg-white px-5 py-2 rounded-2xl text-slate-600 text-xl">
+          <div className="flex justify-between border border-slate-200 bg-white px-5 py-2 rounded-2xl">
             <input
-              className="outline-none"
+              className="outline-none text-sm"
               placeholder="Search devices, rooms..."
             />
             <FaSearchengin className="w-10 h-10" />
-          </div>
-          <FaBell className="w-12 h-12 bg-white px-2 py-2 rounded-full shadow-sm ring-1 ring-indigo-200" />
-          <div className="flex gap-3 items-center text-slate-600 border border-slate-200 px-5 py-2 rounded-2xl bg-white">
-            <FaGrav className="w-10 h-10" />
-            <select onChange={handleMenu}>
-              <option value="dashboard">Dashboard</option>
-              <option value="profile">Profile</option>
-              <option value="logout">Log out</option>
-            </select>
           </div>
         </div>
       </div>
