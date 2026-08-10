@@ -49,7 +49,7 @@ function Dashboard() {
       <div className="w-screen min-h-screen bg-indigo-50">
         <DashboardHeader />
         <div className="grid lg:grid-cols-[0.3fr_1.7fr]">
-          <div>
+          <div className="hidden lg:block">
             <SideBarHelper />
           </div>
           <div className="bg-indigo-50 px-10 py-10 space-y-5">
