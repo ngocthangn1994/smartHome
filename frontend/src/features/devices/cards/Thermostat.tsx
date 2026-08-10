@@ -24,7 +24,7 @@ function Thermostat({ device }: ThermostatProp) {
   return (
     <>
       <div>
-        <div className="flex justify-center">
+        <div className="flex justify-center h-[250px]">
           <div className="relative w-65 h-65 ">
             <svg
               viewBox="0 0 200 200"
@@ -68,8 +68,7 @@ function Thermostat({ device }: ThermostatProp) {
               </div>
             </div>
 
-            {/* Target */}
-            <p className="absolute bottom-0 left-0 right-0 text-center text-[10px] text-slate-500">
+            <p className="absolute bottom-0 left-0 right-0 text-center text-[10px] text-slate-500 font-bold">
               {device.state.targetTemperature}
             </p>
           </div>
