@@ -2,8 +2,6 @@ import {
   FaHouseChimneyUser,
   FaAngleDown,
   FaSearchengin,
-  FaBell,
-  FaGrav,
 } from "react-icons/fa6";
 import type { IUser } from "../../types";
 import { useNavigate } from "react-router-dom";
