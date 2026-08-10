@@ -124,17 +124,14 @@ function SettingPage() {
   };
   return (
     <>
-      <div className="w-screen min-h-screen grid grid-cols-[0.3fr_1.7fr] bg-indigo-50">
-        <div>
-          <SideBarHelper />
-        </div>
+      <div className="w-screen min-h-screen bg-indigo-50">
         <div className="bg-indigo-50 px-10 py-10">
           <Header user={user} page="settings" />
           <SummaryDevices devices={devices} />
-          <div className="grid grid-cols-[1.4fr_0.7fr] mt-5 gap-3">
+          <div className="grid grid-cols-1 md:grid-cols-[1.4fr_0.7fr] mt-5 gap-3">
             <div className="space-y-5">
               <SettingsMenu />
-              <div className="flex gap-3">
+              <div className="grid grid-cols-1 md:flex gap-3">
                 <ProfileInformation
                   name={name}
                   email={email}
@@ -153,7 +150,7 @@ function SettingPage() {
                 />
                 <NotificationPreferences />
               </div>
-              <div className="flex gap-3">
+              <div className="grid grid-cols-1 md:flex gap-3">
                 <SecuritySettings />
                 <Integrations />
                 <BackupSystem />
