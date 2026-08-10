@@ -23,19 +23,21 @@ function MenuList() {
   ];
   return (
     <>
-      <div className="px-5 py-5 text-2xl text-slate-900 space-y-5">
-        {menu.map((item) => (
-          <NavLink
-            key={item.name}
-            to={item.path}
-            className={({ isActive }) =>
-              `flex items-center gap-3 ${isActive ? "bg-blue-600 py-2 rounded-2xl px-3 text-white shadow-sm" : "text-slate-700 hover:text-blue-600"}`
-            }
-          >
-            <span>{item.icon}</span>
-            <span>{item.name}</span>
-          </NavLink>
-        ))}
+      <div>
+        <div className="px-5 py-5 text-2xl text-slate-900 space-y-5">
+          {menu.map((item) => (
+            <NavLink
+              key={item.name}
+              to={item.path}
+              className={({ isActive }) =>
+                `flex items-center gap-3 ${isActive ? "bg-blue-600 py-2 rounded-2xl px-3 text-white shadow-sm" : "text-slate-700 hover:text-blue-600"}`
+              }
+            >
+              <span>{item.icon}</span>
+              <span>{item.name}</span>
+            </NavLink>
+          ))}
+        </div>
       </div>
     </>
   );

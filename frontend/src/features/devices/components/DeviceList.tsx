@@ -21,7 +21,7 @@ function DeviceList({ devices }: DeviceListProp) {
   return (
     <>
       <div className="text-slate-600">
-        <div className="grid grid-cols-2 md:grid-cols-2 xl:grid-cols-4 gap-1 md:gap-3">
+        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-1 md:gap-3">
           {currentDevices.map((device) => (
             <Device device={device} />
           ))}
