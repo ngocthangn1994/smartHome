@@ -62,7 +62,7 @@ function Dashboard() {
               </div>
               <SecurityOverview devices={devices} />
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-[1fr_1fr_2fr] mt-5 gap-5">
+            <div className="grid grid-cols-1 xl:grid-cols-[1fr_1fr_2fr] mt-5 gap-5">
               <EnergyOverview />
               <Automation automationRules={automationRules} />
               <RecentActivity alerts={alerts} />
