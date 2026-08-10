@@ -6,8 +6,8 @@ function SettingsOverview() {
       <div className="space-y-3 bg-white px-5 py-5 rounded-2xl text-slate-600">
         <p className="text-xl font-bold">Settings Overview</p>
         <div className="flex justify-between gap-3 items-center gap-3">
-          <div className="px-8 py-8 bg-green-600 rounded-full">
-            <div className="px-10 py-10 bg-white rounded-full">
+          <div className="px-3 md:px-4 py-3 md:py-4 bg-green-600 rounded-full">
+            <div className="px-4 md:px-10  py-4 md:py-10  bg-white rounded-full">
               <p className="font-bold text-3xl">87%</p>
               <p>Healthy</p>
             </div>

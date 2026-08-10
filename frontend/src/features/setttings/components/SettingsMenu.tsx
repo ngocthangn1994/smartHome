@@ -16,7 +16,7 @@ function SettingsMenu() {
   ];
   return (
     <>
-      <div className="bg-white rounded-2xl px-5 py-5 flex gap-5 justify-between">
+      <div className="bg-white rounded-2xl px-5 py-5 grid grid-cols-3 md:flex gap-5 justify-between">
         {menu.map((item) => (
           <div className="flex gap-2 items-center hover:text-blue-600">
             <span>{item.icon}</span>
