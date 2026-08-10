@@ -127,18 +127,18 @@ function SettingPage() {
     <>
       <div className="w-screen min-h-screen bg-indigo-50">
         <UserHeader />
-        <div className="grid lg:grid-cols-[0.3fr_1.7fr]">
-          <div className="hidden lg:block">
+        <div className="grid grid-cols-1 xl:grid-cols-[0.3fr_1.7fr]">
+          <div className="hidden xl:block">
             <SideBarHelper />
           </div>
 
           <div className="bg-indigo-50 px-10 py-10 space-y-3">
             <Header user={user} page="settings" />
             <SummaryDevices devices={devices} />
-            <div className="grid grid-cols-1 md:grid-cols-[1.4fr_0.7fr] mt-5 gap-3">
+            <div className="grid grid-cols-1 mt-5 gap-3">
               <div className="space-y-5">
                 <SettingsMenu />
-                <div className="grid grid-cols-1 md:flex gap-3">
+                <div className="grid grid-cols-1 lg:grid-cols-2 xl:flex gap-3">
                   <ProfileInformation
                     name={name}
                     email={email}

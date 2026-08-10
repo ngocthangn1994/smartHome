@@ -21,7 +21,7 @@ function AutomationMenu() {
   return (
     <>
       <div className="text-slate-600 rounded-2xl mt-5">
-        <div className="grid grid-cols-1 xl:grid-cols-[1.5fr_0.5fr] gap-3">
+        <div className="grid grid-cols-1 lg:grid-cols-[1.5fr_0.5fr] gap-3">
           <div className="grid grid-cols-2 lg:grid-cols-4 xl:grid-cols-6 gap-5 items-center bg-white px-5 py-2 rounded-2xl">
             {menu.map((item) => (
               <div className="flex px-5 py-2 items-center gap-3 hover:bg-blue-600 hover:text-white rounded-2xl">

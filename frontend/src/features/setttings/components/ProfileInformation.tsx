@@ -20,7 +20,7 @@ function ProfileInformation({
 }: ProfileInformationProp) {
   return (
     <>
-      <div className="bg-white px-5 py-5 rounded-2xl text-slate-600 flex flex-col justify-between">
+      <div className="bg-white px-5 py-5 rounded-2xl text-slate-600 flex flex-col justify-between space-y-3">
         <p className="font-bold text-xl">Profile Information</p>
         <div className="flex items-center gap-5 ">
           <div>
