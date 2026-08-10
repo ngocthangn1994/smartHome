@@ -10,6 +10,7 @@ import AlertList from "../components/AlertList";
 import AlertOverview from "../components/AlertOverview";
 import AlertRecentActivity from "../components/AlertRecentActivity";
 import AlertQuickAction from "../components/AlertQuickActions";
+import UserHeader from "../../../components/layout/UserHeader";
 function AlertPage() {
   const [devices, setDevices] = useState<IDevice[]>([]);
   const [alerts, setAlerts] = useState<IAlert[]>([]);
@@ -36,6 +37,7 @@ function AlertPage() {
   return (
     <>
       <div className="w-screen min-h-screen bg-indigo-50">
+        <UserHeader />
         <div className="bg-indigo-50 px-10 py-10 space-y-3">
           <Header user={user} page="alerts" />
           <SummaryDevices devices={devices} />
