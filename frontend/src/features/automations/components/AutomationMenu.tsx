@@ -20,7 +20,7 @@ function AutomationMenu() {
   ];
   return (
     <>
-      <div className="flex justify-between items-center text-slate-600 bg-white rounded-2xl mt-5">
+      <div className="grid grid-cols-1 md:flex justify-between items-center text-slate-600 bg-white rounded-2xl mt-5">
         <div className="flex gap-5 items-center bg-white px-5 py-2 rounded-2xl">
           {menu.map((item) => (
             <div className="flex px-5 py-2 items-center gap-3 hover:bg-blue-600 hover:text-white rounded-2xl">
