@@ -15,7 +15,7 @@ function HomePreferences({
 }: HomePreferencesProps) {
   return (
     <>
-      <div className="bg-white px-5 py-5 rounded-2xl flex flex-col justify-between">
+      <div className="bg-white px-5 py-5 rounded-2xl flex flex-col justify-between space-y-3">
         <div>
           <div>
             <p className="text-xl font-bold">Home Preferences</p>

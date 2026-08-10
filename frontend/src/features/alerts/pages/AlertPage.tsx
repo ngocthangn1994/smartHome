@@ -38,8 +38,8 @@ function AlertPage() {
     <>
       <div className="w-screen min-h-screen bg-indigo-50">
         <UserHeader />
-        <div className="grid lg:grid-cols-[0.3fr_1.7fr]">
-          <div>
+        <div className="grid grid-cols-1 xl:grid-cols-[0.3fr_1.7fr]">
+          <div className="hidden xl:block">
             <SideBarHelper />
           </div>
           <div className="bg-indigo-50 px-10 py-10 space-y-3">
@@ -57,7 +57,7 @@ function AlertPage() {
               </div>
             </div>
           </div>
-        </div>{" "}
+        </div>
       </div>
     </>
   );

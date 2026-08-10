@@ -38,8 +38,8 @@ function SecurityPage() {
     <>
       <div className="w-screen min-h-screen bg-indigo-50">
         <UserHeader />
-        <div className="grid lg:grid-cols-[0.3fr_1.7fr]">
-          <div className="hidden lg:block">
+        <div className="grid grid-cols-1 xl:grid-cols-[0.3fr_1.7fr]">
+          <div className="hidden xl:block">
             <SideBarHelper />
           </div>
 
