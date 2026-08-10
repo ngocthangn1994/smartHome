@@ -11,6 +11,7 @@ import AutomationHealthOverview from "../../automations/components/AutomationHea
 import RecentActivity from "../components/RecentActivity";
 import SuggestedAutomation from "../components/SuggestedAutomation";
 import QuickActions from "../components/QuickActions";
+import UserHeader from "../../../components/layout/UserHeader";
 function AutomationPage() {
   const [devices, setDevices] = useState<IDevice[]>([]);
   const [automationRules, setAutomationRules] = useState<IAutomationRule[]>([]);
@@ -53,6 +54,7 @@ function AutomationPage() {
   return (
     <>
       <div className="w-screen min-h-screen bg-indigo-50">
+        <UserHeader />
         <div className="bg-indigo-50 px-10 py-10">
           <Header user={user} page="automations" />
           <SummaryDevices devices={devices} />

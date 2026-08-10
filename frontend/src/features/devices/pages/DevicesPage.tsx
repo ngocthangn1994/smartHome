@@ -11,6 +11,7 @@ import DeviceHealthOverview from "../components/DeviceHealthOverview";
 import RecentAdded from "../components/RecentAdded";
 import RecentActivity from "../components/RecentActivity";
 import type { DeviceType } from "../../../types";
+import UserHeader from "../../../components/layout/UserHeader";
 type DeviceFilter = DeviceType | "all" | "security";
 
 function DevicesPage() {
@@ -57,6 +58,7 @@ function DevicesPage() {
   return (
     <>
       <div className="w-screen min-h-screen md:grid-cols-[0.3fr_1.7fr] bg-indigo-50">
+        <UserHeader />
         <div className="bg-indigo-50 px-10 py-10">
           <Header user={user} page="devices" />
           <SummaryDevices devices={devices} />

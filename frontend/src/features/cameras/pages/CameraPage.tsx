@@ -11,7 +11,7 @@ import DeviceHealthOverview from "../../devices/components/DeviceHealthOverview"
 import RecentMotion from "../components/RecentMotion";
 import Recording from "../components/Recording";
 import QuickAction from "../components/QuickAction";
-
+import UserHeader from "../../../components/layout/UserHeader";
 function CameraPage() {
   const [devices, setDevices] = useState<IDevice[]>([]);
 
@@ -39,10 +39,8 @@ function CameraPage() {
   );
   return (
     <>
-      <div className="w-screen min-h-screen grid grid-cols-[0.3fr_1.7fr] bg-indigo-50">
-        <div>
-          <SideBarHelper />
-        </div>
+      <div className="w-screen min-h-screen bg-indigo-50">
+        <UserHeader />
         <div className="bg-indigo-50 px-10 py-10">
           <Header user={user} page="cameras" />
           <SummaryDevices devices={devices} />

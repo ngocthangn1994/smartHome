@@ -15,6 +15,7 @@ import SecuritySettings from "../components/SecuritySettings.tsx";
 import Integrations from "../components/Integrations.tsx";
 import BackupSystem from "../components/BackupSystem.tsx";
 import SettingsQuickActions from "../components/SettingsQuickActions.tsx";
+import UserHeader from "../../../components/layout/UserHeader.tsx";
 function SettingPage() {
   const [devices, setDevices] = useState<IDevice[]>([]);
   const [home, setHome] = useState<IHome>();
@@ -125,6 +126,7 @@ function SettingPage() {
   return (
     <>
       <div className="w-screen min-h-screen bg-indigo-50">
+        <UserHeader />
         <div className="bg-indigo-50 px-10 py-10">
           <Header user={user} page="settings" />
           <SummaryDevices devices={devices} />

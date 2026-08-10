@@ -12,7 +12,7 @@ import { useAuth } from "../../../context/AuthContext";
 import type { IAutomationRule, IAlert, IDevice } from "../../../types";
 import MenuList from "../../../components/layout/MenuList";
 import DashboardHeader from "../components/DashboardHeader";
-
+import UserHeader from "../../../components/layout/UserHeader";
 function Dashboard() {
   const [devices, setDevices] = useState<IDevice[]>([]);
   const [automationRules, setAutomationRules] = useState<IAutomationRule[]>([]);
