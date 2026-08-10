@@ -10,7 +10,7 @@ function DoorLock({ device }: DoorLockProp) {
 
   return (
     <>
-      <div className="flex flex-col justify-between">
+      <div className="flex flex-col h-[350px] justify-between">
         <div>
           <img src={smartHomeDoorLock} />
           <p className="text-green-600 font-bold">Locked</p>

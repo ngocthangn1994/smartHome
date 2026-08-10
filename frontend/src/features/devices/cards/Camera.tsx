@@ -16,10 +16,10 @@ function Camera({ device }: CameraProp) {
   const cameraImage = cameraShot.find((camera) => camera.area === device.area);
   return (
     <>
-      <div className="flex h-[350px] flex-col justify-between">
-        <div>
+      <div>
+        <div className="flex flex-col justify-between h-[350px]">
           <div>{<img className="rounded-xl" src={cameraImage?.img} />}</div>
-          <div className="flex gap-2 items-center mt-2 justify-center">
+          <div className="flex items-center gap-3 mb-3">
             <FaCircle className="text-orange-300" />
             <p className="text-slate-600">
               {device.state.motionDetected == false
@@ -27,13 +27,13 @@ function Camera({ device }: CameraProp) {
                 : "No Motion"}
             </p>
           </div>
+          <button
+            onClick={() => setControl(true)}
+            className="w-full rounded-xl border py-2 border-slate-200 shadow-sm"
+          >
+            View Live
+          </button>
         </div>
-        <button
-          onClick={() => setControl(true)}
-          className="w-full rounded-xl border py-2 border-slate-200 shadow-sm"
-        >
-          View Live
-        </button>
       </div>
       {control && (
         <CameraControl device={device} onClose={() => setControl(false)} />
