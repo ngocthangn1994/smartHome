@@ -4,7 +4,6 @@ import {
   FaSearchengin,
 } from "react-icons/fa6";
 import type { IUser } from "../../types";
-// import { useNavigate } from "react-router-dom";
 type PageName =
   | "dashboard"
   | "devices"
@@ -19,9 +18,7 @@ interface HeaderProps {
   user: IUser | null;
 }
 
-// import api from "../../api/api";
 function Header({ user, page }: HeaderProps) {
-  // const navigate = useNavigate();
   const headerGreeting = {
     dashboard: {
       greet: `Welcome back, ${user?.name ?? "User"}! 👋`,
@@ -72,22 +69,6 @@ function Header({ user, page }: HeaderProps) {
     },
   };
 
-  // const handleMenu = async (event: React.ChangeEvent<HTMLSelectElement>) => {
-  //   const value = event.target.value;
-
-  //   if (value === "profile") {
-  //     navigate("/settings");
-  //     return;
-  //   }
-  //   if (value === "dashboard") {
-  //     navigate("/dashboard");
-  //     return;
-  //   }
-  //   if (value === "logout") {
-  //     await api.logout();
-  //     navigate("/");
-  //   }
-  // };
   return (
     <>
       <div className="space-y-5 text-slate-600">

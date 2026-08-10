@@ -5,6 +5,8 @@ import { FaBell, FaGrav } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 import api from "../../../api/api";
 import SideBarHelper from "../../../components/layout/SideBarHelper";
+import { AiOutlineCloseCircle } from "react-icons/ai";
+
 function DashboardHeader() {
   const [isMenu, setIsMenu] = useState(false);
   const [isProfile, setIsProfile] = useState(false);
@@ -58,7 +60,14 @@ function DashboardHeader() {
         </div>
       </div>
       {isMenu && (
-        <div className="fixed top-0 left-0 h-screen w-[50%] bg-white shadow-xl z-50 xl:hidden">
+        <div className="fixed top-0 left-0 h-screen w-[55%] bg-white shadow-xl z-50 xl:hidden">
+          <button
+            type="button"
+            className="px-2 py-1"
+            onClick={() => setIsMenu(false)}
+          >
+            <AiOutlineCloseCircle className="w-10 h-10 text-blue-600 hover:textr-blue-900" />
+          </button>
           <SideBarHelper />
         </div>
       )}
