@@ -5,7 +5,6 @@ import {
   FaShieldHalved,
   FaGear,
   FaModx,
-  FaSketch,
 } from "react-icons/fa6";
 import { MdManageHistory } from "react-icons/md";
 import { HiBellAlert } from "react-icons/hi2";

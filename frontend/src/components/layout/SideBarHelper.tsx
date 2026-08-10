@@ -1,5 +1,4 @@
 import { FaSketch } from "react-icons/fa6";
-import Logo from "./Logo";
 import MenuList from "./MenuList";
 function SideBarHelper() {
   return (
