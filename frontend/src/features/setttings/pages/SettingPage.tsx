@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import api from "../../../api/api.ts";
 import Header from "../../../components/layout/Header.tsx";
 import SummaryDevices from "../../../features/dashboard/components/SummaryDevices.tsx";
-import SideBarHelper from "../../../components/layout/SideBarHelper.tsx";
 import { useAuth } from "../../../context/AuthContext.tsx";
 import type { IDevice, IHome } from "../../../types";
 import SettingsMenu from "../../../features/setttings/components/SettingsMenu.tsx";
