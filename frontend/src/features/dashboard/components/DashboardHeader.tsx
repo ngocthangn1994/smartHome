@@ -6,7 +6,11 @@ import { useNavigate } from "react-router-dom";
 import api from "../../../api/api";
 import SideBarHelper from "../../../components/layout/SideBarHelper";
 import { AiOutlineCloseCircle } from "react-icons/ai";
-
+import {
+  FaHouseChimneyUser,
+  FaAngleDown,
+  FaSearchengin,
+} from "react-icons/fa6";
 function DashboardHeader() {
   const [isMenu, setIsMenu] = useState(false);
   const [isProfile, setIsProfile] = useState(false);
@@ -41,6 +45,20 @@ function DashboardHeader() {
           <Logo />
         </div>
         <div className="flex items-center gap-3">
+          <div className="lg:grid grid-cols-2 gap-3 hidden ">
+            <div className="flex gap-3 items-center text-slate-600 border border-slate-200 px-2 py-2 rounded-2xl bg-white">
+              <FaHouseChimneyUser className="w-10 h-10" />
+              <span className="text-sm font-bold ">My Home</span>
+              <FaAngleDown />
+            </div>
+            <div className="flex justify-between border border-slate-200 bg-white px-5 py-2 rounded-2xl">
+              <input
+                className="outline-none text-sm"
+                placeholder="Search devices, rooms..."
+              />
+              <FaSearchengin className="w-10 h-10" />
+            </div>
+          </div>
           <button>
             <FaBell className="w-10 h-10 md:w-12 md:h-12 bg-white px-2 py-2 rounded-full shadow-sm ring-1 ring-indigo-200" />
           </button>

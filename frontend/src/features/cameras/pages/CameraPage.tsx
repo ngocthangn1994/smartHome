@@ -11,6 +11,7 @@ import RecentMotion from "../components/RecentMotion";
 import Recording from "../components/Recording";
 import QuickAction from "../components/QuickAction";
 import UserHeader from "../../../components/layout/UserHeader";
+import SideBarHelper from "../../../components/layout/SideBarHelper";
 function CameraPage() {
   const [devices, setDevices] = useState<IDevice[]>([]);
 
@@ -39,28 +40,33 @@ function CameraPage() {
   return (
     <>
       <div className="w-screen min-h-screen bg-indigo-50">
-        <UserHeader />
-        <div className="bg-indigo-50 px-10 py-10">
-          <Header user={user} page="cameras" />
-          <SummaryDevices devices={devices} />
-          <DeviceToolbar
-            selectedType={selectedType}
-            onFilterDevice={(type) => setSelectedType(type)}
-          />
-          <div className="grid grid-cols-[1.4fr_0.7fr] mt-5 gap-3">
-            <div className="space-y-5">
-              <DeviceList devices={camera} />
-            </div>
-            <div className="bg-white px-5 py-5 border border-slate-200 shadow-sm rounded-2xl text-slate-600 space-y-3">
-              <DeviceHealthOverview devices={devices} />
-              <div className="mt-5">
-                <RecentMotion />
-                <Recording />
+        <SideBarHelper />
+        <div className="grid lg:grid-cols-[0.3fr_1.7fr]">
+          <div className="hidden lg:block">
+            <UserHeader />
+          </div>
+          <div className="bg-indigo-50 px-10 py-10">
+            <Header user={user} page="cameras" />
+            <SummaryDevices devices={devices} />
+            <DeviceToolbar
+              selectedType={selectedType}
+              onFilterDevice={(type) => setSelectedType(type)}
+            />
+            <div className="grid grid-cols-[1.4fr_0.7fr] mt-5 gap-3">
+              <div className="space-y-5">
+                <DeviceList devices={camera} />
+              </div>
+              <div className="bg-white px-5 py-5 border border-slate-200 shadow-sm rounded-2xl text-slate-600 space-y-3">
+                <DeviceHealthOverview devices={devices} />
+                <div className="mt-5">
+                  <RecentMotion />
+                  <Recording />
+                </div>
               </div>
             </div>
-          </div>
-          <div className="mt-5">
-            <QuickAction />
+            <div className="mt-5">
+              <QuickAction />
+            </div>
           </div>
         </div>
       </div>

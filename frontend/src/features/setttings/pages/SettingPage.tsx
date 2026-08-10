@@ -15,6 +15,7 @@ import Integrations from "../components/Integrations.tsx";
 import BackupSystem from "../components/BackupSystem.tsx";
 import SettingsQuickActions from "../components/SettingsQuickActions.tsx";
 import UserHeader from "../../../components/layout/UserHeader.tsx";
+import SideBarHelper from "../../../components/layout/SideBarHelper.tsx";
 function SettingPage() {
   const [devices, setDevices] = useState<IDevice[]>([]);
   const [home, setHome] = useState<IHome>();
@@ -126,41 +127,47 @@ function SettingPage() {
     <>
       <div className="w-screen min-h-screen bg-indigo-50">
         <UserHeader />
-        <div className="bg-indigo-50 px-10 py-10 space-y-3">
-          <Header user={user} page="settings" />
-          <SummaryDevices devices={devices} />
-          <div className="grid grid-cols-1 md:grid-cols-[1.4fr_0.7fr] mt-5 gap-3">
-            <div className="space-y-5">
-              <SettingsMenu />
-              <div className="grid grid-cols-1 md:flex gap-3">
-                <ProfileInformation
-                  name={name}
-                  email={email}
-                  phone={phone}
-                  onSave={onSave}
-                  setName={setName}
-                  setEmail={setEmail}
-                  setPhone={setPhone}
-                />
-                <HomePreferences
-                  homeName={homeName}
-                  address={address}
-                  setHomeName={setHomeName}
-                  setAddress={setAddress}
-                  homeSave={homeSave}
-                />
-                <NotificationPreferences />
+        <div className="grid lg:grid-cols-[0.3fr_1.7fr]">
+          <div className="hidden lg:block">
+            <SideBarHelper />
+          </div>
+
+          <div className="bg-indigo-50 px-10 py-10 space-y-3">
+            <Header user={user} page="settings" />
+            <SummaryDevices devices={devices} />
+            <div className="grid grid-cols-1 md:grid-cols-[1.4fr_0.7fr] mt-5 gap-3">
+              <div className="space-y-5">
+                <SettingsMenu />
+                <div className="grid grid-cols-1 md:flex gap-3">
+                  <ProfileInformation
+                    name={name}
+                    email={email}
+                    phone={phone}
+                    onSave={onSave}
+                    setName={setName}
+                    setEmail={setEmail}
+                    setPhone={setPhone}
+                  />
+                  <HomePreferences
+                    homeName={homeName}
+                    address={address}
+                    setHomeName={setHomeName}
+                    setAddress={setAddress}
+                    homeSave={homeSave}
+                  />
+                  <NotificationPreferences />
+                </div>
+                <div className="grid grid-cols-1 md:flex gap-3">
+                  <SecuritySettings />
+                  <Integrations />
+                  <BackupSystem />
+                </div>
               </div>
-              <div className="grid grid-cols-1 md:flex gap-3">
-                <SecuritySettings />
-                <Integrations />
-                <BackupSystem />
+              <div className="space-y-5">
+                <SettingsOverview />
+                <SettingRecentActivity />
+                <SettingsQuickActions />
               </div>
-            </div>
-            <div className="space-y-5">
-              <SettingsOverview />
-              <SettingRecentActivity />
-              <SettingsQuickActions />
             </div>
           </div>
         </div>
