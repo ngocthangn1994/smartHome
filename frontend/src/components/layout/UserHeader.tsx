@@ -34,14 +34,14 @@ function UserHeader() {
   };
   return (
     <>
-      <div className="flex items-center bg-white p-2 justify-between">
+      <div className="flex items-center bg-white px-5 justify-between">
         <div className="flex">
           <button
             onClick={() => setIsMenu(!isMenu)}
             type="button"
             className="shrink-0 xl:hidden"
           >
-            <TiThMenuOutline className="w-10 h-10" />
+            <TiThMenuOutline className="w-8 h-8" />
           </button>
           <Logo />
         </div>

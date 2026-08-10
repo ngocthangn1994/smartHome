@@ -33,7 +33,7 @@ function DashboardHeader() {
   };
   return (
     <>
-      <div className="flex items-center bg-white p-2 justify-between">
+      <div className="flex items-center bg-white px-5 justify-between">
         <div className="flex">
           <button
             onClick={() => setIsMenu(!isMenu)}
