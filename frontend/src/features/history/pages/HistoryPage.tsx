@@ -27,7 +27,7 @@ function HistoryPage() {
     <>
       <div className="w-screen min-h-screen bg-indigo-50">
         <UserHeader />
-        <div className="bg-indigo-50 px-10 py-10">
+        <div className="bg-indigo-50 px-10 py-10 space-y-3">
           <Header user={user} page="history" />
           <SummaryDevices devices={devices} />
           <HistoryMenu />

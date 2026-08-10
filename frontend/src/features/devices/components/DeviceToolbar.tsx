@@ -38,7 +38,7 @@ function DeviceToolbar({
   const [control, setControl] = useState(false);
   return (
     <>
-      <div className="grid grid-cols-[1.3fr_0.7fr] mt-5 gap-1">
+      <div className="grid grid-cols-1 md:grid-cols-[1.3fr_0.7fr] mt-5 gap-1">
         <div className="bg-white border border-slate-200 rounded-2xl shadow-sm px-3 py-5 flex gap-7">
           {deviceToolBar.map((item) => (
             <button
