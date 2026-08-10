@@ -11,7 +11,7 @@ import SecurityHealthOverview from "../../security/components/SecurityHealthOver
 import SecurityRecentActivity from "../../security/components/SecurityRecentActivity";
 import SecurityQuickAction from "../../security/components/SecurityQuickAction";
 import type { securityType } from "../components/SecurityMenu";
-
+import UserHeader from "../../../components/layout/UserHeader";
 function SecurityPage() {
   const [devices, setDevices] = useState<IDevice[]>([]);
 
@@ -37,6 +37,7 @@ function SecurityPage() {
   return (
     <>
       <div className="w-screen min-h-screen bg-indigo-50">
+        <UserHeader />
         <div className="bg-indigo-50 px-10 py-10 space-y-5">
           <Header user={user} page="history" />
           <SummaryDevices devices={devices} />

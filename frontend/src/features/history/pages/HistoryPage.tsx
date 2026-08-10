@@ -9,6 +9,7 @@ import HistoryMenu from "../components/HistoryMenu";
 import HistoryList from "../components/HistoryList";
 import HistoryOverview from "../components/HistoryOverview";
 import HistoryRecentActivity from "../components/HisrtoryRecentActivity";
+import UserHeader from "../../../components/layout/UserHeader";
 function HistoryPage() {
   const [devices, setDevices] = useState<IDevice[]>([]);
 
@@ -25,6 +26,7 @@ function HistoryPage() {
   return (
     <>
       <div className="w-screen min-h-screen bg-indigo-50">
+        <UserHeader />
         <div className="bg-indigo-50 px-10 py-10">
           <Header user={user} page="history" />
           <SummaryDevices devices={devices} />
