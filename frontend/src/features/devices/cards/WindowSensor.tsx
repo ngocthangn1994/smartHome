@@ -10,7 +10,7 @@ function WindowSensor({ device }: WindowSensorProps) {
 
   return (
     <>
-      <div className="flex flex-col justify-between h-[350px]">
+      <div className="flex flex-col justify-between h-[350]">
         <div>
           <img src={smartHomeWindowSensor} />
           <p className="text-green-600 font-bold">Locked</p>
