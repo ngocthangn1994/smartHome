@@ -45,9 +45,9 @@ function AlertPage() {
           <div className="bg-indigo-50 px-10 py-10 space-y-3">
             <Header user={user} page="alerts" />
             <SummaryDevices devices={devices} />
-            <div>
+            <div className="space-y-3">
               <AlertMenu />
-              <div className="gap-3">
+              <div className="gap-3 space-y-3">
                 <AlertList />
                 <div>
                   <AlertOverview alerts={alerts} />
