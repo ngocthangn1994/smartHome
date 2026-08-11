@@ -117,8 +117,8 @@ function AutomationList({
                 </div>
               </div>
             </div>
-            <div className="flex justify-between items-center">
-              <div className="border border-slate-200 rounded-xl px-5 py-2 flex items-center gap-3 w-lg justify-between">
+            <div className="grid grid-cols-1 xl:flex justify-between items-center">
+              <div className="border border-slate-200 rounded-xl px-5 py-2 grid xl:flex items-center gap-3 w-lg justify-between">
                 <div className="flex items-center gap-3">
                   <MdDevices className="w-8 h-8 bg-blue-100 p-2 rounded-xl" />
                   <div>
@@ -139,7 +139,7 @@ function AutomationList({
               <div>
                 <FaArrowRight />
               </div>
-              <div className="border border-slate-200 rounded-xl px-5 py-2 flex items-center gap-3 w-lg justify-between">
+              <div className="border border-slate-200 rounded-xl px-5 py-2 grid xl:flex items-center gap-3 w-lg justify-between">
                 <div className="flex items-center gap-3">
                   <MdDevices className="w-8 h-8 bg-blue-100 p-2 rounded-xl" />
                   <div>
