@@ -55,15 +55,15 @@ function AutomationPage() {
     <>
       <div className="w-screen min-h-screen bg-indigo-50">
         <UserHeader />
-        <div className="grid grid-cols-1 xl:grid-cols-[0.3fr_1.7fr]">
+        <div className="grid grid-cols-1 xl:grid-cols-[1.7fr_0.3fr]">
           <div className="hidden xl:block">
             <SideBarHelper />
           </div>
-          <div className="bg-indigo-50 px-10 py-10 space-y-3">
+          <div className="bg-indigo-50 px-3 py-3 space-y-3">
             <Header user={user} page="automations" />
             <SummaryDevices devices={devices} />
             <AutomationMenu />
-            <div className="grid grid-cols-1 md:grid-cols-[1.5fr_0.5fr] mt-5 gap-5">
+            <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr] mt-5 gap-5">
               <div>
                 <AutomationList
                   automationRules={automationRules}

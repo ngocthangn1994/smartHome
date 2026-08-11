@@ -121,7 +121,7 @@ function AlertList() {
   return (
     <>
       <div className="bg-white px-5 py-5 rounded-2xl mt-5 text-slate-600">
-        <div className="grid grid-cols-6 gap-3">
+        <div className="grid grid-cols-2 lg:grid-cols-6 gap-3">
           <p>Alert</p>
           <p>Device/Location</p>
           <p>Description</p>
@@ -131,7 +131,7 @@ function AlertList() {
         </div>
         <div className="mt-3">
           {list.map((item) => (
-            <div className="grid grid-cols-6 gap-1">
+            <div className="grid grid-cols-2 items-center gap-3 md:grid-cols-3 xl:grid-cols-6 gap-1">
               <div className="flex items-center gap-3">
                 <p>{item.iconName}</p>
                 <p className="font-medium">{item.name}</p>
