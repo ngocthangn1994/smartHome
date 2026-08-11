@@ -27,7 +27,20 @@ function SecurityPage() {
     loadData();
   }, []);
 
-  const filterDevice = devices.filter((device) => {
+  const securityDevices = devices.filter((device) => {
+    if (
+      device.deviceType === "camera" ||
+      device.deviceType === "door_bell" ||
+      device.deviceType === "door_lock" ||
+      device.deviceType === "window_sensor" ||
+      device.deviceType === "smoke_detector" ||
+      device.deviceType === "water_leak_sensor" ||
+      device.deviceType === "motion_sensor"
+    ) {
+      return device;
+    }
+  });
+  const filterDevice = securityDevices.filter((device) => {
     if (selectedType === "all") {
       return true;
     }
