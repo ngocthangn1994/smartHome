@@ -57,7 +57,7 @@ function SecurityPage() {
           </div>
 
           <div className="bg-indigo-50 px-10 py-10 space-y-3">
-            <Header user={user} page="history" />
+            <Header user={user} page="security" />
             <SummaryDevices devices={devices} />
             <SecurityMenu
               selectedType={selectedType}

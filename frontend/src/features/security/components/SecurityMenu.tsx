@@ -37,8 +37,8 @@ function SecurityMenu({ selectedType, onFilterDevice }: securityMenuProps) {
   ];
   return (
     <>
-      <div className="bg-white p-5 rounded-2xl mt-5 text-slate-600 grid grid-cols-[1.2fr_0.8fr] gap-10">
-        <div className="flex gap-3 items-center justify-between">
+      <div className="text-slate-600 grid grid-cols-1 xl:grid-cols-[1.2fr_0.8fr] gap-5">
+        <div className="grid grid-cols-2 gap-3 items-center justify-between bg-white p-5 rounded-xl shadow-sm">
           {menu.map((item) => (
             <button
               key={item.type}
@@ -54,8 +54,7 @@ function SecurityMenu({ selectedType, onFilterDevice }: securityMenuProps) {
             </button>
           ))}
         </div>
-
-        <div className="flex gap-3 justify-between">
+        <div className="grid grid-cols-1 items-center gap-3 lg:grid-cols-2 justify-between bg-white p-2 rounded-xl">
           <div className="flex gap-3 border border-slate-200 rounded-2xl p-2">
             <div className="flex items-center border gap-2 p-2 border-slate-200 rounded-2xl">
               <FaCircle className="text-green-600" />
@@ -73,7 +72,7 @@ function SecurityMenu({ selectedType, onFilterDevice }: securityMenuProps) {
 
           <div>
             <button className="bg-blue-600 text-white px-10 py-2 rounded-2xl font-bold text-xl">
-              + Add Sensor
+              + Add Security
             </button>
           </div>
         </div>
