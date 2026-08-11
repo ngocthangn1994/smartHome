@@ -34,10 +34,10 @@ function QuickAction() {
   ];
   return (
     <>
-      <div className="bg-white rounded-2xl px-5 py-5 flex justify-between grid grid-cols-[1.3fr_0.7fr]">
+      <div className="grid grid-cols-1 bg-white rounded-2xl px-5 py-5">
         <div>
           <p className="text-xl font-bold">Quick Actions</p>
-          <div className="flex justify-between px-10 mt-5">
+          <div className="grid grid-cols-2 xl:grid-cols-4 px-10 mt-5">
             {actions.map((item) => (
               <div className="text-slate-600">
                 <div className="flex items-center gap-3">

@@ -3,7 +3,7 @@ import Login from "../src/features/auth/pages/Login";
 import Register from "../src/features/auth/pages/Register";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 import DevicesPage from "../src/features/devices/pages/DevicesPage";
-import CameraPage from "../src/features/devices/pages/DevicesPage";
+import CameraPage from "../src/features/cameras/pages/CameraPage";
 import AutomationPage from "../src/features/automations/pages/AutomationPage";
 import EnergyPage from "./features/energy/EnergyPage";
 import SettingPage from "../src/features/setttings/pages/SettingPage";

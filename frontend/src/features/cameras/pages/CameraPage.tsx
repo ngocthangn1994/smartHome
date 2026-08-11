@@ -24,7 +24,6 @@ function CameraPage() {
         const [devicesResponse] = await Promise.all([api.getDevices()]);
 
         setDevices(devicesResponse.data ?? []);
-        // Ensure automationResponse.data is an array before setting state
       } catch (error) {
         console.error(error);
       }
@@ -33,17 +32,17 @@ function CameraPage() {
     loadData();
   }, []);
 
-  const camera = devices.filter(
+  const cameras = devices.filter(
     (device) =>
       device.deviceType === "door_bell" || device.deviceType === "camera",
   );
   return (
     <>
       <div className="w-screen min-h-screen bg-indigo-50">
-        <SideBarHelper />
-        <div className="grid lg:grid-cols-[0.3fr_1.7fr]">
-          <div className="hidden lg:block">
-            <UserHeader />
+        <UserHeader />
+        <div className="grid grid-cols-1 xl:grid-cols-[0.3fr_1.7fr]">
+          <div className="hidden xl:block">
+            <SideBarHelper />
           </div>
           <div className="bg-indigo-50 px-10 py-10">
             <Header user={user} page="cameras" />
@@ -52,9 +51,9 @@ function CameraPage() {
               selectedType={selectedType}
               onFilterDevice={(type) => setSelectedType(type)}
             />
-            <div className="grid grid-cols-[1.4fr_0.7fr] mt-5 gap-3">
+            <div className="grid xl:grid-cols-[1.4fr_0.7fr] mt-5 gap-3">
               <div className="space-y-5">
-                <DeviceList devices={camera} />
+                <DeviceList devices={cameras} />
               </div>
               <div className="bg-white px-5 py-5 border border-slate-200 shadow-sm rounded-2xl text-slate-600 space-y-3">
                 <DeviceHealthOverview devices={devices} />
