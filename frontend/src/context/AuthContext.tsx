@@ -5,7 +5,7 @@ import { useEffect } from "react";
 type AuthContextType = {
   user: IUser | null;
   login: (email: string, passWord: string) => Promise<void>;
-  register: (email: string, passWord: string, name: string) => Promise<void>;
+  register: (name: string, email: string, passWord: string) => Promise<void>;
   logout: () => void;
   isLoading: boolean;
 };
@@ -37,9 +37,15 @@ export function AuthProvider({ children }: AuthProviderProps) {
     loadCurrentUser();
   }, []);
 
-  const register = async (email: string, passWord: string, name: string) => {
+  const register = async (name: string, email: string, passWord: string) => {
     const response = await api.register(name, email, passWord);
-    setUser((response.data as IUser) ?? null);
+
+    const registerData = response.data as {
+      user: IUser;
+      token: string;
+    };
+    setUser(registerData.user);
+    setIsLoading(false);
   };
 
   const login = async (email: string, passWord: string) => {

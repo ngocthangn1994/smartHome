@@ -19,17 +19,30 @@ function Register() {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [passWord, setPassWord] = useState("");
+  const [confirmPassWord, setConfirmPassWord] = useState("");
   const [showPassWord, setShowPassWord] = useState(false);
   const [showConfirmPassWord, setShowConfirmPassWord] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setErrorMessage("");
+    if (passWord !== confirmPassWord) {
+      setErrorMessage("Passwords do not match.");
+      return;
+    }
+    setIsLoading(true);
     try {
-      e.preventDefault();
       await register(name, email, passWord);
       navigate("/dashboard");
     } catch (error) {
-      throw new Error("Can't register");
+      setErrorMessage(
+        error instanceof Error ? error.message : "Can't register",
+      );
+    } finally {
+      setIsLoading(false);
     }
   };
   return (
@@ -193,6 +206,8 @@ function Register() {
                     <FaLock className="w-6 h-6" />
                     <input
                       className="text-xl w-full px-4 py-3.5 text-slate-900 outline-none transition placeholder:text-slate-400"
+                      value={confirmPassWord}
+                      onChange={(e) => setConfirmPassWord(e.target.value)}
                       type={showConfirmPassWord ? "text" : "password"}
                       required
                       placeholder="create your password"
@@ -249,12 +264,18 @@ function Register() {
                     </NavLink>
                   </span>
                 </label>
+                {errorMessage && (
+                  <p className="rounded-2xl border border-red-200 bg-red-50 px-4 py-3 text-sm font-medium text-red-600">
+                    {errorMessage}
+                  </p>
+                )}
                 <div>
                   <button
                     type="submit"
+                    disabled={isLoading}
                     className="bg-blue-500 w-full rounded-2xl px-2 py-2 border border-slate-200 text-white font-semibold text-[1.2rem] hover:bg-blue-700"
                   >
-                    Create account
+                    {isLoading ? "Creating account" : "Create account"}
                   </button>
                   <div className="flex gap-3 mt-5 justify-center">
                     <p>Already have account!</p>
