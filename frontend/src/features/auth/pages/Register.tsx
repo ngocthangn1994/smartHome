@@ -8,6 +8,7 @@ import { NavLink } from "react-router-dom";
 import {
   FaEnvelope,
   FaLock,
+  FaEye,
   FaEyeLowVision,
   FaCircleUser,
   FaCheck,
@@ -18,6 +19,8 @@ function Register() {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [passWord, setPassWord] = useState("");
+  const [showPassWord, setShowPassWord] = useState(false);
+  const [showConfirmPassWord, setShowConfirmPassWord] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -153,11 +156,21 @@ function Register() {
                       className="text-xl w-full px-4 py-3.5 text-slate-900 outline-none transition placeholder:text-slate-400"
                       value={passWord}
                       onChange={(e) => setPassWord(e.target.value)}
-                      type="password"
+                      type={showPassWord ? "text" : "password"}
                       required
                       placeholder="create your password"
                     />
-                    <FaEyeLowVision className="w-6 h-6" />
+                    <button
+                      type="button"
+                      onClick={() => setShowPassWord(!showPassWord)}
+                      className="cursor-pointer"
+                    >
+                      {showPassWord ? (
+                        <FaEye className="w-6 h-6" />
+                      ) : (
+                        <FaEyeLowVision className="w-6 h-6" />
+                      )}
+                    </button>
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
@@ -180,11 +193,21 @@ function Register() {
                     <FaLock className="w-6 h-6" />
                     <input
                       className="text-xl w-full px-4 py-3.5 text-slate-900 outline-none transition placeholder:text-slate-400"
-                      type="password"
+                      type={showConfirmPassWord ? "text" : "password"}
                       required
                       placeholder="create your password"
                     />
-                    <FaEyeLowVision className="w-6 h-6" />
+                    <button
+                      type="button"
+                      onClick={() => setShowConfirmPassWord(!showConfirmPassWord)}
+                      className="cursor-pointer"
+                    >
+                      {showConfirmPassWord ? (
+                        <FaEye className="w-6 h-6" />
+                      ) : (
+                        <FaEyeLowVision className="w-6 h-6" />
+                      )}
+                    </button>
                   </div>
                 </div>
                 <div className="bg-blue-50 py-2 px-2 space-y-1 text-slate-600 rounded-2xl shadow-sm">

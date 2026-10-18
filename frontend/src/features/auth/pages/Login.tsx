@@ -4,7 +4,13 @@ import { Link, useNavigate } from "react-router-dom";
 import smarthomeLogin from "../../../assets/landing/smarthome_login.png";
 import smartHomeLogo from "../../../assets/branding/smarthome_logo.png";
 import { FaMobileAlt, FaDesktop, FaRobot, FaBell } from "react-icons/fa";
-import { FaEnvelope, FaLock, FaEyeLowVision, FaGoogle } from "react-icons/fa6";
+import {
+  FaEnvelope,
+  FaLock,
+  FaEye,
+  FaEyeLowVision,
+  FaGoogle,
+} from "react-icons/fa6";
 import { NavLink } from "react-router-dom";
 function Login() {
   const { login } = useAuth();
@@ -12,6 +18,7 @@ function Login() {
   const [email, setEmail] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [passWord, setPassWord] = useState("");
+  const [showPassWord, setShowPassWord] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -134,11 +141,21 @@ function Login() {
                         className="w-full px-4 py-3.5 text-slate-600 text-xl outline-none placeholder:text-slate-400"
                         value={passWord}
                         onChange={(e) => setPassWord(e.target.value)}
-                        type="password"
+                        type={showPassWord ? "text" : "password"}
                         required
                       />
                     </div>
-                    <FaEyeLowVision className="text-slate-400" />
+                    <button
+                      type="button"
+                      onClick={() => setShowPassWord(!showPassWord)}
+                      className="cursor-pointer"
+                    >
+                      {showPassWord ? (
+                        <FaEye className="text-slate-400" />
+                      ) : (
+                        <FaEyeLowVision className="text-slate-400" />
+                      )}
+                    </button>
                   </div>
                 </div>
                 <div>
