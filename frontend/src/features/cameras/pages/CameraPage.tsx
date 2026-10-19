@@ -38,34 +38,32 @@ function CameraPage() {
   );
   return (
     <>
-      <div className="w-screen min-h-screen bg-indigo-50">
+      <div className="w-full min-h-screen bg-indigo-50">
         <UserHeader />
-        <div className="grid grid-cols-1 xl:grid-cols-[0.3fr_1.7fr]">
+        <div className="grid grid-cols-1 xl:grid-cols-[280px_minmax(0,1fr)]">
           <div className="hidden xl:block">
             <SideBarHelper />
           </div>
-          <div className="bg-indigo-50 px-10 py-10">
+          <div className="min-w-0 bg-indigo-50 px-4 py-6 sm:px-6 lg:px-10 lg:py-10 space-y-5">
             <Header user={user} page="cameras" />
             <SummaryDevices devices={devices} />
             <DeviceToolbar
               selectedType={selectedType}
               onFilterDevice={(type) => setSelectedType(type)}
             />
-            <div className="grid xl:grid-cols-[1.4fr_0.7fr] mt-5 gap-3">
-              <div className="space-y-5">
+            <div className="grid grid-cols-1 2xl:grid-cols-[1.4fr_0.7fr] gap-5">
+              <div className="min-w-0 space-y-5">
                 <DeviceList devices={cameras} />
               </div>
-              <div className="bg-white px-5 py-5 border border-slate-200 shadow-sm rounded-2xl text-slate-600 space-y-3">
+              <div className="h-fit bg-white px-4 py-4 sm:px-5 sm:py-5 border border-slate-200 shadow-sm rounded-2xl text-slate-600 grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-1 gap-5">
                 <DeviceHealthOverview devices={devices} />
-                <div className="mt-5">
+                <div>
                   <RecentMotion />
                   <Recording />
                 </div>
               </div>
             </div>
-            <div className="mt-5">
-              <QuickAction />
-            </div>
+            <QuickAction />
           </div>
         </div>
       </div>

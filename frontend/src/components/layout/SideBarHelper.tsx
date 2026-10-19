@@ -17,7 +17,7 @@ function SideBarHelper() {
             <p>Discover smart automations</p>
             <p> to save time and energy.</p>
           </div>
-          <button className="bg-blue-600 text-white font-semibold px-10 py-3 rounded-xl mt-5">
+          <button className="w-full bg-blue-600 text-white font-semibold px-4 py-3 rounded-xl mt-5">
             Explore Automations
           </button>
         </div>

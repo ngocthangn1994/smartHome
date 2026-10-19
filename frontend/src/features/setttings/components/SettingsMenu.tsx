@@ -16,9 +16,12 @@ function SettingsMenu() {
   ];
   return (
     <>
-      <div className="bg-white rounded-2xl px-5 py-5 grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-5 justify-between">
+      <div className="bg-white rounded-2xl p-4 sm:p-5 grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-3">
         {menu.map((item) => (
-          <div className="flex gap-2 items-center hover:text-blue-600">
+          <div
+            key={item.name}
+            className="flex gap-2 items-center hover:text-blue-600"
+          >
             <span>{item.icon}</span>
             <p>{item.name}</p>
           </div>

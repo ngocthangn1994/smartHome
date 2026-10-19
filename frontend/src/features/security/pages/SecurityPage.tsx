@@ -49,23 +49,25 @@ function SecurityPage() {
 
   return (
     <>
-      <div className="w-screen min-h-screen bg-indigo-50">
+      <div className="w-full min-h-screen bg-indigo-50">
         <UserHeader />
-        <div className="grid grid-cols-1 xl:grid-cols-[0.3fr_1.7fr]">
+        <div className="grid grid-cols-1 xl:grid-cols-[280px_minmax(0,1fr)]">
           <div className="hidden xl:block">
             <SideBarHelper />
           </div>
 
-          <div className="bg-indigo-50 px-10 py-10 space-y-3">
+          <div className="min-w-0 bg-indigo-50 px-4 py-6 sm:px-6 lg:px-10 lg:py-10 space-y-5">
             <Header user={user} page="security" />
             <SummaryDevices devices={devices} />
             <SecurityMenu
               selectedType={selectedType}
               onFilterDevice={setSelectedType}
             />
-            <div className="grid grid-cols-1 md:grid-cols-[1.5fr_0.5fr] gap-2">
-              <DeviceList devices={filterDevice} />
-              <div>
+            <div className="grid grid-cols-1 2xl:grid-cols-[1.5fr_0.5fr] gap-5">
+              <div className="min-w-0">
+                <DeviceList devices={filterDevice} />
+              </div>
+              <div className="grid grid-cols-1 lg:grid-cols-3 2xl:grid-cols-1 gap-5 h-fit">
                 <SecurityHealthOverview devices={devices} />
                 <SecurityRecentActivity />
                 <SecurityQuickAction />

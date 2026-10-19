@@ -120,8 +120,8 @@ function HistoryList() {
   ];
   return (
     <>
-      <div className="bg-white px-5 py-5 rounded-2xl mt-5 text-slate-600">
-        <div className="grid grid-cols-6 gap-3">
+      <div className="min-w-0 bg-white p-4 sm:p-5 rounded-2xl text-slate-600 overflow-x-auto">
+        <div className="min-w-[760px] grid grid-cols-6 gap-3 pb-3 border-b border-slate-200 font-bold text-slate-900">
           <p>Alert</p>
           <p>Device/Location</p>
           <p>Description</p>
@@ -129,9 +129,12 @@ function HistoryList() {
           <p>Status</p>
           <p>Time</p>
         </div>
-        <div className="mt-3">
-          {list.map((item) => (
-            <div className="grid grid-cols-6 gap-1">
+        <div className="min-w-[760px] divide-y divide-slate-100">
+          {list.map((item, index) => (
+            <div
+              key={index}
+              className="grid grid-cols-6 items-center gap-3 py-3"
+            >
               <div className="flex items-center gap-3">
                 <p>{item.iconName}</p>
                 <p className="font-medium">{item.name}</p>

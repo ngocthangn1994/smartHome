@@ -4,11 +4,11 @@ function Recording() {
   return (
     <>
       <div className="mt-5 text-slate-600">
-        <div className="flex justify-between items-center">
+        <div className="flex justify-between items-center gap-3">
           <p className="text-xl font-bold">Storage & Recording</p>
           <p className="text-blue-600">Settings</p>
         </div>
-        <div className="space-y-3">
+        <div className="space-y-3 mt-3">
           <p className="font-bold">Cloud Storage</p>
           <div className="flex justify-between">
             <p>128 GB of 200 GB used</p>

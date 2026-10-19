@@ -10,12 +10,15 @@ function DoorLock({ device }: DoorLockProp) {
 
   return (
     <>
-      <div className="flex flex-col h-[350px] justify-between">
+      <div className="flex flex-1 flex-col justify-between gap-3">
         <div>
-          <img src={smartHomeDoorLock} />
+          <img
+            className="mx-auto w-full max-h-56 object-contain"
+            src={smartHomeDoorLock}
+          />
           <p className="text-green-600 font-bold">Locked</p>
         </div>
-        <div className="text-center mt-10">
+        <div className="text-center">
           <button
             onClick={() => setControl(true)}
             className="border w-full rounded-2xl border-slate-200 shadow-sm py-2 text-blue-600 font-bold hover:bg-blue-600 hover:text-white"

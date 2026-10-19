@@ -51,7 +51,7 @@ function AutomationHealthOverview({
   ];
   return (
     <>
-      <div className="bg-white p-5 rounded-2xl">
+      <div className="bg-white p-4 sm:p-5 rounded-2xl">
         <p className="text-xl font-bold">Automation Health Overview</p>
         <div className="grid sm:grid-cols-[auto_1fr] gap-5 items-center text-center mt-5">
           <div className="flex justify-center sm:justify-start">

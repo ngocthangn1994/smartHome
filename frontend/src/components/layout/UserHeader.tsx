@@ -34,8 +34,8 @@ function UserHeader() {
   };
   return (
     <>
-      <div className="flex items-center bg-white px-5 justify-between">
-        <div className="flex">
+      <div className="flex items-center gap-3 bg-white px-3 sm:px-5 justify-between">
+        <div className="flex items-center gap-2 min-w-0">
           <button
             onClick={() => setIsMenu(!isMenu)}
             type="button"
@@ -46,26 +46,26 @@ function UserHeader() {
           <Logo />
         </div>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2 sm:gap-3 shrink-0">
           <div className="lg:grid grid-cols-2 gap-3 hidden ">
             <div className="flex gap-3 items-center text-slate-600 border border-slate-200 px-2 py-2 rounded-2xl bg-white">
-              <FaHouseChimneyUser className="w-10 h-10" />
+              <FaHouseChimneyUser className="w-8 h-8 shrink-0" />
               <span className="text-sm font-bold ">My Home</span>
               <FaAngleDown />
             </div>
-            <div className="flex justify-between border border-slate-200 bg-white px-5 py-2 rounded-2xl">
+            <div className="flex items-center justify-between gap-2 border border-slate-200 bg-white px-4 py-2 rounded-2xl">
               <input
-                className="outline-none text-sm"
+                className="w-full min-w-0 outline-none text-sm"
                 placeholder="Search devices, rooms..."
               />
-              <FaSearchengin className="w-10 h-10" />
+              <FaSearchengin className="w-8 h-8 shrink-0" />
             </div>
           </div>
           <button>
-            <FaBell className="w-10 h-10 md:w-12 md:h-12 bg-white px-2 py-2 rounded-full shadow-sm ring-1 ring-indigo-200" />
+            <FaBell className="w-9 h-9 md:w-12 md:h-12 bg-white px-2 py-2 rounded-full shadow-sm ring-1 ring-indigo-200" />
           </button>
           <button onClick={() => setIsProfile(!isProfile)}>
-            <FaGrav className="w-10 h-10" />
+            <FaGrav className="w-9 h-9 md:w-10 md:h-10" />
           </button>
           {isProfile === true && (
             <select
@@ -80,13 +80,13 @@ function UserHeader() {
         </div>
       </div>
       {isMenu && (
-        <div className="fixed top-0 left-0 h-screen w-[55%] bg-white shadow-xl z-50 xl:hidden">
+        <div className="fixed top-0 left-0 h-screen w-[80%] max-w-xs overflow-y-auto bg-white shadow-xl z-50 xl:hidden">
           <button
             type="button"
             className="px-2 py-1"
             onClick={() => setIsMenu(false)}
           >
-            <AiOutlineCloseCircle className="w-10 h-10 text-blue-600 hover:textr-blue-900" />
+            <AiOutlineCloseCircle className="w-10 h-10 text-blue-600 hover:text-blue-900" />
           </button>
           <SideBarHelper />
         </div>

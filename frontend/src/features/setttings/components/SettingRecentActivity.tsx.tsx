@@ -45,19 +45,22 @@ function SettingRecentActivity() {
 
   return (
     <>
-      <div className="bg-white rounded-2xl px-5 py-5 flex flex-col justify-between">
+      <div className="h-full bg-white rounded-2xl p-4 sm:p-5 flex flex-col gap-3 text-slate-600">
         <div className="flex justify-between items-center">
           <p className="font-bold text-xl">Recent Account Activity</p>
           <p className="text-blue-600">View All</p>
         </div>
-        <div className="space-y-1 mt-1">
+        <div className="space-y-3">
           {recentActivity.map((item) => (
-            <div className="flex justify-between items-center">
-              <div className="flex gap-2 items-center">
+            <div
+              key={item.name}
+              className="flex justify-between items-center gap-3"
+            >
+              <div className="flex gap-2 items-center min-w-0">
                 <span>{item.icon}</span>
                 <p>{item.name}</p>
               </div>
-              <p>{item.time}</p>
+              <p className="shrink-0 whitespace-nowrap">{item.time}</p>
             </div>
           ))}
         </div>

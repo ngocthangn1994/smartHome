@@ -13,9 +13,12 @@ function SmartLight({ device }: SmartLightProp) {
 
   return (
     <>
-      <div className="flex flex-col h-[350px] justify-between text-slate-600">
+      <div className="flex flex-1 flex-col justify-between gap-3 text-slate-600">
         <div>
-          <img src={smartHomeSmartLight} />
+          <img
+            className="mx-auto w-full max-h-56 object-contain"
+            src={smartHomeSmartLight}
+          />
           <p className="text-green-600 font-bold">On</p>
         </div>
         <div className="flex items-center gap-3">

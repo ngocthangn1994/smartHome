@@ -34,10 +34,10 @@ function QuickAction() {
   ];
   return (
     <>
-      <div className="grid grid-cols-1 bg-white rounded-2xl px-5 py-5">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 bg-white rounded-2xl p-4 sm:p-5 text-slate-600">
         <div>
           <p className="text-xl font-bold">Quick Actions</p>
-          <div className="grid grid-cols-2 xl:grid-cols-4 px-10 mt-5">
+          <div className="grid grid-cols-2 gap-5 mt-5">
             {actions.map((item) => (
               <div className="text-slate-600">
                 <div className="flex items-center gap-3">
@@ -51,8 +51,8 @@ function QuickAction() {
             ))}
           </div>
         </div>
-        <div className="border-l border-slate-200 ml-5 px-2">
-          <div className="flex justify-between w-full items-center">
+        <div className="min-w-0 lg:border-l border-slate-200 lg:pl-5">
+          <div className="flex flex-wrap justify-between gap-3 w-full items-center">
             <div className="flex items-center gap-3">
               <p className="text-xl font-bold">Recording Timeline</p>
               <p> (All Cameras)</p>
@@ -61,7 +61,7 @@ function QuickAction() {
               <option>Today</option>
             </select>
           </div>
-          <div className="w-full rounded-2xl bg-white p-5 shadow-sm">
+          <div className="w-full rounded-2xl bg-white p-4 sm:p-5 mt-3 shadow-sm">
             {/* Timeline bar */}
             <div className="flex h-2 w-full overflow-hidden rounded-full bg-slate-200">
               <div className="w-[35%] bg-blue-600"></div>
@@ -75,7 +75,7 @@ function QuickAction() {
             </div>
 
             {/* Time labels */}
-            <div className="mt-3 flex justify-between text-xs font-medium text-slate-500">
+            <div className="mt-3 flex justify-between gap-1 text-[10px] sm:text-xs font-medium text-slate-500">
               <span>12 AM</span>
               <span>4 AM</span>
               <span>8 AM</span>

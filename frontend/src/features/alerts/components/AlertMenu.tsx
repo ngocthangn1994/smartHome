@@ -30,19 +30,22 @@ function AlertMenu() {
   ];
   return (
     <>
-      <div className="grid grid-cols-1 md:grid-cols-[1.5fr_0.5fr] xl:flex justify-between text-slate-600 gap-3">
-        <div className="grid grid-cols-2 lg:grid-cols-5 xl:flex xl:justify-between gap-3 bg-white px-5 py-5 rounded-2xl">
+      <div className="grid grid-cols-1 2xl:grid-cols-[1.5fr_0.5fr] text-slate-600 gap-3">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 bg-white p-4 sm:p-5 rounded-2xl">
           {menu.map((item) => (
-            <div className="flex items-center gap-2 px-2 py-1 border border-slate-200 rounded-xl">
+            <div
+              key={item.name}
+              className="flex items-center gap-2 px-2 py-1 border border-slate-200 rounded-xl"
+            >
               <span>{item.icon}</span>
               <p>{item.name}</p>
             </div>
           ))}
         </div>
-        <div className="bg-white px-5 py-5 rounded-2xl gap-3 space-y-5">
-          <div className="border border-slate-200 flex gap-3 items-center px-3 py-1 rounded-2xl shadow-sm gap">
+        <div className="flex flex-wrap 2xl:flex-col 2xl:items-start items-center justify-between bg-white p-4 sm:p-5 rounded-2xl gap-3">
+          <div className="border border-slate-200 flex flex-wrap gap-3 items-center px-3 py-1 rounded-2xl shadow-sm">
             {status.map((item) => (
-              <div className="flex items-center gap-1">
+              <div key={item.name} className="flex items-center gap-1">
                 <p> {item.icon}</p>
                 <p
                   className={
@@ -55,7 +58,7 @@ function AlertMenu() {
             ))}
           </div>
           <div>
-            <span className="flex gap-3 items-center px-3 py-2 font-bold rounded-2xl bg-blue-600 text-white">
+            <span className="flex gap-3 items-center px-3 py-2 font-bold rounded-2xl bg-blue-600 text-white whitespace-nowrap">
               <CiSettings />
               <p>Notifications Settings</p>
             </span>

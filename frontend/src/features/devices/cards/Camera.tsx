@@ -17,8 +17,15 @@ function Camera({ device }: CameraProp) {
   return (
     <>
       <div>
-        <div className="flex flex-col justify-between h-[350px]">
-          <div>{<img className="rounded-xl" src={cameraImage?.img} />}</div>
+        <div className="flex flex-1 flex-col justify-between gap-3">
+          <div>
+            {
+              <img
+                className="w-full aspect-video object-cover rounded-xl"
+                src={cameraImage?.img}
+              />
+            }
+          </div>
           <div className="flex items-center gap-3 mb-3">
             <FaCircle className="text-orange-300" />
             <p className="text-slate-600">

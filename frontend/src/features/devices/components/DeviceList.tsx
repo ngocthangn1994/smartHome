@@ -21,12 +21,12 @@ function DeviceList({ devices }: DeviceListProp) {
   return (
     <>
       <div className="text-slate-600">
-        <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-1 md:gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-3">
           {currentDevices.map((device) => (
-            <Device device={device} />
+            <Device key={device._id} device={device} />
           ))}
         </div>
-        <div className="flex gap-3 mt-5 items-center">
+        <div className="flex flex-wrap gap-3 mt-5 items-center">
           <p>
             Showing:
             {startIndex + 1} - {endIndex} : {devices.length}
@@ -34,13 +34,13 @@ function DeviceList({ devices }: DeviceListProp) {
           <button
             onClick={() => handlePrevious()}
             disabled={currentPage === 1}
-            className="text-blue-600"
+            className="text-blue-600 disabled:text-slate-400"
           >
             Previous
           </button>
           <button
             onClick={() => handleNext()}
-            className="text-blue-600"
+            className="text-blue-600 disabled:text-slate-400"
             disabled={currentPage === totalPages}
           >
             Next

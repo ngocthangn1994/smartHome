@@ -43,20 +43,20 @@ function RecentActivity() {
   ];
   return (
     <>
-      <div className="bg-white rounded-2xl px-3 py-3">
+      <div className="bg-white rounded-2xl p-4 sm:p-5">
         <div className="flex justify-between items-center mb-3">
           <p className="text-xl font-bold">Recent Activity</p>
           <p className="text-blue-600">View All</p>
         </div>
         <div className="space-y-3">
           {recentActivity.map((item) => (
-            <div className="flex justify-between">
+            <div key={item.message} className="flex justify-between gap-3">
               <div className="flex items-center gap-2">
                 <p>{item.icon}</p>
                 <p>{item.message}</p>
               </div>
               <div>
-                <p>{item.time}</p>
+                <p className="shrink-0 whitespace-nowrap">{item.time}</p>
               </div>
             </div>
           ))}

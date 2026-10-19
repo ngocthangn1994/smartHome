@@ -12,9 +12,12 @@ function SmokeDetector({ device }: SmokeDetectorProp) {
   return (
     <>
       <div>
-        <img src={smartHomeSmokeDetector} />
+        <img
+          className="mx-auto w-full max-h-56 object-contain"
+          src={smartHomeSmokeDetector}
+        />
       </div>
-      <div className="flex justify-between">
+      <div className="mt-auto flex justify-between items-center gap-3">
         <div>
           <p
             className={

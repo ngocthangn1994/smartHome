@@ -40,15 +40,15 @@ function DeviceToolbar({
   const [control, setControl] = useState(false);
   return (
     <>
-      <div className="grid grid-cols-1 xl:grid-cols-[1.3fr_0.7fr] mt-5 gap-1">
-        <div className="grid grid-cols-2 lg:grid-cols-4 xl:grid-cols-6 bg-white border border-slate-200 rounded-2xl shadow-sm px-3 py-5 flex gap-7">
+      <div className="grid grid-cols-1 2xl:grid-cols-[1.3fr_0.7fr] gap-3">
+        <div className="grid grid-cols-2 sm:grid-cols-4 bg-white border border-slate-200 rounded-2xl shadow-sm p-3 gap-2">
           {deviceToolBar.map((item) => (
             <button
               key={item.type}
               onClick={() => onFilterDevice(item.type)}
-              className="flex items-center gap-2
+              className="flex items-center justify-center sm:justify-start gap-2
           rounded-xl
-          px-4 py-2.5
+          px-3 py-2.5
           font-medium
           text-slate-600
           transition-all duration-200
@@ -62,16 +62,16 @@ function DeviceToolbar({
           ))}
         </div>
         <div
-          className="flex justify-between gap-3 bg-white border border-slate-200 rounded-2xl shadow-sm px-3 py-5 text-sm font-medium
+          className="flex flex-wrap justify-between gap-3 bg-white border border-slate-200 rounded-2xl shadow-sm p-3 text-sm font-medium
           text-slate-600 items-center"
         >
-          <div className="flex border border-slate-200 shadow-sm iems-centergap-3 rounded-2xl px-2 py-2 justify-between gap-3">
+          <div className="flex border border-slate-200 shadow-sm items-center rounded-2xl px-2 py-2 justify-between gap-3">
             <p className="flex gap-1 items-center border px-2 py-2 border-slate-200 rounded-2xl">
               <FaCircle className="text-green-600" /> Online
             </p>
             <p className="flex gap-1 items-center">
               <FaCircle />
-              <p>Offline</p>
+              <span>Offline</span>
             </p>
           </div>
           <div>
@@ -82,7 +82,7 @@ function DeviceToolbar({
           <div>
             <button
               onClick={() => setControl(true)}
-              className="border border-slate-200 rounded-2xl px-6 py-4 bg-blue-600 text-white shadow-sm"
+              className="border border-slate-200 rounded-2xl px-5 py-3 bg-blue-600 text-white shadow-sm whitespace-nowrap"
             >
               + Add Device
             </button>

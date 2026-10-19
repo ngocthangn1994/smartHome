@@ -125,20 +125,20 @@ function SettingPage() {
   };
   return (
     <>
-      <div className="w-screen min-h-screen bg-indigo-50">
+      <div className="w-full min-h-screen bg-indigo-50">
         <UserHeader />
-        <div className="grid grid-cols-1 xl:grid-cols-[0.3fr_1.7fr]">
+        <div className="grid grid-cols-1 xl:grid-cols-[280px_minmax(0,1fr)]">
           <div className="hidden xl:block">
             <SideBarHelper />
           </div>
 
-          <div className="bg-indigo-50 px-10 py-10 space-y-3">
+          <div className="min-w-0 bg-indigo-50 px-4 py-6 sm:px-6 lg:px-10 lg:py-10 space-y-5">
             <Header user={user} page="settings" />
             <SummaryDevices devices={devices} />
-            <div className="grid grid-cols-1 mt-5 gap-3">
+            <div className="grid grid-cols-1 gap-5">
               <div className="space-y-5">
                 <SettingsMenu />
-                <div className="grid grid-cols-1 lg:grid-cols-2 xl:flex gap-3">
+                <div className="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 gap-5">
                   <ProfileInformation
                     name={name}
                     email={email}
@@ -157,13 +157,13 @@ function SettingPage() {
                   />
                   <NotificationPreferences />
                 </div>
-                <div className="grid grid-cols-1 md:flex gap-3">
+                <div className="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 gap-5">
                   <SecuritySettings />
                   <Integrations />
                   <BackupSystem />
                 </div>
               </div>
-              <div className="space-y-5">
+              <div className="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 gap-5">
                 <SettingsOverview />
                 <SettingRecentActivity />
                 <SettingsQuickActions />

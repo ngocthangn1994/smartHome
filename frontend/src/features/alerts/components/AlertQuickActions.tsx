@@ -21,11 +21,14 @@ function AlertQuickAction() {
   ];
   return (
     <>
-      <div className="bg-white mt-5 p-5 rounded-2xl">
+      <div className="bg-white p-4 sm:p-5 rounded-2xl">
         <p className="text-xl font-bold">Quick Actions</p>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-5 p-5 rounded-2xl text-slate-600 font-medium">
+        <div className="grid grid-cols-2 gap-3 mt-5 rounded-2xl text-slate-600 font-medium">
           {actions.map((item) => (
-            <div className="border border-slate-200 p-5 rounded-2xl flex flex-col items-center text-center shadow-sm">
+            <div
+              key={item.name}
+              className="border border-slate-200 p-4 rounded-2xl flex flex-col items-center text-center shadow-sm"
+            >
               <p>{item.icon}</p>
               <p>{item.name}</p>
             </div>

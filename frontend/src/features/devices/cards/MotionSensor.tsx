@@ -10,10 +10,13 @@ function MotionSensor({ device }: WaterLeakSensorProp) {
 
   return (
     <>
-      <div className="flex h-[350px] flex-col justify-between text-slate-600">
+      <div className="flex flex-1 flex-col justify-between gap-3 text-slate-600">
         <div>
           <div>
-            <img src={smartHomeMotionSensor} />
+            <img
+              className="mx-auto w-full max-h-56 object-contain"
+              src={smartHomeMotionSensor}
+            />
             <p className="text-green-600 font-bold">Clear</p>
           </div>
           <div>

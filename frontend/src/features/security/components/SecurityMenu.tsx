@@ -37,13 +37,13 @@ function SecurityMenu({ selectedType, onFilterDevice }: securityMenuProps) {
   ];
   return (
     <>
-      <div className="text-slate-600 grid grid-cols-1 xl:grid-cols-[1.2fr_0.8fr] gap-5">
-        <div className="grid grid-cols-2 gap-3 items-center justify-between bg-white p-5 rounded-xl shadow-sm">
+      <div className="text-slate-600 grid grid-cols-1 2xl:grid-cols-[1.2fr_0.8fr] gap-3">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 items-center bg-white p-3 rounded-xl shadow-sm">
           {menu.map((item) => (
             <button
               key={item.type}
               onClick={() => onFilterDevice(item.type)}
-              className={`flex items-center gap-2 px-10 py-3 rounded-2xl ${
+              className={`flex items-center justify-center sm:justify-start gap-2 px-3 py-3 rounded-2xl ${
                 selectedType === item.type
                   ? "bg-blue-600 text-white"
                   : "hover:bg-blue-600 hover:text-white"
@@ -54,8 +54,8 @@ function SecurityMenu({ selectedType, onFilterDevice }: securityMenuProps) {
             </button>
           ))}
         </div>
-        <div className="grid grid-cols-1 items-center gap-3 lg:grid-cols-2 justify-between bg-white p-2 rounded-xl">
-          <div className="flex gap-3 border border-slate-200 rounded-2xl p-2">
+        <div className="flex flex-wrap items-center justify-between gap-3 bg-white p-3 rounded-xl">
+          <div className="flex flex-wrap gap-2 border border-slate-200 rounded-2xl p-2">
             <div className="flex items-center border gap-2 p-2 border-slate-200 rounded-2xl">
               <FaCircle className="text-green-600" />
               <span className="font-bold">Armed</span>
@@ -71,7 +71,7 @@ function SecurityMenu({ selectedType, onFilterDevice }: securityMenuProps) {
           </div>
 
           <div>
-            <button className="bg-blue-600 text-white px-10 py-2 rounded-2xl font-bold text-xl">
+            <button className="bg-blue-600 text-white px-6 py-2 rounded-2xl font-bold text-base sm:text-xl whitespace-nowrap">
               + Add Security
             </button>
           </div>

@@ -10,9 +10,12 @@ function WaterLeakSensor({ device }: WaterLeakSensorProp) {
 
   return (
     <>
-      <div className="flex flex-col justify-between text-slate-600">
+      <div className="flex flex-1 flex-col justify-between gap-3 text-slate-600">
         <div>
-          <img src={smartHomeWaterLeakSensor} />
+          <img
+            className="mx-auto w-full max-h-56 object-contain"
+            src={smartHomeWaterLeakSensor}
+          />
           <p className="text-green-600 font-bold">Dry</p>
         </div>
         <div>

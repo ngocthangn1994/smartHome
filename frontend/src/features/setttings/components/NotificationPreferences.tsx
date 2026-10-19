@@ -62,15 +62,18 @@ function NotificationPreferences() {
 
   return (
     <>
-      <div className="bg-white px-5 py-5 flex flex-col justify-between rounded-2xl text-slate-600">
+      <div className="h-full min-w-0 bg-white p-4 sm:p-5 flex flex-col gap-3 rounded-2xl text-slate-600">
         <div>
           <p className="font-bold text-xl">Notification Preferences</p>
         </div>
-        <div className="space-y-1">
+        <div className="space-y-3">
           {notifications.map((item) => (
-            <div className="flex items-center gap-3 justify-between">
-              <span>{item.icon}</span>
-              <div className="text-center">
+            <div
+              key={item.name}
+              className="flex items-center gap-3 justify-between"
+            >
+              <span className="shrink-0">{item.icon}</span>
+              <div className="flex-1 min-w-0">
                 <p className="font-bold">{item.name}</p>
                 <p>{item.message}</p>
               </div>
@@ -78,7 +81,7 @@ function NotificationPreferences() {
                 type="button"
                 onClick={() => setIsOn(!isOn)}
                 className={`
-        relative h-7 w-12 rounded-full
+        relative shrink-0 h-7 w-12 rounded-full
         transition-colors duration-300
         ${isOn ? "bg-blue-600" : "bg-slate-300"}
       `}

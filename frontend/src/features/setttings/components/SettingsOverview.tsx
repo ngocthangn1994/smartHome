@@ -3,11 +3,11 @@ import { FaCircle } from "react-icons/fa";
 function SettingsOverview() {
   return (
     <>
-      <div className="space-y-3 bg-white px-5 py-5 rounded-2xl text-slate-600">
+      <div className="h-full space-y-3 bg-white p-4 sm:p-5 rounded-2xl text-slate-600">
         <p className="text-xl font-bold">Settings Overview</p>
-        <div className="flex justify-between gap-3 items-center gap-3">
-          <div className="px-3 md:px-4 py-3 md:py-4 bg-green-600 rounded-full">
-            <div className="px-4 md:px-10  py-4 md:py-10  bg-white rounded-full">
+        <div className="flex flex-wrap justify-center sm:justify-between gap-5 items-center">
+          <div className="shrink-0 p-3 md:p-4 bg-green-600 rounded-full">
+            <div className="w-28 h-28 md:w-32 md:h-32 flex flex-col items-center justify-center bg-white rounded-full">
               <p className="font-bold text-3xl">87%</p>
               <p>Healthy</p>
             </div>

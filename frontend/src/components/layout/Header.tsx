@@ -83,18 +83,18 @@ function Header({ user, page }: HeaderProps) {
             </p>
           )}
         </div>
-        <div className="grid grid-cols-2 gap-3 lg:hidden">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 lg:hidden">
           <div className="flex gap-3 items-center text-slate-600 border border-slate-200 px-2 py-2 rounded-2xl bg-white">
-            <FaHouseChimneyUser className="w-10 h-10" />
+            <FaHouseChimneyUser className="w-8 h-8 shrink-0" />
             <span className="text-sm font-bold ">My Home</span>
             <FaAngleDown />
           </div>
-          <div className="flex justify-between border border-slate-200 bg-white px-5 py-2 rounded-2xl">
+          <div className="flex items-center justify-between gap-2 border border-slate-200 bg-white px-4 py-2 rounded-2xl">
             <input
-              className="outline-none text-sm"
+              className="w-full min-w-0 outline-none text-sm"
               placeholder="Search devices, rooms..."
             />
-            <FaSearchengin className="w-10 h-10" />
+            <FaSearchengin className="w-8 h-8 shrink-0" />
           </div>
         </div>
       </div>

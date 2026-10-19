@@ -20,23 +20,26 @@ function AutomationMenu() {
   ];
   return (
     <>
-      <div className="text-slate-600 rounded-2xl mt-5">
-        <div className="grid grid-cols-1 lg:grid-cols-[1.5fr_0.5fr] gap-3">
-          <div className="grid grid-cols-2 lg:grid-cols-4 xl:grid-cols-6 gap-5 items-center bg-white px-5 py-2 rounded-2xl">
+      <div className="text-slate-600 rounded-2xl">
+        <div className="grid grid-cols-1 2xl:grid-cols-[1.5fr_0.5fr] gap-3">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 items-center bg-white p-3 rounded-2xl">
             {menu.map((item) => (
-              <div className="flex px-5 py-2 items-center gap-3 hover:bg-blue-600 hover:text-white rounded-2xl">
+              <div
+                key={item.name}
+                className="flex px-3 py-2 items-center justify-center sm:justify-start gap-2 hover:bg-blue-600 hover:text-white rounded-2xl"
+              >
                 <p>{item.icon}</p>
                 <p>{item.name}</p>
               </div>
             ))}
           </div>
-          <div className="flex items-center gap-3">
-            <div className="flex gap-1 ml-2 bg-white px-2 py-2 rounded-xl">
-              <button className="flex gap-1 items-center border border-slate-200 px-5 py-2 rounded-2xl font-bold">
+          <div className="flex flex-wrap items-center justify-between gap-3 bg-white p-3 rounded-2xl">
+            <div className="flex gap-1">
+              <button className="flex gap-1 items-center border border-slate-200 px-4 py-2 rounded-2xl font-bold">
                 <FaCircle className="text-green-600" />
                 <p>Active</p>
               </button>
-              <button className="flex gap-1 items-center border border-slate-200 px-5 py-2 rounded-2xl ">
+              <button className="flex gap-1 items-center border border-slate-200 px-4 py-2 rounded-2xl">
                 <FaCircle className="text-slate-600" />
                 <p>Paused</p>
               </button>
@@ -44,7 +47,7 @@ function AutomationMenu() {
             <div className="bg-white">
               <button
                 onClick={() => setPopUp(true)}
-                className="bg-blue-600 text-white px-5 py-2 rounded-xl"
+                className="bg-blue-600 text-white px-5 py-2 rounded-xl whitespace-nowrap"
               >
                 + New Automation
               </button>

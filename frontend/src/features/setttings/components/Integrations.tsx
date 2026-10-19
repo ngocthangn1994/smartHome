@@ -13,7 +13,7 @@ function Integrations() {
   ];
   return (
     <>
-      <div className="bg-white rounded-2xl px-5 py-5 text-slate-600 space-y-3">
+      <div className="h-full min-w-0 bg-white rounded-2xl p-4 sm:p-5 text-slate-600 space-y-3">
         <div className="flex gap-3 items-center">
           <LuCombine />
           <p className="text-xl font-bold">Intergrations</p>
@@ -21,13 +21,18 @@ function Integrations() {
         <div>
           <p className="font-medium">Manage connected services and platforms</p>
         </div>
-        <div>
+        <div className="space-y-3">
           {intergration.map((item) => (
-            <div className="flex items-center justify-between">
-              <span>{item.icon}</span>
-              <p>{item.name}</p>
-              <p className="text-green-600 font-bold">Connected</p>
-              <button className="px-2 py-2 border border-slate-200 rounded-2xl">
+            <div
+              key={item.name}
+              className="flex items-center justify-between gap-3"
+            >
+              <span className="shrink-0">{item.icon}</span>
+              <p className="flex-1 min-w-0">{item.name}</p>
+              <p className="hidden sm:block text-green-600 font-bold">
+                Connected
+              </p>
+              <button className="shrink-0 px-3 py-2 border border-slate-200 rounded-2xl">
                 Manage
               </button>
             </div>

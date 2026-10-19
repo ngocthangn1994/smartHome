@@ -24,18 +24,21 @@ function HistoryOverview() {
   ];
   return (
     <>
-      <div className="bg-white px-5 py-5 rounded-2xl mt-5">
+      <div className="bg-white p-4 sm:p-5 rounded-2xl text-slate-600">
         <p className="font-bold text-xl mb-5">Alert Overview</p>
-        <div className="flex items-center gap-3">
-          <div className="bg-green-600 rounded-full text-green-600 px-10 py-10">
-            <div className="bg-white rounded-full text-green-600 px-10 py-10">
+        <div className="flex flex-wrap items-center justify-center sm:justify-start gap-5">
+          <div className="shrink-0 bg-green-600 rounded-full text-green-600 p-4">
+            <div className="bg-white rounded-full text-green-600 w-28 h-28 flex flex-col items-center justify-center">
               <p className="text-3xl font-bold">26</p>
               <p>Total</p>
             </div>
           </div>
-          <div>
+          <div className="space-y-2">
             {overview.map((item) => (
-              <div className="flex items-center gap-2">
+              <div
+                key={item.name}
+                className="flex items-center justify-between gap-3"
+              >
                 <div className="flex items-center gap-1">
                   <p>{item.icon}</p>
                   <p>{item.name}</p>

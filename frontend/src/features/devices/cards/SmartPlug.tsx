@@ -13,9 +13,12 @@ function SmartPlug({ device }: SmartPlugProp) {
   return (
     <>
       <div>
-        <img src={smartHomeSamrtPlug} />
+        <img
+          className="mx-auto w-full max-h-56 object-contain"
+          src={smartHomeSamrtPlug}
+        />
       </div>
-      <div className="flex justify-between items-center">
+      <div className="mt-auto flex justify-between items-center gap-3">
         <div>
           <p className="text-green-600 font-bold">{device.status}</p>
           <p className="text-slate-600">{device.batteryLevel}% battery</p>

@@ -57,13 +57,13 @@ function DevicesPage() {
 
   return (
     <>
-      <div className="w-screen min-h-screen bg-indigo-50">
+      <div className="w-full min-h-screen bg-indigo-50">
         <UserHeader />
-        <div className="grid grid-cols-1 xl:grid-cols-[0.3fr_1.7fr]">
+        <div className="grid grid-cols-1 xl:grid-cols-[280px_minmax(0,1fr)]">
           <div className="hidden xl:block">
             <SideBarHelper />
           </div>
-          <div className="bg-indigo-50 px-10 py-10 space-y-3">
+          <div className="min-w-0 bg-indigo-50 px-4 py-6 sm:px-6 lg:px-10 lg:py-10 space-y-5">
             <Header user={user} page="devices" />
             <SummaryDevices devices={devices} />
             <DeviceToolbar
@@ -73,11 +73,11 @@ function DevicesPage() {
                 setDevices((previous) => [...previous, device])
               }
             />
-            <div className="grid grid-cols-1 xl:grid-cols-[1.4fr_0.7fr] mt-5 gap-3">
-              <div className="space-y-5">
+            <div className="grid grid-cols-1 2xl:grid-cols-[1.4fr_0.7fr] gap-5">
+              <div className="min-w-0 space-y-5">
                 <DeviceList devices={filterDevice(selectedType)} />
               </div>
-              <div className="bg-white px-5 py-5 border border-slate-200 shadow-sm rounded-2xl text-slate-600 space-y-3">
+              <div className="h-fit bg-white px-4 py-4 sm:px-5 sm:py-5 border border-slate-200 shadow-sm rounded-2xl text-slate-600 space-y-3">
                 <DeviceHealthOverview devices={filterDevice(selectedType)} />
                 <RecentAdded />
                 <div className="mt-5">

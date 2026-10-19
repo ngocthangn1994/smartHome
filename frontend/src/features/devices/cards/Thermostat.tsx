@@ -24,8 +24,8 @@ function Thermostat({ device }: ThermostatProp) {
   return (
     <>
       <div>
-        <div className="flex justify-center h-[250px]">
-          <div className="relative w-65 h-65 ">
+        <div className="flex justify-center">
+          <div className="relative w-full max-w-60 aspect-square">
             <svg
               viewBox="0 0 200 200"
               className="absolute inset-0 w-full h-full"
@@ -83,7 +83,7 @@ function Thermostat({ device }: ThermostatProp) {
             </p>
           </div>
         </div>
-        <div className="flex items-center justify-center px-5 mt-7">
+        <div className="flex items-center justify-center px-5 mt-5">
           <button
             onClick={() => setShowControl(true)}
             className="flex items-center gap-2 rounded-2xl bg-gradient-to-r from-blue-500 to-indigo-600 px-6 py-2.5 text-lg font-semibold text-white shadow-md transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:from-blue-600 hover:to-indigo-700 active:scale-95"

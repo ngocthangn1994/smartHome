@@ -24,11 +24,14 @@ function SettingsQuickActions() {
   ];
   return (
     <>
-      <div className="bg-white px-5 py-5 rounded-2xl">
+      <div className="h-full bg-white p-4 sm:p-5 rounded-2xl text-slate-600">
         <p className="text-xl font-bold">Quick Actions</p>
-        <div className="grid grid-cols-2 mt-5">
+        <div className="grid grid-cols-2 gap-3 mt-5">
           {actions.map((item) => (
-            <div className="space-y-2 border border-slate-200 shadow-sm px-5 py-5 rounded-2xl flex flex-col justify-center items-center gap-1">
+            <div
+              key={item.name}
+              className="space-y-2 border border-slate-200 shadow-sm p-4 rounded-2xl flex flex-col justify-center items-center text-center gap-1"
+            >
               <span className="text-blue-600">{item.icon}</span>
               <div>
                 <p className="font-bold">{item.name}</p>

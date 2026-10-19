@@ -42,16 +42,22 @@ function RecentMotion() {
   return (
     <>
       <div>
-        <div className="flex justify-between">
+        <div className="flex justify-between items-center gap-3">
           <p className="text-xl font-bold">Recent Motion Events</p>
           <p className="text-blue-600">View All</p>
         </div>
-        <div className="mt-3">
+        <div className="mt-3 space-y-3">
           {recentMotionEvent.map((item) => (
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-5">
-                <img src={item.src} className="w-30 h-30 rounded-2xl" />
-                <div className="flex gap-2 items-center ">
+            <div
+              key={item.name}
+              className="flex items-center justify-between gap-3"
+            >
+              <div className="flex items-center gap-3 min-w-0">
+                <img
+                  src={item.src}
+                  className="w-16 h-16 sm:w-20 sm:h-20 shrink-0 object-cover rounded-2xl"
+                />
+                <div className="flex gap-2 items-center min-w-0">
                   {item.icon}
                   <div>
                     <p className="font-bold">{item.name}</p>
@@ -61,7 +67,7 @@ function RecentMotion() {
               </div>
 
               <div>
-                <p>{item.time}</p>
+                <p className="shrink-0 whitespace-nowrap">{item.time}</p>
               </div>
             </div>
           ))}

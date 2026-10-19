@@ -32,8 +32,8 @@ function Device({ device }: DeviceProp) {
   };
   return (
     <>
-      <div className="bg-white border border-slate-200 px-3 py-2 rounded-2xl shadow-sm space-y-1 hover:shadow-lg">
-        <div className="flex justify-between items-center">
+      <div className="h-full min-w-0 flex flex-col bg-white border border-slate-200 px-3 py-3 rounded-2xl shadow-sm space-y-1 hover:shadow-lg">
+        <div className="flex justify-between items-center gap-2">
           <div>
             <p className="font-bold">{nameDeviceType[device.deviceType]}</p>
             <p className="text-slate-600">{device.area}</p>

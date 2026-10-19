@@ -38,21 +38,21 @@ function RecentActivity({ alerts }: AlertProp) {
   };
   return (
     <>
-      <div className="bg-white px-5 rounded-2xl text-slate-600 px-5 py-8">
+      <div className="bg-white rounded-2xl text-slate-600 py-5">
         <p className="text-xl font-bold mb-5">
           Recent Activity & Quick Actions
         </p>
         <div className="space-y-5 gap-5">
           <div className="space-y-4">
             <div className="grid grid-cols-2 gap-4">
-              <div className="border border-slate-200 rounded-2xl px-5 py-5 shadow-sm text-slate-600 font-bold flex flex-col items-center justify-center text-center bg-slate-100">
+              <div className="border border-slate-200 rounded-2xl px-3 py-4 sm:px-5 sm:py-5 shadow-sm text-slate-600 font-bold flex flex-col items-center justify-center text-center bg-slate-100">
                 <FaLightbulb className="text-2xl text-yellow-300" />
                 <div>
                   <p>Turn Off</p>
                   <p>All Lights</p>
                 </div>
               </div>
-              <div className="border border-slate-200 rounded-2xl px-5 py-5 shadow-sm text-slate-600 font-bold flex flex-col items-center justify-center text-center bg-slate-100">
+              <div className="border border-slate-200 rounded-2xl px-3 py-4 sm:px-5 sm:py-5 shadow-sm text-slate-600 font-bold flex flex-col items-center justify-center text-center bg-slate-100">
                 <FaBuildingShield className="text-2xl text-green-600" />
                 <div>
                   <p>Arm</p>
@@ -61,14 +61,14 @@ function RecentActivity({ alerts }: AlertProp) {
               </div>
             </div>
             <div className="grid grid-cols-2 gap-4">
-              <div className="border border-slate-200 rounded-2xl px-5 py-5 shadow-sm text-slate-600 font-bold flex flex-col items-center justify-center text-center bg-slate-100">
+              <div className="border border-slate-200 rounded-2xl px-3 py-4 sm:px-5 sm:py-5 shadow-sm text-slate-600 font-bold flex flex-col items-center justify-center text-center bg-slate-100">
                 <FaCameraRetro className="text-2xl text-orange-200" />
                 <div>
                   <p>Views</p>
                   <p>Camera</p>
                 </div>
               </div>
-              <div className="border border-slate-200 rounded-2xl px-5 py-5 shadow-sm text-slate-600 font-bold flex flex-col items-center justify-center text-center bg-slate-100">
+              <div className="border border-slate-200 rounded-2xl px-3 py-4 sm:px-5 sm:py-5 shadow-sm text-slate-600 font-bold flex flex-col items-center justify-center text-center bg-slate-100">
                 <FaDoorOpen className="text-2xl text-red-300" />
                 <div>
                   <p>Lock</p>
@@ -77,17 +77,20 @@ function RecentActivity({ alerts }: AlertProp) {
               </div>
             </div>
           </div>
-          <div className="space-y-7 border border-slate-200 shadow-sm px-2 py-2 rounded-2xl">
+          <div className="space-y-4 border border-slate-200 shadow-sm px-3 py-3 rounded-2xl">
             {alerts.map((alert) => (
-              <div className="flex items-center gap-5 px-1 py-1">
-                <p>{iconAlertType[alert.type]}</p>
-                <div className="flex justify-between w-full items-center">
+              <div
+                key={alert._id}
+                className="flex items-center gap-3 px-1 py-1"
+              >
+                <p className="shrink-0">{iconAlertType[alert.type]}</p>
+                <div className="flex justify-between w-full min-w-0 items-center gap-3">
                   <p className="font-semibold">{alert.message}</p>
                   <p
                     className={
                       `text-sm ${alert.severity} === "critical`
-                        ? "text-orange-500 bg-orange-100 rounded-full px-2 py-2"
-                        : "text-red-300 bg-red-100 rounded-full px-2 py-2"
+                        ? "shrink-0 text-orange-500 bg-orange-100 rounded-full px-2 py-2"
+                        : "shrink-0 text-red-300 bg-red-100 rounded-full px-2 py-2"
                     }
                   >
                     {nameSeverity[alert.severity]}

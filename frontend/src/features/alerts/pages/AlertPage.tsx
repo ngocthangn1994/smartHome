@@ -36,24 +36,22 @@ function AlertPage() {
 
   return (
     <>
-      <div className="w-screen min-h-screen bg-indigo-50">
+      <div className="w-full min-h-screen bg-indigo-50">
         <UserHeader />
-        <div className="grid grid-cols-1 xl:grid-cols-[0.3fr_1.7fr]">
+        <div className="grid grid-cols-1 xl:grid-cols-[280px_minmax(0,1fr)]">
           <div className="hidden xl:block">
             <SideBarHelper />
           </div>
-          <div className="bg-indigo-50 px-10 py-10 space-y-3">
+          <div className="min-w-0 bg-indigo-50 px-4 py-6 sm:px-6 lg:px-10 lg:py-10 space-y-5">
             <Header user={user} page="alerts" />
             <SummaryDevices devices={devices} />
-            <div className="space-y-3">
+            <div className="space-y-5">
               <AlertMenu />
-              <div className="gap-3 space-y-3">
-                <AlertList />
-                <div>
-                  <AlertOverview alerts={alerts} />
-                  <AlertRecentActivity />
-                  <AlertQuickAction />
-                </div>
+              <AlertList />
+              <div className="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-5">
+                <AlertOverview alerts={alerts} />
+                <AlertRecentActivity />
+                <AlertQuickAction />
               </div>
             </div>
           </div>

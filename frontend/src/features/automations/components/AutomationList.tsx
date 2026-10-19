@@ -91,15 +91,15 @@ function AutomationList({
         {automationRules.map((item) => (
           <div
             key={item._id}
-            className="text-slate-600 bg-white rounded-2xl px-5 py-5 space-y-3"
+            className="text-slate-600 bg-white rounded-2xl p-4 sm:p-5 space-y-3"
           >
-            <div className="flex items-center justify-between">
+            <div className="flex flex-wrap items-center justify-between gap-3">
               <div className="flex items-center gap-3">
                 {triggerTypeData[item.triggerType].icon}
                 <p className="font-bold">{item.name}</p>
               </div>
               <div className="flex items-center gap-3">
-                <div className="bg-green-100 px-5 py-2 rounded-2xl flex items-center gap-2">
+                <div className="bg-green-100 px-4 py-2 rounded-2xl flex items-center gap-2">
                   <FaCircle className="text-green-600" />
                   <p>Active</p>
                 </div>
@@ -117,8 +117,8 @@ function AutomationList({
                 </div>
               </div>
             </div>
-            <div className="grid grid-cols-1 xl:flex justify-between items-center">
-              <div className="border border-slate-200 rounded-xl px-5 py-2 grid xl:flex items-center gap-3 w-lg justify-between">
+            <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto_1fr] gap-3 items-center">
+              <div className="border border-slate-200 rounded-xl px-4 py-3 grid grid-cols-1 sm:grid-cols-2 items-center gap-3 w-full">
                 <div className="flex items-center gap-3">
                   <MdDevices className="w-8 h-8 bg-blue-100 p-2 rounded-xl" />
                   <div>
@@ -137,9 +137,9 @@ function AutomationList({
                 </div>
               </div>
               <div>
-                <FaArrowRight />
+                <FaArrowRight className="mx-auto rotate-90 lg:rotate-0" />
               </div>
-              <div className="border border-slate-200 rounded-xl px-5 py-2 grid xl:flex items-center gap-3 w-lg justify-between">
+              <div className="border border-slate-200 rounded-xl px-4 py-3 grid grid-cols-1 sm:grid-cols-2 items-center gap-3 w-full">
                 <div className="flex items-center gap-3">
                   <MdDevices className="w-8 h-8 bg-blue-100 p-2 rounded-xl" />
                   <div>

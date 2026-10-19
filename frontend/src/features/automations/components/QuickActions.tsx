@@ -24,10 +24,10 @@ function QuickActions() {
   ];
 
   return (
-    <div className="rounded-2xl bg-white p-4">
+    <div className="rounded-2xl bg-white p-4 sm:p-5">
       <p className="text-xl font-bold">Quick Actions</p>
 
-      <div className="mt-4 grid grid-cols-2 gap-3 md:grid-cols-4">
+      <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-4 lg:grid-cols-2">
         {quickActions.map((item) => (
           <button
             key={item.name}

@@ -22,17 +22,17 @@ function HistoryMenu() {
   ];
   return (
     <>
-      <div className="text-slate-600 grid grid-cols-[1.5fr_0.5fr] gap-5">
-        <div className="grid grid-cols-2 justify-between gap-10 bg-white p-3 rounded-2xl">
+      <div className="text-slate-600 grid grid-cols-1 2xl:grid-cols-[1.5fr_0.5fr] gap-3">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 bg-white p-4 sm:p-5 rounded-2xl">
           {menu.map((item) => (
-            <div className="flex items-center gap-1">
+            <div key={item.name} className="flex items-center gap-1">
               <span>{item.icon}</span>
               <p>{item.name}</p>
             </div>
           ))}
         </div>
-        <div className="bg-white p-3 rounded-2xl">
-          <div className="border border-slate-200 px-10 py-2 rounded-2xl flex items-center gap-5 ">
+        <div className="flex flex-wrap 2xl:flex-col items-center 2xl:items-stretch gap-3 bg-white p-3 rounded-2xl">
+          <div className="border border-slate-200 px-4 py-2 rounded-2xl flex flex-wrap items-center gap-5">
             <div className="flex items-center gap-2">
               <FaCircle className="text-green-600" />
               <p>Live Logs</p>
@@ -42,7 +42,7 @@ function HistoryMenu() {
               <p>Archived</p>
             </div>
           </div>
-          <div className="flex items-center gap-5 border border-slate-200 rounded-2xl px-5 py-2">
+          <div className="flex flex-wrap items-center gap-3 border border-slate-200 rounded-2xl px-4 py-2">
             <div className="flex items-center gap-2 border border-slate-200 px-2 py-1  rounded-xl">
               <p>Last 7 days</p>
               <SlCalender />
