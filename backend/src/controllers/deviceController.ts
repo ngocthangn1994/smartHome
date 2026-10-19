@@ -7,16 +7,13 @@ import { asyncHandler } from "../utils/asyncHandler";
 import { AppError } from "../utils/AppError";
 
 import Device from "../models/Device";
-import User from "../models/User";
+import User, { IUser } from "../models/User";
+import Home from "../models/Home";
 
 import { homeAssistantService } from "../services/homeAssistantService";
 
 export interface AuthenticatedRequest extends Request {
-  user?: {
-    userId: string;
-    email?: string;
-    homeId?: string;
-  };
+  user?: IUser;
 }
 
 /*
@@ -50,7 +47,12 @@ export const getDevices = asyncHandler(
     }
 
     if (!user.homeId) {
-      throw new AppError("User does not have a home assigned.", 400);
+      res
+        .status(200)
+        .json(
+          buildResponse(true, "Successfully fetched devices for this home", []),
+        );
+      return;
     }
 
     const devices = await Device.find({
@@ -101,26 +103,51 @@ export const getDeviceById = asyncHandler(
 */
 
 export const createDevice = asyncHandler(
-  async (req: Request, res: Response) => {
+  async (req: AuthenticatedRequest, res: Response) => {
+    const user = req.user;
+
+    if (!user) {
+      throw new AppError("You are not logged in.", 401);
+    }
+
     const {
       name,
-      home,
       deviceType,
       status,
       batteryLevel,
       area,
       haEntityId,
       state,
+      brand,
+      modelDevice,
+      connectionMethod,
+      ipAddress,
+      macAddress,
+      deviceImage,
+      description,
     } = req.body;
 
-    if (!name || !home || !deviceType || !area || !haEntityId) {
+    if (!name || !deviceType || !area || !haEntityId) {
       throw new AppError(
-        "Name, home, device type, area, and Home Assistant entity ID are required.",
+        "Name, device type, area, and Home Assistant entity ID are required.",
         400,
       );
     }
 
+    if (!user.homeId) {
+      const newHome = await Home.create({
+        name: `${user.name}'s Home`,
+        address: "Not set",
+        ownerId: user._id,
+      });
+      user.homeId = newHome._id;
+      await user.save({ validateBeforeSave: false });
+    }
+
+    const home = user.homeId;
+
     const existingDevice = await Device.findOne({
+      home,
       haEntityId,
     });
 
@@ -140,6 +167,13 @@ export const createDevice = asyncHandler(
       area,
       haEntityId,
       state,
+      brand,
+      modelDevice,
+      connectionMethod,
+      ipAddress,
+      macAddress,
+      deviceImage,
+      description,
     });
 
     res

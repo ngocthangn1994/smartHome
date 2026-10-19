@@ -9,12 +9,13 @@ import {
   FaCircle,
 } from "react-icons/fa6";
 import AddDevice from "../control/AddDevice";
-import type { DeviceType } from "../../../types";
+import type { DeviceType, IDevice } from "../../../types";
 import { useState, type ReactNode } from "react";
 type DeviceFilter = DeviceType | "all" | "security";
 interface DeviceToolBarProps {
   selectedType: DeviceFilter;
   onFilterDevice: (type: DeviceFilter) => void;
+  onDeviceAdded?: (device: IDevice) => void;
 }
 interface ToolBarItem {
   type: DeviceFilter;
@@ -24,6 +25,7 @@ interface ToolBarItem {
 function DeviceToolbar({
   selectedType: _selectedType,
   onFilterDevice,
+  onDeviceAdded,
 }: DeviceToolBarProps) {
   const deviceToolBar: ToolBarItem[] = [
     { type: "all", name: "All", icon: null },
@@ -84,7 +86,12 @@ function DeviceToolbar({
             >
               + Add Device
             </button>
-            {control == true && <AddDevice onClose={() => setControl(false)} />}
+            {control == true && (
+              <AddDevice
+                onClose={() => setControl(false)}
+                onDeviceAdded={onDeviceAdded}
+              />
+            )}
           </div>
         </div>
       </div>

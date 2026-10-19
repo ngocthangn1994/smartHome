@@ -146,7 +146,10 @@ const deviceSchema = new Schema<IDevice>(
     },
     brand: String,
     modelDevice: String,
-    connectionMethod: ["wifi", "bluetooth", "zigbee", "zwave"],
+    connectionMethod: {
+      type: String,
+      enum: ["wifi", "bluetooth", "zigbee", "zwave"],
+    },
     ipAddress: String,
     macAddress: String,
     deviceImage: String,

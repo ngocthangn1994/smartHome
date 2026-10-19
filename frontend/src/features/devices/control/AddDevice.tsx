@@ -12,9 +12,10 @@ import smartCameraImage from "../../../assets/devices/smarthome_camera.png";
 import smartDoorBellImage from "../../../assets/devices/smartHome_doorBell.png";
 import smartThermostatImage from "../../../assets/devices/smartHome_thermostat.png";
 import AddDeviceDetail from "./AddDeviceDetail";
-import type { DeviceType } from "../../../types";
+import type { DeviceType, IDevice } from "../../../types";
 interface AddDeviceProps {
   onClose: () => void;
+  onDeviceAdded?: (device: IDevice) => void;
 }
 
 interface DeviceOption {
@@ -22,7 +23,7 @@ interface DeviceOption {
   name: string;
   deviceType: DeviceType;
 }
-function AddDevice({ onClose }: AddDeviceProps) {
+function AddDevice({ onClose, onDeviceAdded }: AddDeviceProps) {
   const [selectedDevice, setSelectedDevice] = useState<DeviceOption | null>(
     null,
   );
@@ -32,7 +33,9 @@ function AddDevice({ onClose }: AddDeviceProps) {
       <AddDeviceDetail
         deviceType={selectedDevice?.deviceType}
         selectedDevice={selectedDevice?.name}
-        onClose={() => setShowDetail(false)}
+        onClose={onClose}
+        onBack={() => setShowDetail(false)}
+        onDeviceAdded={onDeviceAdded}
       />
     );
   }
@@ -171,8 +174,10 @@ function AddDevice({ onClose }: AddDeviceProps) {
               Cancel
             </button>
             <button
+              type="button"
               onClick={() => setShowDetail(true)}
-              className="px-10 py-2 bg-blue-600 text-white border border-slate-200 rounded-2xl"
+              disabled={!selectedDevice}
+              className="disabled:opacity-50 px-10 py-2 bg-blue-600 text-white border border-slate-200 rounded-2xl"
             >
               Next
             </button>

@@ -9,9 +9,11 @@ import { FaArrowLeft } from "react-icons/fa";
 import { MdOnDeviceTraining } from "react-icons/md";
 import { useState } from "react";
 import api from "../../../api/api";
-import type { DeviceType, ConnectionMethod } from "../../../types";
+import type { DeviceType, ConnectionMethod, IDevice } from "../../../types";
 interface AddDeviceDetailProps {
   onClose: () => void;
+  onBack: () => void;
+  onDeviceAdded?: (device: IDevice) => void;
   selectedDevice: string | null;
   deviceType: DeviceType;
 }
@@ -28,6 +30,8 @@ interface AddDeviceFormData {
 }
 function AddDeviceDetail({
   onClose,
+  onBack,
+  onDeviceAdded,
   selectedDevice,
   deviceType,
 }: AddDeviceDetailProps) {
@@ -58,7 +62,7 @@ function AddDeviceDetail({
     { icon: <FaWifi />, name: "wifi" },
     { icon: <SiZigbee className="text-red-600" />, name: "zigbee" },
     { icon: <FaBluetooth className="text-blue-600" />, name: "bluetooth" },
-    { icon: <SiMatternet className="text-slate-900" />, name: "matthernet" },
+    { icon: <SiMatternet className="text-slate-900" />, name: "zwave" },
   ];
 
   const handleConnectionMethod = (method: ConnectionMethod) => {
@@ -104,7 +108,6 @@ function AddDeviceDetail({
       setIsSubmitting(true);
       const deviceData = {
         name: formData.name.trim(),
-        home: "665f1b8d2f4c3a0012ab1234",
         deviceType,
         status: "offline" as const,
         area: formData.area,
@@ -129,10 +132,17 @@ function AddDeviceDetail({
 
       const response = await api.createDevice(deviceData);
       console.log("Device created:", response.data);
+      if (response.data) {
+        onDeviceAdded?.(response.data);
+      }
       onClose();
     } catch (error) {
       console.error(error);
-      setError("Unable to add the device. Please try again.");
+      setError(
+        error instanceof Error
+          ? error.message
+          : "Unable to add the device. Please try again.",
+      );
     } finally {
       setIsSubmitting(false);
     }
@@ -153,7 +163,11 @@ function AddDeviceDetail({
                     </p>
                   </div>
                 </div>
-                <button className="text-xl font-bold" onClick={() => onClose()}>
+                <button
+                  type="button"
+                  className="text-xl font-bold"
+                  onClick={() => onClose()}
+                >
                   X
                 </button>
               </div>
@@ -311,23 +325,31 @@ function AddDeviceDetail({
                 </div>
               </div>
             </div>
+            {error && (
+              <p className="mt-3 rounded-xl border border-red-200 bg-red-50 px-4 py-2 text-sm font-medium text-red-600">
+                {error}
+              </p>
+            )}
             <div className="mt-5 flex justify-between">
-              <div className="px-5 py-2 border border-slate-200 rounded-xl flex items-center gap-1">
+              <button
+                type="button"
+                onClick={() => onBack()}
+                className="px-5 py-2 border border-slate-200 rounded-xl flex items-center gap-1"
+              >
                 <FaArrowLeft />
                 <p className="font-bold">Back</p>
-              </div>
+              </button>
               <button
                 type="submit"
                 disabled={isSubmitting}
                 className="flex items-center gap-1 px-7 py-2 border border-slate-200 rounded-xl bg-blue-600 text-white"
               >
                 <MdOnDeviceTraining />
-                <p>Add Device</p>
+                <p>{isSubmitting ? "Adding..." : "Add Device"}</p>
               </button>
             </div>
           </div>
         </div>
-        {error}
       </form>
     </>
   );

@@ -69,6 +69,9 @@ function DevicesPage() {
             <DeviceToolbar
               selectedType={selectedType}
               onFilterDevice={setSelectedType}
+              onDeviceAdded={(device) =>
+                setDevices((previous) => [...previous, device])
+              }
             />
             <div className="grid grid-cols-1 xl:grid-cols-[1.4fr_0.7fr] mt-5 gap-3">
               <div className="space-y-5">
